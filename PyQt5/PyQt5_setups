@@ -1,0 +1,12 @@
+			PyQt5
+
+
+apt-get install python3-pyqt5
+apt-get install python3-pyqt5.qtsql
+apt-get install qttools5-dev-tools
+
+
+designer -> terminale yazarsan qtdesigner açılır
+
+exec python -m PyQt5.uic.pyuic youruifile -o yourpyfile -x    -> designer ile yaptığın arayüzü kodlarla oynamak için kullanman gereken kod
+

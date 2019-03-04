@@ -1,0 +1,44 @@
+			SCRAPY
+******************************************************************************************************
+scrapy startproject proje_adi  -> proje oluşturur
+
+spider'lar oluşturulan projenin altındaki 'spiders' dizini altına oluşturulur
+
+scrapy crawl spider_adi   -> spider'lar çalışır
+
+
+scrapy shell 'http://quotes.toscrape.com/page/1/' -> hedef siteye request atıyoruz
+
+FEED_EXPORT_ENCODING="utf-8"   -> settings.py dosyasına kopyalıyoruz utf-8 olarak geliyor
+
+*****************************************************************************************************
+
+response.css("title")   -> istedğimiz css elementi
+response.css("title").extract()  -> istediğimiz elementin saf içeriği
+response.css("title::text").extract()  -> istediğimiz elemanı verir liste içinde
+response.css("title::text").extract()[0]  -> liste içinden ilk elemanı verir yani yukarda aldığımızı listeden çıkarmış oluruz
+
+response.css("title::text").extract_first() -> istenilen elemanın ilk değeri
+
+response.xpath("//title")   -> içine verilen değeri alır xpath
+
+response.xpath("//title/text()").extract_first()  -> sadece yazıyı almak istersek
+
+daha detaylı bilgi için scrapy.org 'a bakabilirsin
+
+response.css("li.next a::attr(href)")  -> classı "next" olan "li" elementinin içindeki a yı al, href özelliğini al. attr=attribute demek özelliğini almak için. textini almak için text yazdığımız gibi.
+
+
+
+response.css("div.name.ellipsis a span::text").extract() ->  aşağıdaki elementlerdeki gibi kullanabiliriz
+<div class="name ellipsis" title="Bir İdam Mahkumunun Son Günü (Karton Kapak)"><a itemprop="url" href="https://www.kitapyurdu.com/kitap/bir-idam-mahkumunun-son-gunu-karton-kapak/323224.html"><span itemprop="name">Bir İdam Mahkumunun…</span></a></div>
+
+
+				KİTAP YURDU PROJESİNE AİT UYGULAMA KODLARI
+# response.css("div.name.ellipsis a span::text").extract() ->kitap
+# response.css("div.author span a span::text").extract()   ->yazar
+# response.css("div.publisher span a span::text").extract() ->kitabevi
+
+scrapy crawl spider_adi -o deneme.dosyaadi(.json,.text,.csv,vb..) -> -o ile yazar
+
+
