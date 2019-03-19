@@ -1,0 +1,14 @@
+FLASK MYSQLDB
+Linux mu kullanıyorsunuz? libmysqlclient-dev paketini kurup deneyiniz olmazsa
+
+setuptoolsu güncellemeyi deneyebilirsiniz
+
+pip install --upgrade setuptools
+
+o da olmadı bir de şu şekilde kurmayı deneyin:
+
+pip install --no-cache-dir flask-mysqldb -> bu da çare olmazsa
+
+
+apt-get install libmariadb-dev
+apt-get install libmariadb-dev-compat
