@@ -1,0 +1,10 @@
+pip install -r FlaskGerekliKütüphaneler.txt -> o txt içindeki bütün kütüphaneleri kurar.
+
+Virtualenv Nimetinden faydalanmak:
+pip install virtualenv
+
+cd projeAdi
+virtualenv projeİcinKullanilacakSanalOrtamAdi -> ortamı kurar
+source venvAdi/bin/activate -> ortamı aktif eder
+pip install -r FlaskGerekliKütüphaneler.txt -> böylece tüm bilgisayara değil sadece sanal ortama kurar paketleri
+deactivate   -> ortamdan çıkar
