@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if article %}
+        <h4>{{ article[2] }}</h4>
+        <hr>
+        Yazar : {{ article[1] }}
+        <hr>
+        Tarih : {{ article[4] }}
+        <hr>
+        {{ article[3]|safe }} <!-- jinja template mantığı ile burada '|safe' diyerek html kodunu normale çeviriyoruz -->
+
+    {% else %}
+        <div class="alert alert-warning">
+        Böyle bir makale bulunmuyor...
+        </div>
+
+    {% endif %}
+{% endblock %}

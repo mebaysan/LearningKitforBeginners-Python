@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h3>Kontrol Paneli</h3>
+    <smal>Hoşgeldin <b>{{ session.userName }}</b></smal>
+    <br><br>
+
+    {% if articles %}
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Başlık</th>
+              <th scope="col">Yazar</th>
+              <th scope="col">Tarih</th>
+                <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for article in articles %}
+                <tr>
+                <th scope="row">{{ article[0] }}</th>
+                <td><a href="/article/{{ article[0] }}">{{ article[2] }}</a></td>
+                <td>{{ article[1] }}</td>
+                <td>{{ article[4] }}</td>
+                <td><a href="/update/{{ article[0] }}" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/delete/{{ article[0] }}" class="btn btn-danger">Sil</a></td>
+                </tr>
+           {% endfor %}
+
+          </tbody>
+        </table>
+
+    {% else %}
+        <div class="alert alert-danger">Henüz makaleniz bulunmuyor...</div>
+
+    {% endif %}
+    <hr>
+    <a href="/addArticle" class="btn btn-primary">Makale Ekle</a>
+
+{% endblock %}lo %}

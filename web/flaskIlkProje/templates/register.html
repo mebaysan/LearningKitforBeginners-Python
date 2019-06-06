@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% from "./includes/formhelpers.html" import render_field %} <!-- formhelpers.html adındaki makro sayesinde
+    formumuzu gösteriyoruz
+     -->
+    <h3>Kayıt Olun</h3>
+    <hr>
+    <form method="post"> <!-- form oluşturuyoruz   -->
+        <dl>
+            {{ render_field(form.name,class="form-control") }} <!-- bu url'e yolladığımız form değişkeninin
+            field'larını göster dedik ve form-control adındaki bootstrap class'ını dahil ettik
+             -->
+            {{ render_field(form.userName,class="form-control") }}
+            {{ render_field(form.email,class="form-control") }}
+            {{ render_field(form.password,class="form-control") }}
+            {{ render_field(form.confirm,class="form-control") }}
+        </dl>
+        <p><button type="submit" class="btn btn-success">Kayıt Ol</button>
+    </form>
+{% endblock %}
