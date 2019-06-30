@@ -1,0 +1,2 @@
+[0630/220756.947:ERROR:process_reader_win.cc(123)] NtOpenThread: {Eriþim Yok} Bir iþlem bir nesneye eriþmek istedi, ancak istediði eriþimin haklarý kendisine verilmiþ deðil. (0xc0000022)
+[0630/220756.949:ERROR:exception_snapshot_win.cc(98)] thread ID 8272 not found in process

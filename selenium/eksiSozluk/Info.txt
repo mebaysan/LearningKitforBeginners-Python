@@ -1,0 +1,1 @@
+https://selenium-python.readthedocs.io/   -> gerekli bilgiler, daha fazla döküman
