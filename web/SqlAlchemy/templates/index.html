@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='node_modules//bootstrap/dist/css/bootstrap.min.css') }}">
+    <title>Todo App</title>
+</head>
+
+<body>
+<div style="margin-top:100px" class="container">
+    <h3>Todo List</h3>
+    <hr>
+    <form action="/add" method="POST">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Todo Başlık</label>
+            <input type="text" class="form-control" name="title" id="formGroupExampleInput"
+                   placeholder="Todo Giriniz...">
+            <!-- form post edilince burdaki datayı flask tarafında request.title(form name) olarak yakalayacağız  -->
+            <br>
+            <button type="submit" class="btn btn-success">Ekle</button>
+        </div>
+    </form>
+    {% if todos==[] %}
+        <div class="alert alert-warning" role="alert">
+            Herhangi bir Todo bulunmuyor...
+        </div>
+    {% else %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Todo Başlığı</th>
+                <th scope="col">Todo Durum</th>
+                <th scope="col">Durum Güncelle</th>
+                <th scope="col">Todo Sil</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for todo in todos %}
+                <tr>
+                    <th scope="row">{{ todo.id }}</th>
+                    <td>{{ todo.title }}</td>
+                    {% if todo.complete == False %}
+                        <td>Tamamlanmadı</td>
+                    {% else %}
+                        <td>Tamamlandı</td>
+                    {% endif %}
+                    <td><a href="/complete/{{ todo.id }}" class="btn btn-primary">
+                        {% if todo.complete == False %}
+                            Tamamla
+                        {% else %}
+                            Tamamlamayı Sonlandır
+                        {% endif %}
+                    </a></td>
+                    <td><a href="/delete/{{ todo.id }}" class="btn btn-danger">Sil</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+</div>
+
+
+</body>
+<script src="{{ url_for('static', filename='node_modules//dist/js/bootstrap.min.js') }}"></script>
+
+</html>
