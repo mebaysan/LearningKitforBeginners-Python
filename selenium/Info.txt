@@ -1,0 +1,7 @@
+python ile selenium kullanabilmek için;
+
+-) selenium modülünü yükle -> pip install selenium
+
+-) selenium içinbilgisayarına uygun web driver'ı yükle (kullandığın tarayıcı ile uyumlu versiyon olmalı)
+
+-) yüklediğin web driver'ı path dosyalarına ekle
