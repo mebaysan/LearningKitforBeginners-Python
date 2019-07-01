@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <title>Github Finder</title>
+
+
+</head>
+<body>
+<nav class="navbar navbar-dark bg-danger mb-3">
+    <div class="container">
+
+        <a href="/" class="navbar-brand">Github Kullanıcı Bulma</a>
+    </div>
+</nav>
+<div class="container searchContainer">
+    <div class="search card card-body">
+        <h3>Github Kullanıcılarını Arayın</h3>
+        <p class="lead">
+            Bir kullanıcı adı girin ve kullanıcının bilgilerine ulaşın!
+        </p>
+        <form action="/" method="post">
+            <input type="text" name="githubname" class="form-control" placeholder="Github Kullanıcı adı">
+            <br>
+            <button type="submit" class="btn btn-danger">Ara</button>
+        </form>
+    </div>
+    <br>
+    {% if profile %}
+        <div id="profile">
+
+            <div class="card card-body mb-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img class="img-fluid mb-2"
+                             src="{{ profile.avatar_url }}">
+                        <a href="{{ profile.html_url }}" target="_blank" class="btn btn-danger btn-block mb-4">Profili
+                            Görüntüle</a>
+                    </div>
+                    <div class="col-md-9">
+                        <span class="badge badge-primary">Repo Sayısı: {{ profile.public_repos }}  </span>
+                        <span class="badge badge-secondary">Gist Sayısı: {{ profile.public_gists }}  </span>
+                        <span class="badge badge-success">Takipçi: {{ profile.followers }} </span>
+                        <span class="badge badge-info">Takip Edilen: {{ profile.following }} </span>
+                        <br><br>
+                        <ul class="list-group">
+                            <li class="list-group-item">Şirket: {{ profile.company }}</li>
+                            <li class="list-group-item">Website/Blog: {{ profile.blog }}</li>
+                            <li class="list-group-item">Yer: {{ profile.location }}</li>
+                            <li class="list-group-item">Ne zamandan beri üye: {{ profile.created_at }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h3 class="page-heading mb-3">Repolar</h3>
+            <div id="repos" style="margin-bottom: 100px;">
+                {% for repo in repos %}
+                    <div class="card card-body mb-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>{{ repo.name }}</span>
+                                <br>
+                                <a href="{{ repo.html_url }}" target="_blank" class="badge badge-danger"> Repoya
+                                    Git</a>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="badge badge-primary">Yıldızlar: {{ repo. stargazers_count}} </span>
+                                <span class="badge badge-secondary">İzleyiciler: {{ repo.watchers }}</span>
+                                <span class="badge badge-success">Forklar: {{repo.forks  }} </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+                <!--- Repoların Gösterileceği Kısım" -->
+            </div>
+
+
+        </div>
+
+    {% else %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% else %}
+            <div class="alert alert-warning">Gösterilecek Kullanıcı Yok</div>
+        {% endif %}
+
+    {% endif %}
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
