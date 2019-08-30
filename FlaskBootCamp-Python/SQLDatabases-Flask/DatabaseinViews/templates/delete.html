@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Ponny Sil</title>
+{% endblock %}
+{% block body %}
+<h1>Ponny'niz Buraya Uyum Sağlayamadı mı?</h1>
+<p>Lütfen Ponny'nizin Id'sini verin:</p>
+<form method="POST">
+        {{form.hidden_tag()}}
+        {{form.id.label}}{{form.id()}}
+        {{form.submit(class="btn btn-primary")}}
+</form>
+{% endblock %}

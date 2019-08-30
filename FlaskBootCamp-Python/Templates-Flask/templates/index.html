@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+<!--layout.html 'i extend ettik -->
+{% block title %}
+<!-- layout.html içindeki title blocku değiştirdik -->
+<title>AnaSayfa</title>
+{% endblock %}
+{% block body %}
+<!--layout.html içindeki body blockunu değiştirdik -->
+<h1>Merhaba {{variables[1]}} Template Çalışma dosyasına hoş geldiniz</h1>
+<div>
+    <img src="{{variables[0]}}" alt="">
+</div>
+<!--backend'den gelen img_url adlı değişkeni kullandık -->
+<div>
+    <h3>Burası da arkadan gelen dictionary değişkenleri {{sozluk.name}}</h3>
+    <h5>Naber {{sozluk['soyad']}}</h5>
+    <!-- sozlukten değer iki şekilde alınır. sozluk.degisken_adi veya sozluk['degisken_adi']-->
+</div>
+<div>
+    <h2>Gelen tek değer {{tek_deger}}</h2>
+</div>
+<div>
+    <h2>for döngüsü</h2>
+    <h3>For döngüsü variable içinde</h3>
+    <ul>
+        {% for element in variables %}
+        <li>{{ element }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <h2>if else elseif</h2>
+    {% if toplam < 10 %}
+    <h4>toplam 10'dan küçük</h4>
+    <p><b>toplam = {{toplam}}</b></p>
+    {% elif toplam == 10 %}
+    <h4>toplam 10'a eşit</h4>
+    <p><b>toplam = {{toplam}}</b></p>
+    {% else %}
+    <h4>toplam 10'dan büyük</h4>
+    <p><b>toplam = {{toplam}}</b></p>
+    {% endif %}
+
+</div>
+<div>
+    <h3>URL FOR</h3>
+    <a href="{{ url_for('url_for')}}">İndex sayfasına gitmek için tıkla</a>
+    <!--{{ url_for('fonksiyonADi')}} -> bu method buraya tıklanınca hangi url'e ait methoda gitsin ona yarar  -->
+</div>
+
+{% endblock %}

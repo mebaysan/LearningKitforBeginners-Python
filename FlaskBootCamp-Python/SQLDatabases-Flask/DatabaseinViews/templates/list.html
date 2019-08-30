@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Liste</title>
+{% endblock %}
+{% block body %}
+{% if ponnies|length == 0 %}
+<!-- ponnies|length == 0 -> ponnies listesinin eleman sayısı 0 ise -->
+<h2>Listelenecek Ponny Bulunmuyor!</h2>
+{% else %}
+<h1>Elimizdeki tatlış Ponny Listesi</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ponny Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pon in ponnies %}
+        <tr>
+            <td>{{pon.id}}</td>
+            <td>{{pon.name}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

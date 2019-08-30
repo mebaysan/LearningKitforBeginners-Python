@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Anasayfa</title>
+{% endblock %}
+{% block body %}
+{% if current_user.is_authenticated %}
+<p>Hi {{current_user.username}}</p>
+{% else %}
+<p>Please Login or Register</p>
+{% endif %}
+
+{% endblock %}

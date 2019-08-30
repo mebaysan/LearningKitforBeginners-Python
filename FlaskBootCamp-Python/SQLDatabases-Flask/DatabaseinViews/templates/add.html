@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Ponny Ekle</title>
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Bir Ponny'e mi sahipsin?</h1>
+    <p>Ponny'ni veritabanımızıa eklemek istemez misin?</p>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.name.label}}{{form.name()}}
+        {{form.submit(class="btn btn-primary")}}
+        <!-- bu şekilde form elemanlarımıza css attributes verebiliriz-->
+    </form>
+</div>
+{% endblock %}

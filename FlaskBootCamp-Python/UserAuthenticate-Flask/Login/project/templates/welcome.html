@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Hoşgeldin</title>
+{% endblock %}
+{% block body %}
+{% if current_user.is_authenticated %}
+<h3>Tebrikler! Başarıyla giriş yaptın {{current_user.username}}!</h3>
+{% else %}
+<p>Please Login or Register</p>
+{% endif %}
+{% endblock %}

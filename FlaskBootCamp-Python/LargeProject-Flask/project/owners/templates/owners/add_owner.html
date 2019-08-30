@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h1>Ponny Ekle</h1>
+<p>Formu kullanarak Ponny ekleyebilirsiniz</p>
+<form method="POST">
+    {{form.hiddent_tag()}}
+    {{form.name.label}}
+    {{form.name()}}
+    <br>
+    {{form.pon_id.label}}{{form.pon_id()}}
+    <br>
+    {{form.submit()}}
+</form>
+{% endblock %}

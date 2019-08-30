@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='node_modules//bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='node_modules//bootstrap/dist/js/bootstrap.min.js') }}">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='node_modules//bootstrap/dist/js/bootstrap.bundle.min.js') }}">
+    {% block title %}
+    <title>Layout</title>
+    {% endblock %}
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('index')}}">Anasayfa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('liste')}}">Ponny Listesi</a>
+                    <!-- url_for ile içine verilen fonksiyona gider-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add')}}">Ponny Ekle</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('delete')}}" tabindex="-1">Ponny Sil</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

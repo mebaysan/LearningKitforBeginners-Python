@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Register</title>
+{% endblock %}
+{% block body %}
+<form method="POST">
+    {{form.hidden_tag()}}
+    {{form.email.label}}{{form.email()}}
+    {{form.username.label}}{{form.username()}}
+    {{form.password.label}}{{form.password()}}
+    {{form.pass_confirm.label}}{{form.pass_confirm()}}
+    {{form.submit()}}
+</form>
+{% endblock %}

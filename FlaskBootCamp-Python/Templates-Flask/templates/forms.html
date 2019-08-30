@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>forms</title>
+{% endblock %}
+{% block scripts %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+{% endblock %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('index')}}">Homepage</a>
+</nav>
+<div class="jumbotron">
+    <h1>Welcome to signup page!</h1>
+    <form action="{{ url_for('forms_url_for')}}">
+        <!-- form aciton'ı forms_url_for methoduna yolluyoruz  -->
+        <label for="first">First Name:</label>
+        <input type="text" name="first">
+        <label for="last">Last Name:</label>
+        <input type="text" name="last">
+        <input type="submit" value="Submit Form">
+    </form>
+</div>
+
+
+
+{% endblock %}

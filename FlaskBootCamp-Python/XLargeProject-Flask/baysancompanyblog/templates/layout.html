@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='node_modules//bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='node_modules//bootstrap/dist/js/bootstrap.min.js')}}">
+    <link rel="stylesheet"
+        href="{{url_for('static',filename='node_modules//bootstrap/dist/js/bootstrap.bundle.min.js')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='node_modules//jquery/dist/jquery.min.js')}}">
+    {% block title %}
+    <title>Layout</title>
+    {% endblock %}
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('core.index')}}">BaysanCompanyBlog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{{url_for('core.info')}}">About <span
+                        class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Log Out</a>
+                <a class="nav-item nav-link" href="#">Account</a>
+                <a class="nav-item nav-link" href="#">Create Post</a>
+                <a class="nav-item nav-link" href="#">Log In</a>
+                <a class="nav-item nav-link" href="#">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

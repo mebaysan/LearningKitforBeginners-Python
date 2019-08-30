@@ -1,0 +1,13 @@
+pip install gunicorn # flask uygulamalarımızı deploy etmek için gerekli kütüphane
+# Gunicorn sayesinde requirements.txt adlı bir dosya oluşturacağız ve bu dosya uygulamamızı deploy ettiğimizde gerekli kütüphaneleri içinde barındıracak
+pip freeze > requirements.txt # konsolda uygulamanın olduğu dizine gelip bunu çalıştırıyoruz. Bu sayede gerekli kütüphaneleri tek bir txt içinde toplayacak ve sunucuya deploy ettiğimizde sorunsuz çalışmamızı sağlayacak
+new file Procfile # Procfile adlı bir dosya oluşturuyoruz
+web: gunicorn app:app # Procfile içine yazdığımız bu kod sayesinde gunicorn kullandığımızı ve uygulamamızın burası içindeki app olduğunu söyledik
+Heroku CLI'ı indiriyoruz.
+Heroku üzerinde bir repo oluşturuyoruz.
+heroku login # diyerek heroku username ve userpassword giriyoruz
+git init # burada bir heroku reposu oluşturuyoruz
+git:remote -a repoAdi # repomuzu Heroku üzerine oluşturuyoruz.
+git add .
+git commit -am "mesaj"
+git push heroku master # heroku üzerine repomuzu pushluyoruz

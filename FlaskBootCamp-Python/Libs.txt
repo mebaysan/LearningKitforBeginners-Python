@@ -1,0 +1,8 @@
+flask
+flask-wtf
+flask-sqlalchemy
+flask-migrate
+flask-dance
+flask-dance[sqla]
+flask-bcrypt
+Werkzeug
