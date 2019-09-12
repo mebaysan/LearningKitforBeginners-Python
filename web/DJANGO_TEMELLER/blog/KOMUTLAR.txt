@@ -1,0 +1,50 @@
+django-admin startprojcet proje_adi -> proje oluşturur
+pip freeze > requirements.txt  -> projemiz içindeki bağımlılıkları bir dosyaya yazar pip install -r requirements.txt diyerek bunları yükleyebiliriz
+
+manage.py -> uygulama oluşturmaya yarar belli komutları terminalden çalıştırmaya yarar
+setting.py -> proje ayarlarının yapıldığı yer
+url.py     -> url adresleri ile fonksiyonları eşleştirdiğimiz yer
+wsgi.py    -> web sunucusu ile ilgili yapılan ayarlar
+
+
+python manage.py runserver -> web sunucusunu ayağa kaldırıyoruz
+
+python manage.py migrate  -> migrationları yapar, veritabanı tablolarını oluşturur
+
+python manage.py createsuperuser -> superuser oluşturmamızı sağlar.
+
+python manage.py startapp uygulama_adi  -> yeni bir uygulama oluşturur
+
+python manage.py makemigrations  -> yeni modeller için veritabanında migration oluşturur ve sonrasında migrate yapmak gerekir
+
+python manage.py shell -> django orm shelli açılır
+        from django.contrib.auth.models import User -> modeli dahil ettik
+        from article.models import Article   -> article uygulamamızdan article modelini dahil ettik
+        newUser = User(username = "denemekullanici", password = "123") -> newUser adında bir instance oluşturduk
+        newUser.save() -> oluşan instance'ı veritabanına kaydeder
+        newUser2 = User(username = "denemekullanici2") -> yeni instance oluşturduk
+        newUser2.set_password("123") -> parolasını hashleyerek atadık
+        newUser2.save() -> kayıt ettik
+        User.objects.get(username="fatihsennik") -> username'i bu olan User'i getir
+        user =  User.objects.get(username="fatihsennik") -> bu şekilde bu kullanıcı user instance'a atadık ve buradan onunla daha rahat etkileşime geçebiliriz
+        user.delete() -> oluşan instance'i siler
+        Article.objects.filter(title__contains="Den") -> title'ı içinde  'Den' geçen articleları döner
+
+{% load static %} -> html template'ların başına yazarsak django ile daha rahat bir şekilde style dosyalarına ulaşabiliriz
+
+
+***
+admin oluştur
+veritabanını migrate et
+uygulama oluştur
+setting içinde oluşturduğun uygulamayı kayıt et
+model oluştur
+modeli admin dosyasına kayıt et
+modelin migrationını oluştur
+oluşturduğun migration'ı veritabanına yolla
+html template'larını nereye koyacağını settings altında DIRS'e söyle.
+oluşturduğun uygulama altındaki views klasörü altında viewları yaz
+url kısmına uygulamadaki views altından gerekli fonksiyonu import et ve url'i kaydet
+static dosyalar ilgili uygulama altındaki static klasörü altına koyulur. çağrılmak için {% load static%} sayfanın başına yazılır, href={% static 'style/yolu'%}
+eğer genel bir static dosyan varsa her app için ayrı ayrı yazmak istemezsen ana dizin altına static klasörü oluştur ve settings içinde gerekli kodu yaz
+***
