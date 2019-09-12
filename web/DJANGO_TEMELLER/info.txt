@@ -1,0 +1,4 @@
+admin paneli şifresi ve adı
+
+baysan
+12345
