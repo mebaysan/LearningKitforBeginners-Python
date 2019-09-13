@@ -12,29 +12,28 @@
                 <a class="nav-link" href="{% url 'about' %}">Hakkımızda</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="">Makaleler</a>
+                <a class="nav-link" href="{% url 'article:dashboard' %}">Makaleler</a>
             </li>
 
         </ul>
 
         <ul class="navbar-nav ml-auto">
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated %} <!-- requestte user varsa  -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Kontrol Paneli</a>
+                    <a class="nav-link" href="{% url 'article:dashboard' %}">Kontrol Paneli</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Çıkış Yap</a>
+                    <a class="nav-link" href="{% url 'user:logout' %}">Çıkış Yap</a>
                 </li>
             {% else %}
 
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'user:login' %}">Giriş Yap</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'user:register' %}">Kayıt Ol</a>
+                </li>
             {% endif %}
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'user:register' %}">Kayıt Ol</a>
-            </li>
-
         </ul>
     </div>
 

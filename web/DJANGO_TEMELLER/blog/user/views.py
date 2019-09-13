@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from user import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+
 
 def register(request):
     # 2. VE KOLAY OLAN YOL :)
@@ -15,7 +16,7 @@ def register(request):
         newUser.set_password(password)
         newUser.save()
         login(request, newUser)
-        messages.success(request,"Başarıyla kayıt oldunuz") # eğer başarıyla kayıt olursa request'e mesaj yolluyoruz.
+        messages.success(request, "Başarıyla kayıt oldunuz")  # eğer başarıyla kayıt olursa request'e mesaj yolluyoruz.
         return redirect("index")
     else:
         context = {
@@ -50,8 +51,24 @@ def register(request):
 
 
 def login_user(request):
-    return render(request, 'user/login.html')
+    form = forms.LoginForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.info(request, "Kullanıcı adı veya Parola Hatalı")
+            return render(request, "user/login.html", context)
+        messages.success(request, "Başarıyla Giriş Yaptınız")
+        login(request, user)
+        return redirect("index")
+    return render(request, "user/login.html", context)
 
 
 def logout_user(request):
-    pass
+    logout(request) # otomatik olarak logout yapar
+    messages.success(request,"Başarıyla çıkış yaptınız")
+    return redirect("index")

@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from article import views  # article uygulaması içindeki views dosyasından index methodunu al
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('about/', views.about, name="about"),
-    path('detail/<int:id>', views.detail, name="detail"),
+    # path('detail/<int:id>', views.detail, name="detail"),
     # dinamik url tanımladık. int tipinde bir id değişkeni gelecek dedik
     # '' -> ana sayfa demektir php'deki / gibidir. ikinci parametre ise hangi fonksiyonun kullanılacağı, name ile urllerimize isim verebiliriz
     path('articles/', include("article.urls")),
@@ -15,3 +17,5 @@ urlpatterns = [
     # yani user ile başlayan urllerin devamını git user klasöründeki urls dosyasından çek dedik
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

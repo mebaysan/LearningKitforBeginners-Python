@@ -31,8 +31,25 @@ python manage.py shell -> django orm shelli açılır
         Article.objects.filter(title__contains="Den") -> title'ı içinde  'Den' geçen articleları döner
 
 {% load static %} -> html template'ların başına yazarsak django ile daha rahat bir şekilde style dosyalarına ulaşabiliriz
+
 path('user/', include("user.urls")), ->  yani user ile başlayan urllerin devamını git user klasöründeki urls dosyasından çek dedik
 
+ModelForm'ları kullanarak modelimize göre otomatik olarak bir form oluşturabiliriz.
+
+STATIC_ROOT -> uygulamamızı production'a geçirdiğimizde bütün css ve js dosyalarımızı tek bir klasör altına toplar
+
+python manage.py collectstatic -> bütün css ve js dosyalarımızı STATIC_URL altına tanımladığımız yere toplar
+
+pip install django-ckeditor -> django için ckeditor kurulumu(github) kurulumu yaptıktan sonra settings.py içinde bu uygulamayı tanıtmamız gerekli ardından collectstatic ile ckeditor'un staticlerini kopyalamalıyız. ardından kullanmak istedğimiz model içine import etmeliyiz ardından formun olduğu template içinde  {{ form.media }} yapmalıyız
+
+RESİM YÜKLEME
+    pip install pillow -> resim eklemek için gerekli modül
+    https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
+    https://github.com/django-ckeditor/django-ckeditor
+    pip install django-cleanup -> bir makale sildiğimizde ona bağlı olan dosyaları siler. ve bunu settings'e tanıt
+    from django.conf import settings
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) -> base urls.py dosyana ekle
 
 
 ***
@@ -61,5 +78,10 @@ href={% static 'css/style.css' %} -> ilgili uygulama altında static klasörüne
 href={% url 'url_adi' %} -> ilgili url adına(url kısmında fonksiyonlara verdiğimiz isimler) yönlendirir
 template'a verileri sözlük yapısı olarak göndermeliyiz ve gönderdiğimiz değeri template'de {{ deger }} olarak yakalaybiliriz
 include ile url yaptığınızda link eklerken user:login gibi ana_url:alt_url şeklinde yönlendirmeliyiz
-sayfaya gönderdiğimiz bir formun gözükmesi için form.as_p yapmalıyız
+sayfaya gönderdiğimiz bir formun gözükmesi için form.as_p yapmalıyız -> fakat bu şekilde css classları vs. formumuza etki etmeyecek
 template içerisinde formlarımıza {% csrf_token %} eklemeliyiz. bizi csrf saldırılarından korur
+güzel görünümlü formlar kullanmak istersek django crispy formları kullanmalıyız ve bunu Installed_Apps içerisinde belirtmeliyiz(3rd parti yazılım) ve formların template'ini belirtmeliyiz
+{% load crispy_forms_tags %} -> sayfanın en üstünde bu crispy formlarını kullanacağımızı söylemeliyiz
+{{ form|crispy }}  -> form.as_p yerine yaptık crispy formları kullanacağımızı belirttik.
+{% url 'article:update' id=article.id %} -> eğer parametreli bir url yollayacaksak bu şekilde parametreleri belirtmeliyiz for içinde
+{{ article.content|safe}} ckeditörden gelen html etiketlerini göstermez

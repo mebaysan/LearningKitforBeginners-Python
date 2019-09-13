@@ -23,3 +23,8 @@ class RegisterForm(forms.Form):
         }
         return values
         # işlem başarılı ise sayfaya return etmeliyiz. bunu sözlük yapısı ile return ediyoruz
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Kullanıcı Adı")
+    password = forms.CharField(label="Şifre",widget=forms.PasswordInput)

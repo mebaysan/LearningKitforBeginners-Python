@@ -1,0 +1,42 @@
+{% extends 'article/layout.html' %}
+{% block body %}
+    <div class="container">
+        <h3>Kontrol Paneli</h3>
+        <span>Hoşgeldiniz <b>{{ request.user.username }}</b></span>
+    </div>
+    <hr>
+    <a class="btn btn-primary" href="{% url 'article:add_article' %}">Makale Ekle</a>
+    <hr>
+    {% if articles %}
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Yazar</th>
+                <th scope="col">Tarih</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+
+                    <td scope="row">{{ article.id }}</td>
+                    <td scope="row"><a href="{% url 'article:detail' id=article.id %}">{{ article.title }}</a></td>
+                    <td scope="row">{{ article.author.username }}</td>
+                    <td scope="row">{{ article.created_date }}</td>
+                    <td><a class="btn btn-success btn-sm" href="{% url 'article:update' id=article.id %}">Güncelle</a>
+                    </td>
+                    <td><a class="btn btn-danger btn-sm" href="{% url 'article:delete' id=article.id %}">Sil</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-warning">Makaleniz bulunmuyor...</div>
+    {% endif %}
+
+
+{% endblock body %}

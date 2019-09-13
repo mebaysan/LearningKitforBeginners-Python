@@ -8,7 +8,7 @@ from .models import Article # admin panelinde göstermek için modeli import ett
 @admin.register(Article) # admin panelini özelleştirmek için
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title','author','created_date'] # neleri göstermek istediğimizi burada belirtiyoruz
-    list_display_links = ['created_date'] # bu özelliklere link verebiliriz.
+    list_display_links = ['title'] # bu özelliklere link verebiliriz.
     search_fields = ['title'] # hangi alanlara göre arama yapılsın
     list_filter = ['created_date'] # hangi field'a göre filtreleme yapılsın
     class Meta: # zorunlu alan Meta olmak zorunda burada modeli admine bağlıyoruz
