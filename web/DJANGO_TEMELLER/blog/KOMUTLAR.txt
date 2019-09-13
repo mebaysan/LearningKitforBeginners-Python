@@ -31,6 +31,8 @@ python manage.py shell -> django orm shelli açılır
         Article.objects.filter(title__contains="Den") -> title'ı içinde  'Den' geçen articleları döner
 
 {% load static %} -> html template'ların başına yazarsak django ile daha rahat bir şekilde style dosyalarına ulaşabiliriz
+path('user/', include("user.urls")), ->  yani user ile başlayan urllerin devamını git user klasöründeki urls dosyasından çek dedik
+
 
 
 ***
@@ -48,3 +50,16 @@ url kısmına uygulamadaki views altından gerekli fonksiyonu import et ve url'i
 static dosyalar ilgili uygulama altındaki static klasörü altına koyulur. çağrılmak için {% load static%} sayfanın başına yazılır, href={% static 'style/yolu'%}
 eğer genel bir static dosyan varsa her app için ayrı ayrı yazmak istemezsen ana dizin altına static klasörü oluştur ve settings içinde gerekli kodu yaz
 ***
+
+
+******************Jinja Template Kuralları***********
+{% static load %} -> sayfa başına yazılır
+href={% static 'css/style.css' %} -> ilgili uygulama altında static klasörüne gider ve oradakaki verilen path'e ait dosyayı çeker
+{% extends 'article/layout.html' %} -> sayfayı miras alır
+{% block blok_adi %} {% endblock blok_adi %} -> blok oluşturur bu sayede override edebiliriz
+{% include "article/includes/navbar.html" %} -> ilgili template altında verilen path'e ait dosyayı sayfaya dahil eder
+href={% url 'url_adi' %} -> ilgili url adına(url kısmında fonksiyonlara verdiğimiz isimler) yönlendirir
+template'a verileri sözlük yapısı olarak göndermeliyiz ve gönderdiğimiz değeri template'de {{ deger }} olarak yakalaybiliriz
+include ile url yaptığınızda link eklerken user:login gibi ana_url:alt_url şeklinde yönlendirmeliyiz
+sayfaya gönderdiğimiz bir formun gözükmesi için form.as_p yapmalıyız
+template içerisinde formlarımıza {% csrf_token %} eklemeliyiz. bizi csrf saldırılarından korur

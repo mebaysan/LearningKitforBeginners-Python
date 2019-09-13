@@ -1,0 +1,11 @@
+{% extends "article/layout.html" %}
+{% block body %}
+    <h3>Kayıt Ol</h3>
+    <hr>
+    <form method="post">
+    {% csrf_token %}
+        {{ form.as_p }} <!-- formu sayfaya yolladık ve görünmesi için .as_p yaptık  -->
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Kayıt Ol</button>
+    </form>
+{% endblock body %}

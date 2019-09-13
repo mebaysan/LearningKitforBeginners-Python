@@ -5,11 +5,29 @@
     <meta charset="UTF-8">
     <title>Blog</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- style dosyalarının yolunu veriyoruz -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+{% include "article/includes/navbar.html" %}
 
+<div style="margin-top: 100px;" class="container">
+    {% if messages %} <!-- django mesajlarını kullanmak için gerekli -->
+
+        {% for message in messages %}
+            {% if message.tags == "info" %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+            {% endif %}
+
+
+        {% endfor %}
+
+    {% endif %}
+    {% block body %}<!-- block oluşturduk. bu sayfay inherit alan sayfalar blockların arasını dolduracak isterlerse  -->
+
+    {% endblock body %}
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

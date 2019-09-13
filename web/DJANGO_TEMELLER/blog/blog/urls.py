@@ -1,24 +1,17 @@
-"""blog URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
-from article.views import index  # article uygulaması içindeki views dosyasından index methodunu al
+from django.urls import path, include
+from article import views  # article uygulaması içindeki views dosyasından index methodunu al
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="index"),
+    path('', views.index, name="index"),
+    path('about/', views.about, name="about"),
+    path('detail/<int:id>', views.detail, name="detail"),
+    # dinamik url tanımladık. int tipinde bir id değişkeni gelecek dedik
     # '' -> ana sayfa demektir php'deki / gibidir. ikinci parametre ise hangi fonksiyonun kullanılacağı, name ile urllerimize isim verebiliriz
+    path('articles/', include("article.urls")),
+    # eğer url'e articles diye bir şey gelirse sen git article uygulaması içindeki urls dosyasına bak dedik. bu sayede uygulamamızı daha modüler bir hale getiriyoruz
+    path('user/', include("user.urls")),
+    # yani user ile başlayan urllerin devamını git user klasöründeki urls dosyasından çek dedik
+
 ]
