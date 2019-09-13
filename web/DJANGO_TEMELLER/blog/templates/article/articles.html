@@ -1,0 +1,24 @@
+{% extends 'article/layout.html' %}
+{% block body %}
+    <h3>Makaleler</h3>
+    <hr>
+    {% if articles %}
+        {% for article in articles %}
+            <div class="card" style="width: 18rem;">
+                {% if article.image %}
+                    <img class="card-img-top" src="{{ article.image.url }}" alt="Card image cap">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.content|safe }}</p>
+                    <a href="{% url 'article:detail' id=article.id %}" class="btn btn-primary">İncele</a>
+                </div>
+            </div>
+            <br>
+            <br>
+        {% endfor %}
+
+    {% else %}
+        <div class="alert alert-warning">Henüz eklenmiş makale bulunmamaktadır...</div>
+    {% endif %}
+{% endblock body %}

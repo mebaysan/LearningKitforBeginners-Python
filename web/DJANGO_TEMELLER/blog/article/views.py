@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404,HttpResponse  # HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse  # HttpResponse
 from article.forms import ArticleForm
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required  # login_required için
 # Create your views here.
 from article.models import Article
 
@@ -24,12 +24,14 @@ def detail(request, id):  # dinamik url oluşturduk, url'e id adında bir deği�
     return render(request, 'article/detail.html', {'article': article})  # gelen article'yi yolladık
 
 
+@login_required(login_url="user:login")
 def dashboard(request):
     articles = Article.objects.filter(author=request.user)
     # article'lardan author kısmı mevcut login yapmış user olanları koy dedik
     return render(request, 'article/dashboard.html', {'articles': articles})
 
 
+@login_required(login_url="user:login")
 def add_article(request):
     form = ArticleForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -45,6 +47,7 @@ def add_article(request):
     return render(request, 'article/add_article.html', {'form': form})
 
 
+@login_required(login_url="user:login")
 def update_article(request, id):
     article = get_object_or_404(Article, id=id)
     form = ArticleForm(request.POST or None, request.FILES or None,
@@ -55,10 +58,17 @@ def update_article(request, id):
         article.save()
         messages.success(request, "Makale başarıyla güncellendi")
         return redirect("article:dashboard")
-    return render(request, "article/update_article.html",{'form':form})
+    return render(request, "article/update_article.html", {'form': form})
 
-def delete_article(request,id):
-    article = get_object_or_404(Article,id=id)
+
+@login_required()
+def delete_article(request, id):
+    article = get_object_or_404(Article, id=id)
     article.delete()
-    messages.success(request,"{} id'li Makale başarıyla silindi".format(id))
+    messages.success(request, "{} id'li Makale başarıyla silindi".format(id))
     return redirect("article:dashboard")
+
+
+def articles(request):
+    articles = Article.objects.all()
+    return render(request, "article/articles.html", {'articles': articles})
