@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article # admin panelinde göstermek için modeli import ettik
+from .models import Article,Comment # admin panelinde göstermek için modeli import ettik
 # Register your models here.
 #bu uygulamanın admin'de nasıl gözükeceği vs. yer. burası uygulamayı admine bağlar
 
@@ -12,4 +12,14 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title'] # hangi alanlara göre arama yapılsın
     list_filter = ['created_date'] # hangi field'a göre filtreleme yapılsın
     class Meta: # zorunlu alan Meta olmak zorunda burada modeli admine bağlıyoruz
+        model = Article
+
+
+@admin.register(Comment)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['comment_author','comment_content','comment_date']
+    list_display_links = ['comment_content']
+    search_fields = ['comment_content']
+    list_filter = ['comment_date']
+    class Meta:
         model = Article

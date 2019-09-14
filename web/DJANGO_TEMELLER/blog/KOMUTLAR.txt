@@ -42,6 +42,8 @@ python manage.py collectstatic -> bütün css ve js dosyalarımızı STATIC_URL 
 
 pip install django-ckeditor -> django için ckeditor kurulumu(github) kurulumu yaptıktan sonra settings.py içinde bu uygulamayı tanıtmamız gerekli ardından collectstatic ile ckeditor'un staticlerini kopyalamalıyız. ardından kullanmak istedğimiz model içine import etmeliyiz ardından formun olduğu template içinde  {{ form.media }} yapmalıyız
 
+pip install --upgrade django-crispy-forms -> crispy formları yükler
+
 RESİM YÜKLEME
     pip install pillow -> resim eklemek için gerekli modül
     https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
@@ -85,3 +87,4 @@ güzel görünümlü formlar kullanmak istersek django crispy formları kullanma
 {{ form|crispy }}  -> form.as_p yerine yaptık crispy formları kullanacağımızı belirttik.
 {% url 'article:update' id=article.id %} -> eğer parametreli bir url yollayacaksak bu şekilde parametreleri belirtmeliyiz for içinde
 {{ article.content|safe}} ckeditörden gelen html etiketlerini göstermez
+|safe|truncatewords:2  -> aslında bunlar django template filtreleridir. safe ->  html içeriğini göster fakat html etiketlerini gösterme. truncatewords:deger -> deger kadar kelime göster gerisini '...' yap

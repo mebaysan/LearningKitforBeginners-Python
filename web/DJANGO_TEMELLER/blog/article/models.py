@@ -18,3 +18,11 @@ class Article(models.Model):
     def __str__(self):
         # bu şekilde admin paneline title'ı döndürüyoruz
         return self.title
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article,on_delete=models.CASCADE,verbose_name="Makale",related_name="comments") # foreignkey sayesinde article modeli ile bağladık. related_name ile bu tabloya erişmemizi kolaylaştırdık. (article.comments)
+    comment_author = models.CharField(max_length=50,verbose_name="Ziyaretçi")
+    comment_content = models.CharField(max_length=200,verbose_name="Yorum")
+    comment_date = models.DateTimeField(auto_now_add=True)
+

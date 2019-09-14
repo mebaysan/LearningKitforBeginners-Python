@@ -70,5 +70,13 @@ def delete_article(request, id):
 
 
 def articles(request):
+    keyword = request.GET.get("keyword") # request içerisindeki name'i keyword olan değeri yakalıyoruz
+    if keyword:
+        articles = Article.objects.filter(title__contains=keyword) # articlelar içinde title fieldında keyword geçen articleları alıyoruz
+        return render(request, "article/articles.html", {'articles': articles})
     articles = Article.objects.all()
     return render(request, "article/articles.html", {'articles': articles})
+
+
+def addComment(request,id):
+    pass
