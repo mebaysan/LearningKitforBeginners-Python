@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b3fe1a27-999b-4766-8b35-1307856b6fd8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KOMUTLAR.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KOMUTLAR.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/article/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/article/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/article/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/article/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/article/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/article/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/article/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/article/articles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/articles.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/article/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/detail.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -160,6 +155,7 @@
       <workItem from="1568371733310" duration="12024000" />
       <workItem from="1568385503413" duration="1317000" />
       <workItem from="1568467712395" duration="2489000" />
+      <workItem from="1568471209222" duration="1285000" />
     </task>
     <servers />
   </component>

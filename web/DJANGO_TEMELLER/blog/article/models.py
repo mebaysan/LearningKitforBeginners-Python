@@ -18,6 +18,8 @@ class Article(models.Model):
     def __str__(self):
         # bu şekilde admin paneline title'ı döndürüyoruz
         return self.title
+    class Meta:
+        ordering = ['-created_date'] # içeri verilen field'a göre sıralama yapılır
 
 
 class Comment(models.Model):
@@ -25,4 +27,5 @@ class Comment(models.Model):
     comment_author = models.CharField(max_length=50,verbose_name="Ziyaretçi")
     comment_content = models.CharField(max_length=200,verbose_name="Yorum")
     comment_date = models.DateTimeField(auto_now_add=True)
-
+    class Meta:
+        ordering = ['-comment_date']

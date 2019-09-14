@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse  # HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse,reverse  # HttpResponse
 from article.forms import ArticleForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # login_required için
 # Create your views here.
-from article.models import Article
+from article.models import Article,Comment
 
 
 def index(request):  # bu değişken her view fonksiyonunda bulunmalı ve ilk parametre olmalı
@@ -21,7 +21,8 @@ def detail(request, id):  # dinamik url oluşturduk, url'e id adında bir deği�
     # article = Article.objects.filter(id=id).first() # id'si requestten gelen id olan article'ı al
     article = get_object_or_404(Article,
                                 id=id)  # hangi Modeli çekeceğimizi söylüyoruz ve neye göre çekeceğimizi söylüyoruz
-    return render(request, 'article/detail.html', {'article': article})  # gelen article'yi yolladık
+    comments = article.comments.all() # model tarafında belirdeğimiz related_name sayesinde bu işlemi yapabildik
+    return render(request, 'article/detail.html', {'article': article,'comments':comments})  # gelen article'yi yolladık
 
 
 @login_required(login_url="user:login")
@@ -79,4 +80,11 @@ def articles(request):
 
 
 def addComment(request,id):
-    pass
+    article = get_object_or_404(Article,id=id)
+    if request.method == "POST":
+        comment_author = request.POST.get("comment_author")
+        comment_content = request.POST.get("comment_content")
+        newComment = Comment(comment_author=comment_author,comment_content=comment_content)
+        newComment.article = article
+        newComment.save()
+    return redirect(reverse("article:detail",kwargs={'id':id})) # redirect yaparken parametreli url'lere bu şekilde yönlendirme yapılabilir
