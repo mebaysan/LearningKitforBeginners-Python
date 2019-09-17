@@ -257,7 +257,7 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=djangoadmin
+User=linux_oturumundaki_adınız
 Group=www-data
 WorkingDirectory=/home/linux_oturumundaki_adınız/proje_dizininiz/proje_adiniz
 ExecStart=/home/linux_oturumundaki_adınız/proje_dizininiz/venv/bin/gunicorn \
