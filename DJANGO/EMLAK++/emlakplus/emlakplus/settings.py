@@ -1,16 +1,12 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # EMLAK++
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # EMLAK++
 
 SECRET_KEY = 'p$kq#3mc2bnl*^yx-5!=6+9xg9di40=4kvknlh*v9acfq&fujb'
-
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,14 +50,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'emlakplus.wsgi.application'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # pip install psycopg2  -> postgresql bağlantısı için
+        'ENGINE': 'django.db.backends.postgresql',  # postgresql için gerekli ayarlarımızı yapıyoruz
+        'NAME': 'emlakplus',
+        'USER': 'postgres',
+        'PASSWORD': 'cokzorsifre',
+        'HOST': 'localhost'
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -78,7 +76,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'tr'
 
 TIME_ZONE = 'Europe/Istanbul'
@@ -89,9 +86,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # collect static yapınca buraya toplanacak
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # collect static yapınca buraya toplanacak. manage.py yanına
 STATICFILES_DIRS = [  # app'ler buradan staticleri çekecek. Yani template'ler
     os.path.join(BASE_DIR, 'emlakplus/static')
 ]
+
+# Media Dosyaları İçin Ayarlar
+# 1-) pip install pillow
+# 2-) settings.py içerisinde media ayarlarını yap
+# 3-) base urls.py içerisine +static yap
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # ana dizinde media klasörü altına. manage.py yanına
+MEDIA_URL = '/media/' # src kısmına 'static' yazdığımız gibi media yazacağımız için

@@ -1,0 +1,19 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+<!-- Panel Logo & Yazı  -->
+{% block branding %}
+    <h1 id="head">
+        <img src="{% static 'img/logo.png' %}" alt="Emlak Plus" id="brand_img" height="50" width="80">
+        Emlak Plus Admin Paneli
+    </h1>
+{% endblock %}
+<!-- Panel Logo & Yazı  -->
+
+
+
+<!-- Panel CSS  -->
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+{% endblock extrastyle %}
+<!-- Panel CSS  -->

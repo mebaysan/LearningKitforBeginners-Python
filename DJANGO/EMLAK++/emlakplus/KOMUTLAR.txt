@@ -1,0 +1,15 @@
+python manage.py sqlmigrate listings 0001  -> listings uygulamasındaki 0001. migrationu aktif eder
+python manage.py migrate -> gerekli migrationları aktif edip veritabanına yollarız
+
+
+================== ADMİN PANELİNİ ÖZELLEŞTİRMEK İÇİN ==================
+tempaltes>admin>base_site.html
+{% extends 'admin/base.html' %}
+{% load static %}
+================== ADMİN PANELİNİ ÖZELLEŞTİRMEK İÇİN ==================
+
+
+
+
+admin_username = baysan
+admin_password = 12345
