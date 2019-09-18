@@ -41,17 +41,22 @@
                         commodi id libero eveniet harum perferendis laborum molestias quia.</p>
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'img/realtors/kyle.jpg' %}" alt="Seller of the month">
-                        <div class="card-body">
-                            <h5 class="card-title">Seller Of The Month</h5>
-                            <h6 class="text-secondary">Kyle Brown</h6>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nesciunt
-                                amet, illo itaque similique repellat.
-                                content.
-                            </p>
-                        </div>
-                    </div>
+                    {% if mvp_realtors %}
+                        {% for mvp_realtor in mvp_realtors %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ mvp_realtor.photo.url }}" alt="Seller of the month">
+                                <div class="card-body">
+                                    <h5 class="card-title">Seller Of The Month</h5>
+                                    <h6 class="text-secondary">{{ mvp_realtor.name }}</h6>
+                                    <p class="card-text">{{ mvp_realtor.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>
@@ -71,39 +76,28 @@
         <div class="container">
             <h2 class="text-center">Our Team</h2>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <img src="{% static 'img/realtors/kyle.jpg' %}" alt="" class="rounded-circle mb-3">
-                    <h4>Kyle Brown</h4>
-                    <p class="text-success">
-                        <i class="fas fa-award text-success mb-3"></i> Realtor</p>
-                    <hr>
-                    <p>
-                        <i class="fas fa-phone"></i> (555)-555-5555</p>
-                    <p>
-                        <i class="fas fa-envelope-open"></i> Pantheon@baysansoft.com</p>
-                </div>
+                {% if realtors %}
+                    {% for realtor in realtors %}
+                        <div class="col-md-4">
+                            <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3">
+                            <h4>{{ realtor.name }}</h4>
+                            <p class="text-success">
+                                <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+                            <hr>
+                            <p>
+                                <i class="fas fa-phone"></i> {{ realtor.phone }}</p>
+                            <p>
+                                <i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+                        </div>
+                    {% endfor %}
 
-                <div class="col-md-4">
-                    <img src="{% static 'img/realtors/mark.jpg' %}" alt="" class="rounded-circle mb-3">
-                    <h4>Mark Hudson</h4>
-                    <p class="text-success">Realtor</p>
-                    <hr>
-                    <p>
-                        <i class="fas fa-phone"></i> (444)-444-4444</p>
-                    <p>
-                        <i class="fas fa-envelope-open"></i> mehmet@baysansoft.com</p>
-                </div>
+                {% else %}
+                    <div class="col-md-12">
+                        No Realtors available
+                    </div>
+                {% endif %}
 
-                <div class="col-md-4">
-                    <img src="{% static 'img/realtors/jenny.jpg' %}" alt="" class="rounded-circle mb-3">
-                    <h4>Jenny Johnson</h4>
-                    <p class="text-success">Realtor</p>
-                    <hr>
-                    <p>
-                        <i class="fas fa-phone"></i> 0000000000</p>
-                    <p>
-                        <i class="fas fa-envelope-open"></i> ali@baysansoft.com</p>
-                </div>
+
             </div>
         </div>
     </section>
