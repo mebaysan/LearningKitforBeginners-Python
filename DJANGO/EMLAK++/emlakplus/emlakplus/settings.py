@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',  # uygulamamızı kayıt ettik
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
+    'django.contrib.humanize', # template üzerinde sayıları daha hoş göstermek için kullanılır
 ]
 
 MIDDLEWARE = [
