@@ -1,0 +1,124 @@
+// Overlay mixin
+@mixin overlay($color, $opacity, $height) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: $height;
+  width: 100%;
+  background: rgba($color, $opacity);
+}
+
+.btn-secondary {
+  color: #fff !important;
+}
+
+img {
+  width: 100%;
+}
+
+.logo {
+  width: 80px;
+}
+
+.navbar {
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.social a {
+  margin-right: 0.4rem;
+}
+
+#showcase {
+  background: url(../img/showcase.jpg) no-repeat top center fixed/cover;
+  position: relative;
+  min-height: 650px;
+  color: #fff;
+  padding-top: 6rem;
+
+  .home-search {
+    min-height: 400px;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  .overlay {
+    @include overlay(#333, 0.8, 400px);
+  }
+}
+
+#services {
+  background: url(../img/building.jpg) no-repeat top center fixed/cover;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    @include overlay(#20866b, 0.8, 100%);
+  }
+}
+
+#showcase-inner {
+  background: url(../img/building.jpg) no-repeat top center fixed/cover;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  &::before {
+    @include overlay(#20866b, 0.8, 100%);
+  }
+
+  &.showcase-search {
+    min-height: 270px;
+  }
+}
+
+#work {
+  padding: 6rem 0;
+}
+
+.listing-preview a {
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  #showcase {
+    padding-top: 4rem;
+    h1 {
+      font-size: 40px;
+    }
+  }
+  .hide-md-down {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #showcase {
+    padding-top: 3rem;
+    h1 {
+      font-size: 40px;
+    }
+    p {
+      display: none;
+    }
+  }
+
+  #top-bar {
+    text-align: center;
+    .social {
+      text-align: center !important;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #showcase {
+    h1 {
+      font-size: 30px;
+    }
+  }
+
+  #showcase-inner h1 {
+    font-size: 40px;
+  }
+}

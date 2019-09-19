@@ -1,0 +1,14 @@
+{
+  "name": "bt_real_estate_theme",
+  "version": "1.0.0",
+  "description": "Theme for real estate website",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o dist/assets/css/ --recursive"
+  },
+  "author": "Brad Traversy",
+  "license": "MIT",
+  "dependencies": {
+    "node-sass": "^4.9.3"
+  }
+}

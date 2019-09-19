@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
     'django.contrib.humanize', # template üzerinde sayıları daha hoş göstermek için kullanılır
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
