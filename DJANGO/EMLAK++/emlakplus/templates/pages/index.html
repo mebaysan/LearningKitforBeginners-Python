@@ -31,7 +31,8 @@
                                     <label class="sr-only">State</label>
                                     <select name="state" class="form-control">
                                         <option selected="true" disabled="disabled">State (All)</option>
-                                        {% for key,value in state_choices.items %} <!-- context'en gelen state_choices dictionary'nin items'ları içinde gez -->
+                                        {% for key,value in state_choices.items %}
+                                            <!-- context'en gelen state_choices dictionary'nin items'ları içinde gez -->
                                             <option value="{{ key }}">{{ value }}</option>
                                         {% endfor %}
                                     </select>
@@ -68,7 +69,8 @@
             </div>
         </div>
     </section>
-
+    <!-- ALERTS -->
+    {% include 'partials/_alerts.html' %}
     <!-- Listings -->
     <section id="listings" class="py-5">
         <div class="container">
