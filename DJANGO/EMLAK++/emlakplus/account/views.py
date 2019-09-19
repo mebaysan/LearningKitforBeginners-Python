@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User, auth
+from contact.models import Contact
 
 
 def register(request):
@@ -25,10 +26,11 @@ def register(request):
                     return redirect('register')
                 else:
                     # Her şey yolunda ise
-                    newUser = User.objects.create_user(username=username,email=email,first_name=first_name,last_name=last_name)
-                    newUser.set_password(password) # şifresini hashleyerek yolluyoruz
-                    newUser.save() # commit ediyoruz
-                    messages.success(request,"You are registered success <3")
+                    newUser = User.objects.create_user(username=username, email=email, first_name=first_name,
+                                                       last_name=last_name)
+                    newUser.set_password(password)  # şifresini hashleyerek yolluyoruz
+                    newUser.save()  # commit ediyoruz
+                    messages.success(request, "You are registered success <3")
                     # Eğer kayıttan hemen sonra kullanıcıya giriş yaptırmak istersek
                     # auth.login(request,newUser)
                     # return redirect('login')
@@ -45,13 +47,14 @@ def login(request):
         # Login User
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username=username,password=password) # authenticate fonksiyonu ile true gelirse bir user instance oluşacak
-        if user is not None: # user instance boş değilse
-            auth.login(request,user) # kullanıcıya giriş yaptırıyoruz
-            messages.success(request,"You are now logged in")
+        user = auth.authenticate(username=username,
+                                 password=password)  # authenticate fonksiyonu ile true gelirse bir user instance oluşacak
+        if user is not None:  # user instance boş değilse
+            auth.login(request, user)  # kullanıcıya giriş yaptırıyoruz
+            messages.success(request, "You are now logged in")
             return redirect('dashboard')
-        else: # user instance boş gelirse
-            messages.error(request,'Invalid credentials')
+        else:  # user instance boş gelirse
+            messages.error(request, 'Invalid credentials')
             return redirect("login")
     else:
         return render(request, 'account/login.html')
@@ -60,9 +63,13 @@ def login(request):
 def logout(request):
     if request.method == "POST":
         auth.logout(request)
-        messages.success(request,"You are now logged out")
+        messages.success(request, "You are now logged out")
         return redirect('index')
 
 
 def dashboard(request):
-    return render(request, 'account/dashboard.html')
+    user_contacts = Contact.objects.all().order_by('-contact_date').filter(user_id=request.user.id)
+    context = {
+        'contacts': user_contacts,
+    }
+    return render(request, 'account/dashboard.html', context)

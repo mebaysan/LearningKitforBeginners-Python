@@ -18,8 +18,9 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',  # uygulamamızı kayıt ettik
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
-    'django.contrib.humanize', # template üzerinde sayıları daha hoş göstermek için kullanılır
+    'django.contrib.humanize',  # template üzerinde sayıları daha hoş göstermek için kullanılır
     'account.apps.AccountConfig',
+    'contact.apps.ContactConfig',
 ]
 
 MIDDLEWARE = [
@@ -98,14 +99,20 @@ STATICFILES_DIRS = [  # app'ler buradan staticleri çekecek. Yani template'ler
 # 1-) pip install pillow
 # 2-) settings.py içerisinde media ayarlarını yap
 # 3-) base urls.py içerisine +static yap
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # ana dizinde media klasörü altına. manage.py yanına
-MEDIA_URL = '/media/' # src kısmına 'static' yazdığımız gibi media yazacağımız için
-
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # ana dizinde media klasörü altına. manage.py yanına
+MEDIA_URL = '/media/'  # src kısmına 'static' yazdığımız gibi media yazacağımız için
 
 # Django Mesajlarını Kullanmak, Mesajları Ayarlıyoruz
 from django.contrib.messages import constants as messages
+
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 
 }
+
+# EMAIL AYARLARI
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mailadresin@gmail.com'
+EMAIL_HOST_PASSWORD = 'seninsifren'
+EMAIL_USE_TLS = True

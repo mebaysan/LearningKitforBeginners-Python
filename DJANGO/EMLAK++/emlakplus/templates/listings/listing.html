@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block title %}
-   {{listing.title}}
+    {{ listing.title }}
 {% endblock %}
 {% load static %}
 {% load humanize %}
@@ -34,7 +34,8 @@
             </nav>
         </div>
     </section>
-
+<!-- ALERTS -->
+    {% include 'partials/_alerts.html' %}
     <!-- Listing -->
     <section id="listing" class="py-4">
         <div class="container">
@@ -96,7 +97,7 @@
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-car"></i> Garage:
-                                    <span class="float-right">{{listing.garage}}
+                                    <span class="float-right">{{ listing.garage }}
                   </span>
                                 </li>
                             </ul>
@@ -105,20 +106,20 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-th-large"></i> Square Feet:
-                                    <span class="float-right">{{listing.sqft}}</span>
+                                    <span class="float-right">{{ listing.sqft }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-square"></i> Lot Size:
-                                    <span class="float-right">{{listing.lot_size}} Acres
+                                    <span class="float-right">{{ listing.lot_size }} Acres
                   </span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-calendar"></i> Listing Date:
-                                    <span class="float-right">{{listing.list_date | timesince}}</span>
+                                    <span class="float-right">{{ listing.list_date | timesince }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-bed"></i> Realtor:
-                                    <span class="float-right">{{listing.realtor}}
+                                    <span class="float-right">{{ listing.realtor }}
                   </span>
                                 </li>
 
@@ -130,13 +131,13 @@
                     <!-- Description -->
                     <div class="row mb-5">
                         <div class="col-md-12">
-                           {{listing.description}}
+                            {{ listing.description }}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card mb-3">
-                        <img class="card-img-top" src="{{listing.realtor.photo.url}}" alt="Seller of the month">
+                        <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="Seller of the month">
                         <div class="card-body">
                             <h5 class="card-title">Property Realtor</h5>
                             <h6 class="text-secondary">{{ listing.realtor }}</h6>
@@ -152,4 +153,55 @@
 
     <!-- Inquiry Modal -->
     <div class="modal fade" id="inquiryModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                        {% else %}
+                            <input type="hidden" name="user_id" value="0">
+                        {% endif %}
+                        <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+                        <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                        <div class="form-group">
+                            <label for="property_name" class="col-form-label">Property:</label>
+                            <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" name="name" class="form-control" {% if user.is_authenticated %}
+                            value="{{ user.first_name }} {{ user.last_name }}"
+                            {% endif %} required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input type="email" name="email" class="form-control" {% if user.is_authenticated %}
+                            value="{{ user.email }}"
+                            {% endif %} required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-form-label">Phone:</label>
+                            <input type="text" name="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="col-form-label">Message:</label>
+                            <textarea name="message" class="form-control"></textarea>
+                        </div>
+                        <hr>
+                        <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock content %}
