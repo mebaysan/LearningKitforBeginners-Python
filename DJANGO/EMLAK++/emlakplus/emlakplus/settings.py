@@ -100,3 +100,12 @@ STATICFILES_DIRS = [  # app'ler buradan staticleri çekecek. Yani template'ler
 # 3-) base urls.py içerisine +static yap
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # ana dizinde media klasörü altına. manage.py yanına
 MEDIA_URL = '/media/' # src kısmına 'static' yazdığımız gibi media yazacağımız için
+
+
+
+# Django Mesajlarını Kullanmak, Mesajları Ayarlıyoruz
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+
+}

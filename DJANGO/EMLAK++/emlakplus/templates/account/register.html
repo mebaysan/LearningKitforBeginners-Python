@@ -10,7 +10,10 @@
                 <i class="fas fa-user-plus"></i> Register</h4>
             </div>
             <div class="card-body">
-                <form action="index.html">
+                <!-- ALERTS -->
+                {% include 'partials/_alerts.html' %}
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
                   <div class="form-group">
                   <label for="first_name">First Name</label>
                   <input type="text" name="first_name" class="form-control" required>
