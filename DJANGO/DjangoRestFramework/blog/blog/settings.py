@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'post.apps.PostConfig',
+    'rest_framework', #django tarafından bize sunulan hazır api görünümü
 ]
 
 MIDDLEWARE = [
