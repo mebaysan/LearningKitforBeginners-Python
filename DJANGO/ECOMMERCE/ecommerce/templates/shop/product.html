@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% block metadescription %}
+    {{ product.description|truncatewords:155 }}
+{% endblock metadescription %}
+{% block title %}
+    {{ product.name }} - E-Commerce Store
+{% endblock title %}
+{% block content %}
+    <div>
+        <div>
+            <p><a href="{% url 'shop:allProdCat' %}">Home</a>| <a
+                    href="{{ product.category.get_url }}">{{ product.category }}</a> | {{ product.name }}</p>
+        </div>
+        <div>
+            <br>
+            <div>
+                <div>
+                    <div>
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h1>{{ product.name }}</h1>
+                        <p>${{ product.price }}</p>
+                        <p>Product Description</p>
+                        <p>{{ product.description }}</p>
+                        {% if product.stock <= 0 %}
+                            <p><b>Out of stock!</b></p>
+                        {% else %}
+                            <a href="">Add to Cart</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
