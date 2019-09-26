@@ -1,7 +1,10 @@
 <nav>
     <ul>
-        <li><a href="">All Products</a></li>
-        <li>Your Cart</li>
+        <li><a href="{% url 'shop:allProdCat' %}">All Products</a></li>
+        <li>Your Cart ()</li>
+        {% for cat in links %}
+            <li><a href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+        {% endfor %}
     </ul>
 </nav>
 <br>

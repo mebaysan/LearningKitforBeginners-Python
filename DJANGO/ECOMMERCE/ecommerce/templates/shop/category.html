@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% block metadescription %}
+    {% if category %}
+        {{ category.description | truncatewords:155 }}
+    {% else %}
+        Welcome to the E-Commerce Store
+    {% endif %}
+{% endblock metadescription %}
+{% block title %}
+    {% if category %}
+        {{ category.name }} - E-Commerce
+    {% else %}
+        See Our Collection - E-Commerce
+    {% endif %}
+{% endblock title %}
+{% block content %}
+    {% if category %}
+        <div>
+            <div>
+                <p><a href="{% url 'shop:allProdCat' %}">Our Product Collection</a> | {{ category.name }}</p>
+            </div>
+        </div>
+    {% endif %}
+    <div>
+        {% if category %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            </div>
+            <br>
+            <div>
+                <h1>{{ category.name }}</h1>
+                <p>{{ category.description }}</p>
+            </div>
+        {% else %}
+            <img src="{% static '/img/custom_category.jpg' %}" alt="Custom Category">
+            </div>
+            <br>
+            <div>
+                <h1>Our Products Collections</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolore est, et laborum nemo
+                    nesciunt nihil, perferendis perspiciatis quasi repellat, similique sit voluptate voluptatibus?
+                    Aliquam aperiam architecto consequuntur odio odit officiis quam sit vitae? Blanditiis excepturi hic
+                    minima tempore. Veniam?</p>
+            </div>
+        {% endif %}
+    <div>
+        {% for product in products %}
+            <div>
+                <div>
+                    <a href=""><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>
+                    <div>
+                        <h4>{{ product.name }}</h4>
+                        <p>${{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock content %}
