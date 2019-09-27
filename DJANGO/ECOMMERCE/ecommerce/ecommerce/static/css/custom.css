@@ -1,0 +1,69 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/***** Navbar *****/
+.nav-item {
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.dropdown-item {
+    font-size: 14px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+/******Footer****/
+.my_footer {
+    background-color: #f8f9fa;
+    height: 60px;
+}
+
+.my_footer p {
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+
+/***** Category Page *****/
+.my_row_class {
+    padding-top: 15px;
+}
+
+.my_row_class .mx-auto p {
+    color: #000000;
+    font-size: 12px;
+}
+
+.my_row_class .mx-auto p a {
+    color: #000000;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.my_image {
+    width: 100%;
+    height: auto;
+}
+
+.my_title {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
+
+.my_image_padding {
+    padding-top: 5px;
+}
+
+.my_bottom_margin {
+    margin-bottom: 10px;
+}
+
+.card-body h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
