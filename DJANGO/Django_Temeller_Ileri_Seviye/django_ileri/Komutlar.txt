@@ -1,0 +1,58 @@
+=================== Temel Komutlar ===================
+
+# python manage.py migrate -> veritabanı için modellerimizi migrate eder
+# python manage.py makemigrations -> veritabanı için bekleyen migration'ları yapar
+# python manage.py createsuperuser -> admin user oluşturur ( bu proje için baysan / 12345 )
+
+
+
+
+=================== Veritabanına Kayıt ===================
+    # İlk Yöntem
+from blog.models import Blog
+makale = Blog()
+makale.title = "ORM ile Eklenen"
+makale.content = "ORM ile Eklenen makalenin içeriği"
+makale.save()
+   # İkinci Yöntem
+makale = Blog(title= "ORM2",content="ORM2")
+makale.save()
+    # Üçüncü Yöntem
+Blog.objects.create(title="ORM3",content="ORM3 içerik content")
+
+
+
+
+
+=================== Veritabanından Veri Çekme (Filter - All - Exclude) ===================
+blog_list = Blog.objects.all() -> bütün blog nesnelerini tek bir değişkene topladık
+Blog.objects.filter(title='ORM') -> title'ı ORM olanı getirdi
+Blog.objects.exclude(title="ORM") -> title'ı ORM olan hariç hepsini getirir
+Blog.objects.filter(title__contains="ORM") -> title'ı içinde 'ORM' geçenleri getirir
+Blog.objects.filter(title__exact="ORM") -> title'ı 'ORM' olan'ı getirir tam tamına aynısı olanı
+Blog.objects.filter(created_date__year=2010) -> created date'inin yılı 2010 olanları getirir
+Blog.objects.filter(created_date__year__gt=2017) -> created date'inin yılı 2017'den büyük olanları getirir
+Blog.objects.filter(created_date__year__gte=2017) -> created date'inin yılı 2017'den büyük veya eşit olanları getirir
+Blog.objects.filter(created_date__year__lte=2017) -> created date'inin yılı 2017'den küçük veya eşit olanları getirir
+Blog.objects.filter(created_date__year__lt=2017) -> created date'inin yılı 2017'den küçük olanları getirir
+Blog.objects.filter(title__startswith='İl') -> title'ı 'İl' ile başlayanları getirir
+/////////
+sorgu = Blog.objects.filter(title__contains="ORM")
+sorgu.first() -> bu şekilde dönen elemanlardan ilkini seçebiliriz (nesne)
+sorgu.last() -> bu şekilde dönen elemanlardan sonunu seçebiliriz (nesne)
+
+
+
+
+
+=================== Veritabanından Veri Çekme (GET) ===================
+Blog.objects.get(id=3) -> bize benzersiz bir nesne döner. filter eğer nesne yoksa boş liste dönerken get bize hata döner
+
+
+
+=================== Veritabanından Veri Silme ===================
+    # 1. Yöntem
+obj = Blog.objects.get(id=4) -> id'si 4 olanı yakaladık
+obj.delete() -> sildik
+    # 2. Yöntem
+Blog.objects.filter(id=3).delete()
