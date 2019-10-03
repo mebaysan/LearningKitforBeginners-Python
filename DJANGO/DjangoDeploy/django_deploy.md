@@ -60,7 +60,7 @@ Artık pg kabuğuna giriş yapmalıyız
 ### Veritabanı Oluşturalım
 
 ```
-CREATE DATABASE btre_prod;
+CREATE DATABASE project_database;
 ```
 
 ### Kullanıcı oluşturalım
@@ -80,7 +80,7 @@ ALTER ROLE dbadmin SET timezone TO 'UTC';
 ### Kullanıcıya veritabanı izni verelim
 
 ```
-GRANT ALL PRIVILEGES ON DATABASE btre_prod TO dbadmin;
+GRANT ALL PRIVILEGES ON DATABASE project_database TO dbadmin;
 ```
 
 ### Postgres'den çıkalım
@@ -131,7 +131,7 @@ Repomuza local projeyi pushluyoruz
 ### Git reposunu sunucudaki proje_dizini'ne klonlayalım
 
 ```
-# git clone https://github.com/yourgithubname/btre_project.git
+# git clone https://github.com/yourgithubname/your_project.git
 ```
 
 ## Pip bağımlılıklarını yükleyelim
