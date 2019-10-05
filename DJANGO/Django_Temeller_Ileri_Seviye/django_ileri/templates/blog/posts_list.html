@@ -1,0 +1,19 @@
+{% extends 'layout.html' %} <!-- templates içinden layout'u çağıracak / miras alacak -->
+{% load static %}
+{% block title %}
+    Post List
+{% endblock %}
+{% block content %}
+    <h1>PostsList</h1>
+    {% if posts.count >= 2 %}
+        <h3>En Az 2 Adet Post'a sahibiz</h3>
+    {% endif %}
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.title }} - {{ post.created_date }}</li>
+        {% endfor %}
+    </ul>
+    {% if get %}
+        <h2>{{ get }}</h2>
+    {% endif %}
+{% endblock %}

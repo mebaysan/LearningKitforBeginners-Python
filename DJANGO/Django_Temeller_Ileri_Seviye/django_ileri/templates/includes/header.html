@@ -1,0 +1,20 @@
+{% load static %}<!-- static dosyalarını çalıştırması için -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Title
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ozel.css' %}"> <!-- static dosyamızı import ettik -->
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    {% block ozel_css %} <!-- özel css ve js dosyaları oluşturmak için bu tarz trickleri kullanabiliriz -->
+
+    {% endblock ozel_css %}
+</head>
+<body>
