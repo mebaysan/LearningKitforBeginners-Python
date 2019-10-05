@@ -46,3 +46,6 @@ def post_create(request):
             created_blog.save()  # commit False yaptığımız için oluşturduğumuz instance'i tekrardan kayıt ediyoruz
             return redirect('blog:posts_list')
     return render(request, 'blog/post_create.html', context={'form': form})
+
+def post_detail(request,id):
+    pass

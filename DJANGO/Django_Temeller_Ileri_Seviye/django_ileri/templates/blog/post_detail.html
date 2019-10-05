@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    Post Detail
+{% endblock %}
+{% block content %}
+    <div style="margin: 0 auto; width: 505px;">
+
+        <h4> {{ post.title }}
+            <span style="color: dimgrey; font-size: 15px;">{{ post.created_date }}
+                    <small>{{ post.created_date | timesince }} önce eklendi </small>
+                </span>
+        </h4>
+        <p>{{ post.content |truncatewords:5 }}</p>
+    </div>
+{% endblock %}

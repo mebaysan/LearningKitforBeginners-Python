@@ -4,16 +4,26 @@
     Post List
 {% endblock %}
 {% block content %}
-    <h1>PostsList</h1>
-    {% if posts.count >= 2 %}
-        <h3>En Az 2 Adet Post'a sahibiz</h3>
-    {% endif %}
-    <ul>
+    <div style="margin: 0 auto; width: 505px;">
+        <h1>PostsList <i class="fa fa-book" style="height: 34px;"></i></h1>
+        {#        {% if posts.count >= 2 %}#}
+        {#            <h3>En Az 2 Adet Post'a sahibiz</h3>#}
+        {#        {% endif %}#}
+        <hr>
+        <br>
         {% for post in posts %}
-            <li>{{ post.title }} - {{ post.created_date }}</li>
+            <h4> {{ post.title }}
+                <span style="color: dimgrey; font-size: 15px;">{{ post.created_date }}
+                    <small>{{ post.created_date | timesince }} önce eklendi </small>
+                </span>
+            </h4>
+            <p>{{ post.content |truncatewords:5 }}</p>
+        {% empty %} <!-- eğer liste boş dönerse -->
+            <b style="color: crimson">Aradığınız kriterde içerik bulunamadı...</b>
         {% endfor %}
-    </ul>
-    {% if get %}
-        <h2>{{ get }}</h2>
-    {% endif %}
+        {#        {% if get %}#}
+        {#            <h2>{{ get }}</h2>#}
+        {#        {% endif %}#}
+
+    </div>
 {% endblock %}
