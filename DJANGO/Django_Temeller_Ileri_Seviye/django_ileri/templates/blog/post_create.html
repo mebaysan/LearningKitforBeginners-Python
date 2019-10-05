@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    Post Create
+{% endblock %}
+{% block content %}
+    <form action="{% url 'blog:post_create' %}" method="post">
+        {% csrf_token %} <!-- csrf token koymazsak hata alırız -->
+        {% for field in form %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="control-label">
+                            <b> {{ field.label }}</b>
+                        </label>
+                        {{ field }}
+                        {% if field.hep_text %}
+                            <b>{{ field.help_text }}</b>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-2">
+                    <button type="submit" class="btn btn-sm btn-success">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

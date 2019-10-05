@@ -9,6 +9,12 @@
             <h3>İletişim</h3>
         </div>
         <form action="{% url 'iletisim' %}" method="get">
+            {% if form.non_field_errors %}
+                {% for e in form.non_field_errors %}
+                    <span class="text-danger"><b>{{ e }}</b></span>
+                {% endfor %}
+
+            {% endif %}
             {% for field in form %} <!-- form içindeki her field -->
                 <div class="row">
                     <div class="form-group">
@@ -17,6 +23,11 @@
                         </div>
                         <div class="col-lg-10">
                             {{ field }} <!-- field'ın kendisi -->
+                            {% if field.errors %} <!-- eğer field'ın errorları varsa -->
+                                {% for error in field.errors %}
+                                    <p class="text-danger"><b>{{ error }}</b></p>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
