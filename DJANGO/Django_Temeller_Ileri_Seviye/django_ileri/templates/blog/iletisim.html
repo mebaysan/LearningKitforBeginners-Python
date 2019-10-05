@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+    İletişim
+{% endblock title %}
+{% block content %}
+    <div class="col-lg-6 col-lg-offset-2">
+        <div class="pb-2 mt-4 mb-2 border-bottom">
+            <h3>İletişim</h3>
+        </div>
+        <form action="{% url 'iletisim' %}" method="get">
+            {% for field in form %} <!-- form içindeki her field -->
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-2">
+                            <label class="control-label">{{ field.label }}</label> <!-- field'ın labeli -->
+                        </div>
+                        <div class="col-lg-10">
+                            {{ field }} <!-- field'ın kendisi -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-success btn-sm">
+        </form>
+    </div>
+
+{% endblock content %}

@@ -1,5 +1,19 @@
 from django.shortcuts import render, HttpResponse
 from .models import Blog
+from .forms import IletisimForm
+
+
+def iletisim(request):
+    form = IletisimForm(
+        data=request.GET or None)  # formumuzdan bir instance oluşturuyoruz, data= -> eğer varsa GET'ten gelenleri al inputlara yerleştir yoksa boş geç
+    # print(request.GET.get('email')) # GET içerisindeki değerleri yakalarız
+    if form.is_valid(): # eğer formdan gelen bilgiler doğru ise
+        isim = form.cleaned_data.get('isim') # form içindeki bilgileri yakalayabiliyoruz
+        soyisim = form.cleaned_data.get('soyisim')
+        email = form.cleaned_data.get('email')
+        icerik = form.cleaned_data.get('icerik')
+        print(icerik, email, isim, soyisim)
+    return render(request, 'blog/iletisim.html', {'form': form})  # formu contexte gönderiyoruz
 
 
 def posts_list(request):

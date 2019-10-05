@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from blog.views import iletisim  # ana url pathinde burayı tanıtacağımız için bu view'i buraya import ediyoruz
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('posts/', include('blog.urls')),  # bu şekilde string şekilde vermeliyiz
+                  path('iletisim/', iletisim, name='iletisim'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
