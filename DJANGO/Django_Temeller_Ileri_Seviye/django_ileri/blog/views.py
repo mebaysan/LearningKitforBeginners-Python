@@ -47,5 +47,6 @@ def post_create(request):
             return redirect('blog:posts_list')
     return render(request, 'blog/post_create.html', context={'form': form})
 
-def post_detail(request,id):
-    pass
+def post_detail(request,id): # bir id parametresi alacak dedik
+    blog = Blog.objects.get(pk=id)
+    return render(request,'blog/post_detail.html',context={'post':blog})

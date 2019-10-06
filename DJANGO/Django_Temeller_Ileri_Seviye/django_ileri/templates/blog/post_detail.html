@@ -4,13 +4,21 @@
     Post Detail
 {% endblock %}
 {% block content %}
-    <div style="margin: 0 auto; width: 505px;">
+    <div class="container" style="margin: 0 auto; width: 505px; padding-top: 90px;">
 
-        <h4> {{ post.title }}
-            <span style="color: dimgrey; font-size: 15px;">{{ post.created_date }}
-                    <small>{{ post.created_date | timesince }} önce eklendi </small>
-                </span>
+        <h4 style="color:#6d4a70;"> {{ post.title }}
+            <br><br>
+            <div class="pull-right">
+                <small>
+                    <span style="color: dimgrey;" class="fa fa-clock"></span>{{ post.created_date | timesince }} önce
+                    eklendi</small>
+                <br><br>
+                <a style="color: dimgrey;" href="{% url 'blog:posts_list' %}"><span class="fa fa-home"></span></a>
+            </div>
         </h4>
-        <p>{{ post.content |truncatewords:5 }}</p>
+        <hr>
+
+        <p>{{ post.content }}</p>
     </div>
+
 {% endblock %}
