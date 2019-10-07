@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect,get_object_or_404, reverse
 from .models import Blog
 from .forms import IletisimForm, BlogForm
 
@@ -44,9 +44,10 @@ def post_create(request):
             created_blog = form.save(
                 commit=False)  # commit False olunca oluşacak nesneyi döndürür fakat veritabanına henüz ekleme yapmaz
             created_blog.save()  # commit False yaptığımız için oluşturduğumuz instance'i tekrardan kayıt ediyoruz
-            return redirect('blog:posts_list')
-    return render(request, 'blog/post_create.html', context={'form': form})
+            return redirect(reverse("blog:post_detail", kwargs={'id': created_blog.id})) # bu sayede parametreli redirect yapabiliriz
+    return render(request, 'blog/post_detail.html', context={'form': form})
 
 def post_detail(request,id): # bir id parametresi alacak dedik
-    blog = Blog.objects.get(pk=id)
+    # blog = Blog.objects.get(pk=id)
+    blog = get_object_or_404(Blog,id=id) # eğer bulamazsa 404 döndürür. ilk parametre modelimiz ikinci parametre filtremiz
     return render(request,'blog/post_detail.html',context={'post':blog})

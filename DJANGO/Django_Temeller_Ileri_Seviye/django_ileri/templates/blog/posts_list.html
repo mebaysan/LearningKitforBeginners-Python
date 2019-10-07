@@ -5,7 +5,11 @@
 {% endblock %}
 {% block content %}
     <div style="margin: 0 auto; width: 505px;">
-        <h1>PostsList <i class="fa fa-book" style="height: 34px;"></i></h1>
+        <h1>Posts List <i class="fa fa-book" style="height: 34px;"></i> <a style="color:black;"
+                                                                           href="{% url 'blog:post_create' %}"><small
+                class="fa-pull-right">Post Create</small></a><a
+                style="color:black;"
+                href="{% url 'blog:post_create' %}"><span class="fa fa-plus fa-pull-right"></span></a></h1>
         {#        {% if posts.count >= 2 %}#}
         {#            <h3>En Az 2 Adet Post'a sahibiz</h3>#}
         {#        {% endif %}#}
