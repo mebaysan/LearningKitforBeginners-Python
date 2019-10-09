@@ -1,5 +1,14 @@
 {% include 'includes/header.html' %} <!-- bu şekilde farklı sayfaları import edebiliriz -->
 <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+
+            <!-- message.tags varsa message'in tag'ini bastır dedik. bu sayede divimize class vermiş olacağız -->
+        {% endfor %}
+    {% endif %}
     {% block content %}
 
 

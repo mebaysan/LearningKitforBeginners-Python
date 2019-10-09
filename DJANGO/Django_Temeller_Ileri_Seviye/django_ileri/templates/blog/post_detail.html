@@ -4,8 +4,8 @@
     Post Detail
 {% endblock %}
 {% block content %}
-    <div class="container" style="margin: 0 auto; width: 505px; padding-top: 90px;">
 
+    <div class="container" style="margin: 0 auto; width: 505px; padding-top: 90px;">
         <h4 style="color:#6d4a70;"> {{ post.title }}
             <br><br>
             <div class="pull-right">
@@ -13,12 +13,20 @@
                     <span style="color: dimgrey;" class="fa fa-clock"></span>{{ post.created_date | timesince }} önce
                     eklendi</small>
                 <br><br>
-                <a style="color: dimgrey;" href="{% url 'blog:posts_list' %}"><span class="fa fa-home"></span></a>
+                <a style="color: dimgrey;" href="{% url 'blog:posts_list' %}"><span
+                        class="fa fa-home"></span></a>
+                <br><br>
+                <a style="color: dimgrey;" href="{% url 'blog:post_update' id=post.id %}"><span
+                        class="fa fa-arrow-up"></span> Güncelle</a>
+                <br><br>
+                <a style="color: dimgrey;" href="{% url 'blog:post_delete' id=post.id %}"><span
+                        class="fa fa-eraser"></span> Sil</a>
+
             </div>
         </h4>
         <hr>
 
-        <p>{{ post.content }}</p>
+        <p>{{ post.content | linebreaks }}</p>
     </div>
 
 {% endblock %}

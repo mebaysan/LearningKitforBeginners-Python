@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 
 class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' aslında bizim tablomuzdur.
@@ -9,9 +10,11 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
     created_date = models.DateField(auto_now_add=True,
                                     auto_now=False)  # auto_now_add -> oluşturulma tarihini otomatik ekler, auto_now -> Bu nesne her değişime uğradığında otomatik olarak created_date'i güncellenir
 
-    class Meta: # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
+    class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"
         verbose_name_plural = "Gönderiler"
-        ordering=['id'] # bu şekilde admin panelinde id'e göre sıralanacak ',' vererek başka bir alan daha verebiliriz
-    def __str__(self): # bu şekilde admin panelinde modelin title'ı gözükecek
+        ordering = [
+            'id']  # bu şekilde admin panelinde id'e göre sıralanacak ',' vererek başka bir alan daha verebiliriz
+
+    def __str__(self):  # bu şekilde admin panelinde modelin title'ı gözükecek
         return self.title

@@ -16,7 +16,7 @@
         <hr>
         <br>
         {% for post in posts %}
-            <h4><a style="color:#666666;" href="{% url 'blog:post_detail' post.pk %}"> {{ post.title }}</a>
+            <h4><a style="color:#666666;" href="{% url 'blog:post_detail' id=post.id %}"> {{ post.title }}</a>
                 <span style="color: dimgrey; font-size: 15px;">{{ post.created_date }}
                     <small>{{ post.created_date | timesince }} önce eklendi </small>
                 </span>
