@@ -1,5 +1,7 @@
 from django.db import models
 from django.shortcuts import reverse
+from unidecode import unidecode
+from django.template.defaultfilters import slugify
 
 
 class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' aslında bizim tablomuzdur.
@@ -9,6 +11,8 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
     content = models.TextField(max_length=1000, verbose_name='İçerik', null=True, blank=False)
     created_date = models.DateField(auto_now_add=True,
                                     auto_now=False)  # auto_now_add -> oluşturulma tarihini otomatik ekler, auto_now -> Bu nesne her değişime uğradığında otomatik olarak created_date'i güncellenir
+    slug = models.SlugField(null=True, unique=True,
+                            editable=False)  # editable=False -> admin panelden buraya müdahale edilemez
 
     class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"
@@ -18,3 +22,24 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
 
     def __str__(self):  # bu şekilde admin panelinde modelin title'ı gözükecek
         return self.title
+
+    def get_unique_slug(
+            self):  # slug'larımızın düzgün bir şekilde artması için yaptık. Bu sayede sürekli değişecek ve aynı isimde post geldiğinde hata almayacağız
+        sayi = 0
+        slug = slugify(unidecode(self.title))
+        new_slug = slug
+        while Blog.objects.filter(slug=new_slug).exists():
+            sayi += 1
+            new_slug = "{}-{}".format(slug, sayi)
+        slug = new_slug
+        return slug
+
+    def save(self, *args, **kwargs):
+        if self.id is None:
+            self.slug = self.get_unique_slug()
+        else:
+            post = Blog.objects.get(slug=self.slug)
+            if post.title != self.title:
+                self.slug = self.get_unique_slug()
+        super(Blog, self).save(*args, **kwargs)
+        # daha save fonksiyonu işini bitirmeden biz burda override yaptık. Bu sayede modelin slug alanını set ettik.

@@ -4,7 +4,7 @@
     Post Update
 {% endblock %}
 {% block content %}
-    <form action="{% url 'blog:post_update' id=post.id %}" method="post">
+    <form action="{% url 'blog:post_update' slug=post.slug %}" method="post">
         {% csrf_token %} <!-- csrf token koymazsak hata alırız -->
         {% for field in form %}
             <div class="form-group">

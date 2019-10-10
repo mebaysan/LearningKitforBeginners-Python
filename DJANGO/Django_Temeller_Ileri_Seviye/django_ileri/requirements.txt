@@ -1,0 +1,6 @@
+Django==2.2.5
+Pillow==6.1.0
+pytz==2019.2
+sqlparse==0.3.0
+Unidecode==1.1.1
+virtualenv==16.7.5

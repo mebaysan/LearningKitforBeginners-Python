@@ -16,10 +16,10 @@
                 <a style="color: dimgrey;" href="{% url 'blog:posts_list' %}"><span
                         class="fa fa-home"></span></a>
                 <br><br>
-                <a style="color: dimgrey;" href="{% url 'blog:post_update' id=post.id %}"><span
+                <a style="color: dimgrey;" href="{% url 'blog:post_update' slug=post.slug %}"><span
                         class="fa fa-arrow-up"></span> Güncelle</a>
                 <br><br>
-                <a style="color: dimgrey;" href="{% url 'blog:post_delete' id=post.id %}"><span
+                <a style="color: dimgrey;" href="{% url 'blog:post_delete' slug=post.slug %}"><span
                         class="fa fa-eraser"></span> Sil</a>
 
             </div>
@@ -27,6 +27,7 @@
         <hr>
 
         <p>{{ post.content | linebreaks }}</p>
+        <small>Slug: {{ post.slug }}</small>
     </div>
 
 {% endblock %}

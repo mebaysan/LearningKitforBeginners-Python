@@ -56,3 +56,14 @@ obj = Blog.objects.get(id=4) -> id'si 4 olanı yakaladık
 obj.delete() -> sildik
     # 2. Yöntem
 Blog.objects.filter(id=3).delete()
+
+
+
+
+=================== Python Console Slugify ===================
+from django.template.defaultfilters import slugify
+slugify("Deneme Slug İçin Nasıl Yapılır") fakat küçük ı'ları çevirmeyecektir.
+Bunun için; istersek replace("ı","i") diyerek bir önlem alabiliriz ya da;
+pip install Unidecode ile sorunu çözebiliriz
+from unidecode import unidecode
+slugify(unidecode("Deneme İçin Slug Nasıl Yapılır")) -> bu şekilde kendisi türkçe karakterleri ingilizce karakterlere çevirecek
