@@ -3,6 +3,7 @@ from .models import Blog
 from .forms import IletisimForm, BlogForm
 from django.contrib import messages
 
+
 def iletisim(request):
     form = IletisimForm(
         data=request.GET or None)  # formumuzdan bir instance oluşturuyoruz, data= -> eğer varsa GET'ten gelenleri al inputlara yerleştir yoksa boş geç
@@ -36,7 +37,7 @@ def post_update(request, slug):
     if form.is_valid():
         post = form.save(commit=False)
         post.save()
-        slug = post.slug # başlık güncellenirse yeni slug'ı seçiyoruz
+        slug = post.slug  # başlık güncellenirse yeni slug'ı seçiyoruz
         messages.success(request, "{} başlıklı post başarıyla güncellendi".format(isim), extra_tags="success")
         return redirect(reverse('blog:post_detail', kwargs={'slug': slug}))
     return render(request, 'blog/post_update.html', context={'form': form, 'post': post})
