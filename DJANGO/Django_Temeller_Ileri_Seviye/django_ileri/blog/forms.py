@@ -47,9 +47,10 @@ class IletisimForm(forms.Form):  # formlarında form olması için forms.Form'da
 class BlogForm(forms.ModelForm):  # model formu olması için ModelForm class'ından inherit ediyoruz
     class Meta:
         model = Blog  # bu formun kullanacağı model
-        fields = ['title', 'content']  # kullandığı model içerisinde hangi alanlar bu forma gelsin
+        fields = ['title', 'content','kategoriler']  # kullandığı model içerisinde hangi alanlar bu forma gelsin
 
     def __init__(self, *args, **kwargs):
         super(BlogForm, self).__init__(*args, **kwargs)
         self.fields['content'].widget.attrs.update({'class': 'form-control'})
         self.fields['title'].widget.attrs.update({'class': 'form-control'})
+        self.fields['kategoriler'].widget.attrs.update({'class': 'form-control'})

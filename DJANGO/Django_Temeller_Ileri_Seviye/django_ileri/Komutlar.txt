@@ -67,3 +67,15 @@ Bunun için; istersek replace("ı","i") diyerek bir önlem alabiliriz ya da;
 pip install Unidecode ile sorunu çözebiliriz
 from unidecode import unidecode
 slugify(unidecode("Deneme İçin Slug Nasıl Yapılır")) -> bu şekilde kendisi türkçe karakterleri ingilizce karakterlere çevirecek
+
+
+================== Many To Many ===========================
+Çoka çok ilişki
+post = Blog(title="deneme",content="içerik")
+k1 = Kategori("Deneme")
+k2 = Kategori("Deneme23")
+post.kategoriler.add(k1) -> post objesine k1 kategorisini ekledik
+post.kategoriler.add(k1,k2) -> bu şekilde çoklu eklemeler de yapabiliriz
+post.kategoriler.all() -> bize post objesinin bütün kategorilerini verir
+k1.post.all() -> bize k1'in bağlı olduğu tüm postları getirir.
+post.kategoriler.create("Deneme") -> önce kategoriyi oluşturur sonra post objesine ekler

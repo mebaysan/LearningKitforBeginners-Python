@@ -119,3 +119,5 @@ STATICFILES_DIRS = [
     # bütün staticleri buradan çekecek değil aslında staticleri çekerken buraya da bakacak
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static') # burası da bütün staticleri collect yapınca buraya çekecek deploy ederken gerekli olacak
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'  # src kısmına 'static' yazdığımız gibi media yazacağımız için

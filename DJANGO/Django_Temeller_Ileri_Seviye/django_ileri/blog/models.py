@@ -4,6 +4,17 @@ from unidecode import unidecode
 from django.template.defaultfilters import slugify
 
 
+class Kategori(models.Model):
+    isim = models.CharField(max_length=30, verbose_name='Kategori Adı')
+
+    class Meta:
+        verbose_name_plural = 'Kategoriler'
+        verbose_name = 'Kategori'
+
+    def __str__(self):
+        return self.isim
+
+
 class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' aslında bizim tablomuzdur.
     title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Başlık',
                              help_text='Başlık Bilgisi Burada Girilir')
@@ -13,6 +24,8 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
                                     auto_now=False)  # auto_now_add -> oluşturulma tarihini otomatik ekler, auto_now -> Bu nesne her değişime uğradığında otomatik olarak created_date'i güncellenir
     slug = models.SlugField(null=True, unique=True,
                             editable=False)  # editable=False -> admin panelden buraya müdahale edilemez
+    kategoriler = models.ManyToManyField(to=Kategori, null=True,
+                                         related_name='post')  # bir blog'un birden çok kategorisi olabilir
 
     class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"

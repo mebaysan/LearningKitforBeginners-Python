@@ -27,6 +27,14 @@
         <hr>
 
         <p>{{ post.content | linebreaks }}</p>
+        <small><i class="fa fa-calendar"></i> Kategoriler:
+            {% if post.kategoriler.all.count == 0 %}
+                Hiç kategori bulunmamaktadır...
+            {% else %}
+                {{ post.kategoriler.all |join:',' }}
+            {% endif %}
+        </small>
+        <br>
         <small>Slug: {{ post.slug }}</small>
     </div>
 
