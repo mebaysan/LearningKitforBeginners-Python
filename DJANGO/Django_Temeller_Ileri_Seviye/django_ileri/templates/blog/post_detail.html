@@ -25,7 +25,11 @@
             </div>
         </h4>
         <hr>
-
+        {% if post.image %}
+        <div class="thumbnail">
+            <img style="width: %100px;height: 400px;" src="{{ post.image.url }}" alt="">
+        </div>
+        {% endif %}
         <p>{{ post.content | linebreaks }}</p>
         <small><i class="fa fa-calendar"></i> Kategoriler:
             {% if post.kategoriler.all.count == 0 %}

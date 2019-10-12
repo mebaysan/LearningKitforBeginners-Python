@@ -26,6 +26,8 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
                             editable=False)  # editable=False -> admin panelden buraya müdahale edilemez
     kategoriler = models.ManyToManyField(to=Kategori, null=True,
                                          related_name='post')  # bir blog'un birden çok kategorisi olabilir
+    image = models.ImageField(verbose_name="Resim", blank=True, null=True, help_text="Kapak Fotoğrafı Seçiniz",
+                              default="default/default.png") # default -> eğer resim yoksa git media/default/default.png yi getir
 
     class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"

@@ -33,7 +33,8 @@ def post_update(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     isim = post.title
     form = BlogForm(request.POST or None,
-                    instance=post)  # instance -> formun datasını verdiğimiz instance ile dolduruyoruz
+                    instance=post,
+                    files=request.FILES or None)  # instance -> formun datasını verdiğimiz instance ile dolduruyoruz
     if form.is_valid():
         post = form.save(commit=False)
         post.save()
@@ -53,10 +54,12 @@ def post_delete(request, slug):
 def post_create(request):
     form = BlogForm()
     if request.method == "POST":  # eğer method POST ise
-        form = BlogForm(data=request.POST)  # yeni bir form oluştur ve oluşturduğun formun içine bu datayı yaz
+        form = BlogForm(data=request.POST,
+                        files=request.FILES or None)  # yeni bir form oluştur ve oluşturduğun formun içine bu datayı yaz
         if form.is_valid():
             created_blog = form.save(
                 commit=False)  # commit False olunca oluşacak nesneyi döndürür fakat veritabanına henüz ekleme yapmaz
+
             created_blog.save()  # commit False yaptığımız için oluşturduğumuz instance'i tekrardan kayıt ediyoruz
             messages.success(request, "{} başlıklı post başarıyla oluşturuldu".format(created_blog.title),
                              extra_tags="success")

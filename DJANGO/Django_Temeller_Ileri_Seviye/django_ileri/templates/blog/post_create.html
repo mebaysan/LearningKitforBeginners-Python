@@ -4,7 +4,7 @@
     Post Create
 {% endblock %}
 {% block content %}
-    <form action="{% url 'blog:post_create' %}" method="post">
+    <form action="{% url 'blog:post_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %} <!-- csrf token koymazsak hata alırız -->
         {% for field in form %}
             <div class="form-group">
@@ -14,8 +14,15 @@
                             <b> {{ field.label }}</b>
                         </label>
                         {{ field }}
-                        {% if field.hep_text %}
-                            <b>{{ field.help_text }}</b>
+                        {% if field.errors %}
+                            {% for er in field.errors %}
+                                <span> <b>{{ er }}</b></span>
+                            {% endfor %}
+
+                        {% else %}
+                            {% if field.hep_text %}
+                                <b style="color: #666666;">{{ field.help_text }}</b>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
