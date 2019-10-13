@@ -1,5 +1,18 @@
 # Django Deployment to Ubuntu 18.04
 
+### Yeni kullanıcı oluşturuyoruz
+
+Uzak sunucumuzua bağlanmak için kendimize bir kullanıcı oluşturuyoruz. Şifresini güçlü oluşturmalıyız.
+
+```
+# adduser yeni_kullanici
+```
+
+### Root yetkileri verelim
+
+```
+# usermod -aG sudo yeni_kullanici
+```
 ### sshd service Yeniliyoruz
 
 ```
