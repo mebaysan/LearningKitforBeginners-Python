@@ -18,8 +18,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from blog.views import iletisim  # ana url pathinde burayı tanıtacağımız için bu view'i buraya import ediyoruz
+from django.conf import global_settings
 
 urlpatterns = [
+                  path('jet/', include('jet.urls', 'jet')),
+                  path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
                   path('admin/', admin.site.urls),
                   path('', include('blog.urls')),  # bu şekilde string şekilde vermeliyiz
                   path('iletisim/', iletisim, name='iletisim'),

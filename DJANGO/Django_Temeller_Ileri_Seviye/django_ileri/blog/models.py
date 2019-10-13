@@ -30,7 +30,7 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
                                          related_name='post')  # bir blog'un birden çok kategorisi olabilir
     image = models.ImageField(verbose_name="Resim", blank=True, null=True, help_text="Kapak Fotoğrafı Seçiniz",
                               default="default/default.png")  # default -> eğer resim yoksa git media/default/default.png yi getir
-    yayin_taslak = models.CharField(choices=YAYIN_TASLAK, max_length=7, null=True, blank=False)
+    yayin_taslak = models.CharField(choices=YAYIN_TASLAK, max_length=7, null=False, blank=True)
 
     class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"
