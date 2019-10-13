@@ -16,6 +16,8 @@ class Kategori(models.Model):
 
 
 class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' aslında bizim tablomuzdur.
+    YAYIN_TASLAK = ((None, "Lütfen Bir Değer Seçiniz"), ("yayin", "YAYIN"), ("taslak",
+                                                                             "TASLAK"))  # içine tuple'lar alır. Model Form'da option olarak gözükür. ilk parametre değer 2. parametre option'da ne isimle gözükeceği
     title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Başlık',
                              help_text='Başlık Bilgisi Burada Girilir')
     # CharField -> karakter alanı , max_length -> Max karakter uzunluğu zorunludur, verbose_name -> Formda nasıl gözükeceği, help_text -> Formun altında bilgi olarak gözükecek metin, blank -> formda boş girilip girilmemesi, null -> veritabanına boş kayıt edilip edilememesi
@@ -27,7 +29,8 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
     kategoriler = models.ManyToManyField(to=Kategori, null=True,
                                          related_name='post')  # bir blog'un birden çok kategorisi olabilir
     image = models.ImageField(verbose_name="Resim", blank=True, null=True, help_text="Kapak Fotoğrafı Seçiniz",
-                              default="default/default.png") # default -> eğer resim yoksa git media/default/default.png yi getir
+                              default="default/default.png")  # default -> eğer resim yoksa git media/default/default.png yi getir
+    yayin_taslak = models.CharField(choices=YAYIN_TASLAK, max_length=7, null=True, blank=False)
 
     class Meta:  # bu class altına bu modelin tekil ve çoğul isimlerini belirleyebiliriz (admin panelde gözükecek)
         verbose_name = "Gönderi"
