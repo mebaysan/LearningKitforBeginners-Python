@@ -2,6 +2,14 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, 
 from .models import Blog
 from .forms import IletisimForm, BlogForm
 from django.contrib import messages
+from django.http import JsonResponse
+
+
+def deneme(request):
+    if request.is_ajax():  # ajax istekler için bu şekilde kullanmalıyız. eğer method ajax ise
+        print("istek geldi")
+        return True
+    return render(request, 'deneme.html')
 
 
 def iletisim(request):

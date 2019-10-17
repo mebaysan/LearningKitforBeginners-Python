@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h2 style="padding-top: 50px;">Jquery Ajax Denemeleri</h2>
+        <hr>
+        <button id="ajax_btn" url="{% url 'blog:deneme' %}" class="btn btn-success">Ajax</button>
+    </div>
+
+
+
+    <script>
+        $(() => {
+            $("#ajax_btn").click(() => {
+                var url = $("#ajax_btn").attr("url");
+                {#alert(url);#}
+                $.ajax({
+                    url: url,
+                    method: "GET",
+                    dataType: "json",
+                    data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    success: function (data) {
+                        console.log("merhaba");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}
