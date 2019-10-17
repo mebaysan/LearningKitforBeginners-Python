@@ -6,7 +6,11 @@
 {% block content %}
 
     <div class="container" style="margin: 0 auto; width: 505px; padding-top: 90px;">
-        <h4 style="color:#6d4a70;"> {{ post.title }}
+        <h4 style="color:#6d4a70;"> {{ post.title }} | {% if post.get_yayin_taslak_durum == 'taslak' %}
+        <span class="badge badge-warning">{{post.get_yayin_taslak_display}}</span>
+            {% else %}
+             <span class="badge badge-success">{{post.get_yayin_taslak_display}}</span>
+        {% endif %}
             <br><br>
             <div class="pull-right">
                 <small>
@@ -21,7 +25,6 @@
                 <br><br>
                 <a style="color: dimgrey;" href="{% url 'blog:post_delete' slug=post.slug %}"><span
                         class="fa fa-eraser"></span> Sil</a>
-
             </div>
         </h4>
         <hr>

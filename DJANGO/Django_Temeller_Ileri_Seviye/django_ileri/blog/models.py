@@ -1,7 +1,7 @@
 from django.db import models
 from django.shortcuts import reverse
 from unidecode import unidecode
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, safe
 
 
 class Kategori(models.Model):
@@ -40,6 +40,12 @@ class Blog(models.Model):  # her model bir tabloya denk gelir. Buradaki 'Blog' a
 
     def __str__(self):  # bu şekilde admin panelinde modelin title'ı gözükecek
         return self.title
+
+    def get_yayin_taslak_durum(self):
+        if self.yayin_taslak == "taslak":
+            return 'taslak'
+        else:
+            return 'yayin'
 
     def get_unique_slug(
             self):  # slug'larımızın düzgün bir şekilde artması için yaptık. Bu sayede sürekli değişecek ve aynı isimde post geldiğinde hata almayacağız
