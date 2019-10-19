@@ -1,0 +1,9 @@
+{%extends 'layout.html' %}
+{%block content%}
+<h3> Merhaba <p>{{name}}</p>! Aramıza {{location}}'dan katılıyorsun.</h3>
+<!-- değişkenleri bracket'lar içinde kullanıyoruz -->
+{% if name == "Baysan" %}
+<!-- koşulları kullanabiliriz, aynı şekilde döngüleri de kullanabiliriz -->
+<h4><b>Hoşgeldin Kral Admin {{name}}!</b></h4>
+{% endif %}
+{%endblock content%}
