@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{{ url_for('index') }}">Food Tracker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('food') }}">Add Food Item</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase col-sm-6 col-sm-offset-3" role="main">
+
+      <div class="row">
+        <div>
+          <form method="POST" action="/">
+            <div class="form-group">
+              <label for="new-day">New Day</label>
+              <input type="date" class="form-control" name="date" id="new-day">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+
+          <div class="page-header"></div>
+
+          {% for r in results %}
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{ r.pretty_date }}</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="nav nav-pills" role="tablist">
+                <li><a>Protein: <span class="badge">{{ r.protein }}</span></a></li>
+                <li><a>Carbohydates: <span class="badge">{{ r.carbohydrates }}</span></a></li>
+                <li><a>Fat: <span class="badge">{{ r.fat }}</span></a></li>
+                <li><a>Calories: <span class="badge">{{ r.calories }}</span></a></li>
+                <li><a href="{{ url_for('view', date=r.entry_date) }}" type="button" class="btn btn-link">View Detail</a></li>
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+{% endblock %}
