@@ -12,6 +12,9 @@
     <li>{{ product.title }}</li>
     <li>{{ product.description | truncatewords:5 }}</li>
     <li>{{ product.price }}</li>
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="">
+    {% endif %}
 </ul>
 </body>
 </html>
