@@ -38,9 +38,9 @@ def product_featured_list(req):
 
 def product_featured_detail(req, id):
     try:
-        product = Product.objects.get(id=id, featured=True)
+        product = Product.objects.get(id=id, featured=True) # id'si get'ten gelen product ve featured=True ise
     except Product.DoesNotExist:
-        return HttpResponse("{} Id'li Ürün Bulunamadı".format(id))
+        return HttpResponse("<h1>{} Id'li Ürün Bulunamadı veya Featured Değil</h1>".format(id))
     context = {
         'product': product
     }

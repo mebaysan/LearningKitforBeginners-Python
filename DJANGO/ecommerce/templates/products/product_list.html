@@ -11,7 +11,9 @@
 <ul>
     <h4>İtemler</h4>
     {% for object in object_list %}
-        <h5>{{ object.title }} |
+        <h5>{{ object.title }} {% if object.featured == True %}
+        | <small><i>(Featured)</i></small>
+        {% endif %} |
             <small>
                 <a href="{% if object.featured == True %}
          {% url 'product_featured_detail' id=object.id %}
