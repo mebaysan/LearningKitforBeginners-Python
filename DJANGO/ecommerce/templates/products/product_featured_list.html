@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Product List</h1>
+<hr>
+
+<ul>
+    <h4>İtemler ( Featured )</h4>
+    {% for object in products %}
+     <h5>{{ object.title }} | <small><a href="{% url 'product_featured_detail' id=object.id %}"><i>Detail</i></a></small></h5>
+    {% endfor %}
+
+</ul>
+</body>
+</html>

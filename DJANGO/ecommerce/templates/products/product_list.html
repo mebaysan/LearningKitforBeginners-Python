@@ -11,7 +11,17 @@
 <ul>
     <h4>İtemler</h4>
     {% for object in object_list %}
-     <h6>{{ object.title }}</h6>
+        <h5>{{ object.title }} |
+            <small>
+                <a href="{% if object.featured == True %}
+         {% url 'product_featured_detail' id=object.id %}
+            {% else %}
+            {% url 'product_detail' id=object.id %}
+         {% endif %}">
+                    <i>Detail</i>
+                </a>
+            </small>
+        </h5>
     {% endfor %}
 
 </ul>

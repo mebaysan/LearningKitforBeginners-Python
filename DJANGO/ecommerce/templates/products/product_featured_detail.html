@@ -12,6 +12,11 @@
     <li>{{ product.title }}</li>
     <li>{{ product.description | truncatewords:5 }}</li>
     <li>{{ product.price }}</li>
+    <li>{% if product.featured == True %}
+        Featured
+    {% else %}
+        Not Featured
+    {% endif %}</li>
     {% if product.image %}
         <li>Image:<img width="100%" height="300" src="{{ product.image.url }}" alt=""></li>
     {% endif %}
