@@ -16,9 +16,10 @@
         {% endif %} |
             <small>
                 <a href="{% if object.featured == True %}
-         {% url 'product_featured_detail' id=object.id %}
+         {% url 'product_featured_detail' slug=object.slug %}
+
             {% else %}
-            {% url 'product_detail' id=object.id %}
+            {% url 'product_detail' slug=object.slug %}
          {% endif %}">
                     <i>Detail</i>
                 </a>

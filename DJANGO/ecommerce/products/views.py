@@ -14,14 +14,14 @@ class ProductListView(ListView):
         return context
 
 
-def product_detail(req, id):
+def product_detail(req, slug):
     try:
         # product = get_object_or_404(Product, id=id)  # Product modeli üstünde id'e göre arama yapılacak
         product = Product.objects.get(
-            id=id)  # Product modeli üstünde id'e göre getirecek. Id bulunamazsa bize Product.DoesNotExist hatası verecek
+            slug=slug)  # Product modeli üstünde id'e göre getirecek. Id bulunamazsa bize Product.DoesNotExist hatası verecek
     except Product.DoesNotExist:
-        return HttpResponse("<h1> {} Id'li Ürün Bulunamadı!</h1>".format(
-            id))  # istersek burda bir template döndürebiliriz. Böylece kendi 404 sayfamızı yazmış olduk
+        return HttpResponse("<h1> {} Slug'lı Ürün Bulunamadı!</h1>".format(
+            slug))  # istersek burda bir template döndürebiliriz. Böylece kendi 404 sayfamızı yazmış olduk
     context = {
         'product': product
     }
@@ -36,11 +36,11 @@ def product_featured_list(req):
     return render(req, "products/product_featured_list.html", context=context)
 
 
-def product_featured_detail(req, id):
+def product_featured_detail(req, slug):
     try:
-        product = Product.objects.get(id=id, featured=True) # id'si get'ten gelen product ve featured=True ise
+        product = Product.objects.get(slug=slug, featured=True) # id'si get'ten gelen product ve featured=True ise
     except Product.DoesNotExist:
-        return HttpResponse("<h1>{} Id'li Ürün Bulunamadı veya Featured Değil</h1>".format(id))
+        return HttpResponse("<h1>{} Slug'lı Ürün Bulunamadı veya Featured Değil</h1>".format(slug))
     context = {
         'product': product
     }
