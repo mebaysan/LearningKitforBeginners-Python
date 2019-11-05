@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Featured Product List
+{% endblock title %}
+{% block body %}
 <h1>Product List</h1>
 <hr>
 
@@ -15,5 +14,5 @@
     {% endfor %}
 
 </ul>
-</body>
-</html>
+
+{% endblock body %}

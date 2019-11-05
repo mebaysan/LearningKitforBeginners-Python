@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{product.title}} Featured Detail
+{% endblock title %}
+{% block body %}
 <h1>Product Detail : {{ product.title }}</h1>
 <hr>
 <ul>
@@ -21,5 +20,5 @@
         <li>Image:<img width="100%" height="300" src="{{ product.image.url }}" alt=""></li>
     {% endif %}
 </ul>
-</body>
-</html>
+
+{% endblock body %}
