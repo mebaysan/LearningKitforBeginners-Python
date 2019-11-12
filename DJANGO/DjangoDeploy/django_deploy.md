@@ -416,3 +416,19 @@ server {
 # sudo systemctl restart nginx
 # sudo systemctl restart gunicorn
 ```
+
+
+### Localde PostgreSQL Dump
+
+```
+# pg_dump -U db_username dbname > outfile -
+```
+
+
+### Canlıda PostgreSQL Restore
+
+```
+# psql -U db_username dbname < infile
+
+ufak not! localdeki projeyi deploy ederken önce sunucuda db restore yapın sonra django migrate yapın.
+```
