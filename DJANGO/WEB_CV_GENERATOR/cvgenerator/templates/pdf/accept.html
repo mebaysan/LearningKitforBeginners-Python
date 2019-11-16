@@ -1,46 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+
     <div class="container">
+        <br><br>
+        <h3 class="text-center">Web Based CV Generator <small><small>Designed by: <a href="http://baysansoft.com/"
+                                                                                     target="_blank">baysansoft.com</a></small></small>
+        </h3>
+        <br><br>
         <div class="row">
             <div class="col-md-7">
-                <form>
+                <form method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <input type="text" class="form-control" id="phone" name="phone">
                     </div>
                     <div class="form-group">
                         <label>About You</label>
-                        <textarea type="text" class="form-control" id="summary" name="summary" required></textarea>
+                        <textarea type="text" class="form-control" id="summary" name="summary"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Degree</label>
-                        <input type="text" class="form-control" id="degree" name="degree" required>
+                        <input type="text" class="form-control" id="degree" name="degree">
                     </div>
                     <div class="form-group">
                         <label>School</label>
-                        <input type="text" class="form-control" id="school" name="school" required>
+                        <input type="text" class="form-control" id="school" name="school">
                     </div>
                     <div class="form-group">
                         <label>University</label>
-                        <input type="text" class="form-control" id="university" name="university" required>
+                        <input type="text" class="form-control" id="university" name="university">
                     </div>
                     <div class="form-group">
                         <label>Work Experience</label>
-                        <textarea type="text" class="form-control" id="previous_work" name="previous_work" required></textarea>
+                        <textarea type="text" class="form-control" id="previous_work" name="previous_work"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Skills</label>
-                        <textarea type="text" class="form-control" id="skills" name="skills" required></textarea>
+                        <textarea type="text" class="form-control" id="skills" name="skills"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Generate</button>
                 </form>

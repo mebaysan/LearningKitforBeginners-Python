@@ -24,4 +24,5 @@ admin.site.index_title = "Web Based CV Generator Admin"  # url title / admin ind
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.accept, name='accept'),
+    path('resume/<int:id>/', views.resume, name='resume'),
 ]

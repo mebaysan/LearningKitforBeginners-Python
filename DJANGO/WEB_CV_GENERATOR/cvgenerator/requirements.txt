@@ -6,6 +6,7 @@ django-js-asset==1.2.2
 djangorestframework==3.10.3
 gunicorn==19.9.0
 Markdown==3.1.1
+pdfkit==0.6.1
 Pillow==6.2.1
 psycopg2==2.8.4
 psycopg2-binary==2.8.4

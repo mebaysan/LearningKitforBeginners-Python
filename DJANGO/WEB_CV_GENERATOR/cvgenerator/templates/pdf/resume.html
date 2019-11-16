@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="container">
+
+        <h2>{{ profile.name }}</h2>
+        <h2>{{ profile.email }}</h2>
+        <h2>{{ profile.phone }}</h2>
+        <hr>
+        <br>
+        <b>Summary</b>
+        <p>{{ profile.summary }}</p>
+        <b>Skills</b>
+        <p>{{ profile.skills }}</p>
+        <b>Education</b>
+        <ul>
+            <li>{{ profile.school }}</li>
+            <li>{{ profile.university }}</li>
+        </ul>
+
+    </div>
+{% endblock body %}
