@@ -17,9 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import contact, home,about,login,register
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path('', home, name='home'),
+                  path('contact/', contact, name='contact'),
+                  path('register/', register, name='register'),
+                  path('login/', login, name='login'),
+                  path('about/', about, name='about'),
                   path('products/', include('products.urls'))
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                                                                                            document_root=settings.MEDIA_ROOT)

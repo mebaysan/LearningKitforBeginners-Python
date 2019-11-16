@@ -4,10 +4,9 @@
     {{product.title}} Featured Detail
 {% endblock title %}
 {% block body %}
-<h1>Product Detail : {{ product.title }}</h1>
-<hr>
+    {% include 'includes/navbar.html' with brand_name='Featured Detail' %}
 <ul>
-    <h3>Product:</h3>
+    <h3>{{ product.title }}</h3>
     <li>{{ product.title }}</li>
     <li>{{ product.description | truncatewords:5 }}</li>
     <li>{{ product.price }}</li>

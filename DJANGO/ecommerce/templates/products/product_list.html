@@ -4,10 +4,7 @@
     Product List
 {% endblock title %}
 {% block body %}
-
-<h1>Product List</h1>
-<hr>
-
+{% include 'includes/navbar.html' with brand_name="ProductList" %}  <!-- Bu şekilde include ettiğimiz parçaya data yollayabiliriz -->
 <ul>
     <h4>İtemler</h4>
     {% for object in object_list %}
