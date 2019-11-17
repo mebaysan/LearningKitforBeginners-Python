@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for profile in profiles %}
+                <tr>
+                    <th scope="row">{{ profile.id }}</th>
+                    <td>{{ profile.name }}</td>
+                    <td>{{ profile.email }}</td>
+                    <td>{{ profile.phone }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{% url 'resume' id=profile.id %}">Download CV</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock body %}

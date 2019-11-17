@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.accept, name='accept'),
     path('resume/<int:id>/', views.resume, name='resume'),
+    path('list/', views.list, name='list'),
 ]

@@ -40,8 +40,15 @@ def resume(request, id):
         'encoding': 'UTF-8',
     }  # ayarları belirledik.
     pdf = pdfkit.from_string(html, False, options)  # html değişkenini pdf olarak yazacak, ayarları options olacak
-    # return render(request, 'pdf/resume.html', context=context)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'attachment'
     filename = "resume.pdf"
     return response
+
+
+def list(request):
+    profiles = Profile.objects.all()
+    context = {
+        'profiles': profiles,
+    }
+    return render(request, 'pdf/list.html', context=context)
