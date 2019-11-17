@@ -1,0 +1,13 @@
+import requests # kütüphaneyi dahil ettik
+from bs4 import BeautifulSoup # pip install beautifulsoup4
+requests.get('http://baysansoft.com/') # get isteği atar parametre olarak aldığı url'e
+
+page = requests.get('http://baysansoft.com/') # page adında bir değişkene atadık
+
+page.text # sayfa içeriğini (html) verir
+
+soup = BeautifulSoup(page.text,'html.parser') # html olarak sayfayı parçalar
+print(soup.prettify()) # düzenli bir şekilde gösterir html'i
+soup.find_all('a') # bütün a etiketlerini bulur
+for link in soup.find_all('a'): # her a elementi için
+    print(link.get('href')) # a elementlerinin sadece href kısımlarını alır
