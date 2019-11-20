@@ -9,7 +9,7 @@
 <hr>
 <ul>
     {% for item in items %}
-<li><a href="{% url 'detail' id=item.id %}">{{ item.id}} - {{ item.name }}</a></li>
+<li><a href="{% url 'food:detail' id=item.id %}">{{ item.id}} - {{ item.name }}</a></li>
 {% endfor %}
 </ul>
 
