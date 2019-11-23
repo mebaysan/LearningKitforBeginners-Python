@@ -1,28 +1,15 @@
-"""mastertodjangoadmin URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-admin.site.site_title = "Site Title"  # site url kısmındaki title'ı değiştirir
-admin.site.index_title = "Site Index"  # admin anasayfasındaki header altını değiştirir
-admin.site.site_header = "Site Header"  # login page ve ana sayfadaki kısımları değiştirir
+admin.site.site_title = "Special Admin"  # site url kısmındaki title'ı değiştirir
+admin.site.index_title = "Special Admin Panel"  # admin anasayfasındaki header altını değiştirir
+admin.site.site_header = "Special Admin Portal"  # login page ve ana sayfadaki kısımları değiştirir
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
+    # path('grappelli/', include('grappelli.urls')),  # grappelli url'i, 3rd party
+    path('summernote/', include('django_summernote.urls')),  # summernote kullanmak için gerekli url konfigürasyonu
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('secret/', admin.site.urls),  # secret ile admin panele giriş yapabileceğiz
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

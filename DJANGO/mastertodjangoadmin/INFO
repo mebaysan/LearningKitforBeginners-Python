@@ -1,0 +1,59 @@
+Projenin amacının ve yazılan kodların anlaşılması için bakılması gereken dosyaların listesi;
+
+-) mastertodjangoadmin/settings.py
+-) mastertodjangoadmin/urls.py
+-) app/admin.py
+-) app/apps.py
+-) app/models.py
+-) app/resources.py
+
+
+
+Bu projede kullanılan kütüphaneler requirements.txt içerisinde. Ne işe yaradıkları özetle burada;
+*******************************
+        Faker (pip install Faker)
+# bulk Blog instance generate
+from app.models import Blog # app.models içerisinden Blog modeli çağırdık
+from faker import Faker # Faker modulü dahil ettik
+faker = Faker() # faker instance oluşturduk
+for _ in range(0,500):
+    Blog.objects.create(title=faker.sentence(),body=faker.paragraph()) # 500 adet Blog instance oluşturduk faker sayesinde
+
+# Comment oluşturmak için
+from app.models import Comment
+from faker import Faker
+faker = Faker()
+from app.models import Blog
+for blog in Blog.objects.iterator():
+    comments = [Comment(text=faker.paragraph()) for _ in range(0,3)]
+    comments = [Comment(text=faker.paragraph(), blog=blog) for _ in range(0, 3)]
+    Comment.objects.bulk_create(comments)
+
+*******************************
+        Django TinyMCE / Django CKEditor / Django Summernote -> kullanabileceğimiz rich text editörler
+pip install django-summernote -> bu uygulamada summernote kullanıldı.(https://github.com/summernote/django-summernote)
+*******************************
+        Django Admin List Filter Dropdown (https://github.com/mrts/django-admin-list-filter-dropdown)
+pip install django-admin-list-filter-dropdown
+filter yaparken dropdown olanağı sağlar bize
+*******************************
+        Django Admin Range Filter (https://github.com/silentsokolov/django-admin-rangefilter)
+pip install django-admin-rangefilter
+zaman filtresi uygularken daha hoş olur
+*******************************
+        Maps (https://django-leaflet.readthedocs.io/en/latest/installation.html) (https://django-geojson.readthedocs.io/en/latest/model)
+pip install django-geojson
+pip install django-leaflet
+Haritayı kullanabilmemizi sağlar
+******************************
+        Import - Export (https://django-import-export.readthedocs.io/en/latest/)
+export ve import yapabilmemiz için
+pip install django-import-export
+******************************
+        Grappeli (https://django-grappelli.readthedocs.io/en/latest/)
+Django Admin Skin(Theme)
+pip install django-grappelli
+*****************************
+        HoneyPot (https://github.com/dmpayton/django-admin-honeypot)
+Last Login Ip logs
+pip install django-admin-honeypot
