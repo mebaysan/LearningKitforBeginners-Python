@@ -7,26 +7,29 @@
     <div class="container py-5">
         <div class="row mt-5">
             <div class="col-10 mx-auto col-md-6 my-3">
-                <img src="{% static 'img/product4.jpg' %}" alt="">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
             </div>
             <div class="col-10 mx-auto col-md-6 my-3">
                 <div>
                     <h1 class="product_title">
-                        HTC ONE
+                        {{ product.name }}
                     </h1>
                     <h5 class="text-info font-italic mb-3">
-                            <span class="mr-1">$</span>499
-                        </h5>
+                        <span class="mr-1">$</span>{{ product.price }}
+                    </h5>
                     <p class="product_description">
-                        Product Description
+                        Product Descrition
                     </p>
                     <p class="text-justify product_text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut blanditiis doloribus error eveniet
-                        excepturi nostrum.
+                        {{ product.description }}
                     </p>
-                    <p class="text-justify product_text">
-                        <b>Out Of Stock</b>
-                    </p>
+                    {% if product.stock <= 0 %}
+                        <p class="text-justify product_text">
+                            <b>Out Of Stock</b>
+                        </p>
+                    {% else %}
+                        <a href="">Add to Cart</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

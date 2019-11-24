@@ -12,7 +12,7 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
-    def get_url(self): # store altında buraya yönlendiriyoruz. bu fonksiyonu biz yazdık
+    def get_url(self):  # store altında buraya yönlendiriyoruz. bu fonksiyonu biz yazdık
         return reverse('store:products_by_category', args=[self.slug])
 
     def __str__(self):
@@ -34,6 +34,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def get_url(self):  # store altında buraya yönlendiriyoruz. bu fonksiyonu biz yazdık
+        return reverse('store:detail', args=[self.category.slug, self.slug])
 
     def __str__(self):
         return self.name
