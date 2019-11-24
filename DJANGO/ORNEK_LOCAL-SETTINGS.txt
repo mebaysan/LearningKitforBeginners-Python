@@ -1,0 +1,22 @@
+SECRET_KEY = '(11hjxsad1+7+mlqsdsdiift-b-gw8!^-_*?89^3e^2&-bo00isasda0t2^'
+
+DEBUG = True
+ALLOWED_HOSTS = []
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbname',
+        'USER': 'dbusername',
+        'PASSWORD': 'dbpass',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+EMAIL_HOST = 'smtp.yandex.com.tr'
+EMAIL_HOST_USER = 'xxx@xxx.com'
+EMAIL_HOST_PASSWORD = 'xxx'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
