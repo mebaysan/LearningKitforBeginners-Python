@@ -28,7 +28,7 @@
                             <b>Out Of Stock</b>
                         </p>
                     {% else %}
-                        <a href="">Add to Cart</a>
+                        <a href="{% url 'store:add_to_cart' product_id=product.id %}">Add to Cart</a>
                     {% endif %}
                 </div>
             </div>

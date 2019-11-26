@@ -22,6 +22,15 @@
             </li>
             <li class="nav-item"><a href="" class="nav-link text-light text-uppercase font-weight-bold px-3">About</a>
             </li>
+            {% if item_count > 0 %}
+                <li class="nav-item">
+                    <a href="{% url 'store:cart_detail' %}" class="nav-link text-light text-uppercase font-weight-bold px-3">
+                        <i class="fas fa-shopping-cart"></i>({{ item_count }})
+                    </a>
+                </li>
+
+
+            {% endif %}
         </ul>
         <form action="" class="form-inline ml-3">
             <div class="input-group">

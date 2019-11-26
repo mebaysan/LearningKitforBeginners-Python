@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Cart
+{% endblock title %}
+{% block body %}
+    {% if not cart_items %}
+        <div class="text-center">
+            <br>
+            <h1 class="text-center product_title">
+                Your shopping cart is empty
+            </h1>
+            <br>
+            <p class="text-center">
+                Please click <a href="{% url 'store:home' %}">here</a> to continue shopping
+            </p>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <br>
+            <div class="text-center product_title">
+                Your Shopping Cart
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                <table class="table cart_table">
+                    <thead class="cart_thead">
+                    <tr>
+                        <th colspan="4">Your Items</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cart_item in cart_items %}
+                        <tr>
+                            <td><a href="{{ cart_item.product.get_url }}"><img src="{{ cart_item.product.image.url }}"
+                                                                               width="100" height="100"
+                                                                               alt=""></a>
+                            </td>
+                            <td class="text-left">{{ cart_item.product.name }} <br> SKU: {{ cart_item.product.id }} <br>
+                                Unit Price: ${{ cart_item.product.price }} <br> Qty: {{ cart_item.quantity }}
+                                x {{ cart_item.product.name }}</td>
+                            <td>${{ cart_item.sub_total }}</td>
+                            {% if cart_item.quantity < cart_item.product.stock %}
+                                <td><a href="{% url 'store:add_to_cart' product_id=cart_item.product.id %}"><i
+                                        class="fas fa-plus-circle cart_icon"></i></a></td>
+                                <td><a href="{% url 'store:remove_cart' product_id=cart_item.product.id %}"><i class="fas fa-minus-circle cart_icon"></i></a></td>
+                                <td><a href="{% url 'store:remove_product_cart' product_id=cart_item.product.id %}"><i class="fas fa-trash-alt cart_icon"></i></a></td>
+                            {% else %}
+                                <td><a href="{% url 'store:remove_cart' product_id=cart_item.product.id %}"><i class="fas fa-minus-circle cart_icon"></i></a></td>
+                                <td><a href="{% url 'store:remove_product_cart' product_id=cart_item.product.id %}"><i class="fas fa-trash-alt cart_icon"></i></a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                <table class="table cart_table">
+                    <thead class="cart_thead">
+                    <tr>
+                        <th>Check Out</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <br>
+                    <tr>
+                        <td>
+                            Please review your cart items before proceeding with the payment.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            Your total is : <strong>${{ total }}</strong>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="mx-auto">
+                    <a href="{% url 'store:home' %}" style="text-decoration: none;">
+                        <button type="button" class="btn btn-lg btn-block bg-dark text-white">Continue Shopping</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock body %}
