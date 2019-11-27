@@ -3,8 +3,16 @@ from main.models import Main
 
 
 def home(request):
-    return render(request, 'front/home.html')
+    site = Main.objects.first()
+    context = {
+        'site': site
+    }
+    return render(request, 'front/home.html', context=context)
 
 
 def about(request):
-    return render(request, 'front/about.html')
+    site = Main.objects.first()
+    context = {
+        'site': site
+    }
+    return render(request, 'front/about.html',context=context)

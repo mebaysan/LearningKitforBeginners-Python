@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home</title>
+
+    <title>{{ site.name }} | {% block title %} {% endblock title %}</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -63,7 +65,7 @@
                     <div class="left-topbar">
 
 
-                        <a href="#" class="left-topbar-item">
+                        <a href="{% url 'main:about' %}" class="left-topbar-item">
                             About
                         </a>
 
@@ -72,7 +74,7 @@
                         </a>
 
                         <a href="#" class="left-topbar-item">
-                            Sing up
+                            Sign up
                         </a>
 
                         <a href="#" class="left-topbar-item">
@@ -83,23 +85,14 @@
                     </div>
 
                     <div class="right-topbar p-l-18">
-                        <a href="#">
+                        <a href="{{ site.facebook_address }}">
                             <span class="fab fa-facebook-f"></span>
                         </a>
 
-                        <a href="#">
+                        <a href="{{ site.twitter_address }}">
                             <span class="fab fa-twitter"></span>
                         </a>
-
-                        <a href="#">
-                            <span class="fab fa-pinterest-p"></span>
-                        </a>
-
-                        <a href="#">
-                            <span class="fab fa-vimeo-v"></span>
-                        </a>
-
-                        <a href="#">
+                        <a href="{{ site.youtube_address }}">
                             <span class="fab fa-youtube"></span>
                         </a>
                     </div>
@@ -127,7 +120,7 @@
 
                     <ul class="main-menu justify-content-center">
                         <li class="main-menu-active">
-                            <a href="index.html">Home</a>
+                            <a href="{% url 'main:home' %}">Home</a>
                         </li>
 
                         <li class="mega-menu-item">
@@ -2231,9 +2224,7 @@
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit
-                            efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis
-                            ut turpis. Vestibulum dolor metus, tincidunt eget odio
+                            {{ site.about }}
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
@@ -2241,23 +2232,14 @@
                         </p>
 
                         <div class="p-t-15">
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site.facebook_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-facebook-f"></span>
                             </a>
 
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site.twitter_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-twitter"></span>
                             </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-pinterest-p"></span>
-                            </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-vimeo-v"></span>
-                            </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site.youtube_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-youtube"></span>
                             </a>
                         </div>
@@ -2376,10 +2358,10 @@
 				<span class="f1-s-1 cl0 txt-center">
 					Copyright © 2019
 
-					<a href="http://baysansoft.com/" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					<a href="{{ site.link }}" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This wep application is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a href="http://baysansoft.com/"
-                                                                                  target="_blank">baysansoft.com</a>
+                                class="fa fa-heart" aria-hidden="true"></i> by <a href="{{ site.link }}"
+                                                                                  target="_blank">{{ site.link_name }}</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</span>
         </div>
