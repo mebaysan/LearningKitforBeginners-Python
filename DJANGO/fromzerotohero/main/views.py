@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Main
-
+from news.models import News
 
 def home(request):
     site = Main.objects.first()
+    news = News.objects.all()
     context = {
-        'site': site
+        'site': site,
+        'news':news
     }
     return render(request, 'front/home.html', context=context)
 

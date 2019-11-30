@@ -10,6 +10,9 @@ class News(models.Model):
     date = models.CharField(max_length=12)
     pic = models.TextField()
     writer = models.CharField(max_length=50)
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
 
     def __str__(self):
         return self.name

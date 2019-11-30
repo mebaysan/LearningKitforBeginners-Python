@@ -5,5 +5,5 @@ from news import views
 app_name = 'news'
 
 urlpatterns = [
-
+    path('news/<int:pk>', views.news_detail, name='news_detail'),
 ]
