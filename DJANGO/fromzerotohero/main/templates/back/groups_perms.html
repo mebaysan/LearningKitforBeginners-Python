@@ -1,0 +1,120 @@
+
+{% extends 'back/master.html' %}
+{% load staticfiles %}
+
+
+{% block mainblock %}
+
+   <!-- Datatables Header -->
+   <div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-table"></i>Group's Permissions<br><small>you can add, edit and delete your data!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Site</li>
+    <li><a href="/panel/manager/group/">Group's Permissions</a></li>
+</ul>
+<!-- END Datatables Header -->
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                
+                <h2><strong>Add</strong> Group's Perms</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form action="{%url 'groups_perms_add' name=name %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                {% csrf_token %}
+                <div class="form-group">
+                        <div class="col-md-6">
+                            <select id="pname" name="pname" class="select-chosen" data-placeholder="Choose a Permission..." style="width: 250px;">
+                                           
+                                {% for i in allperms %}
+                                <option value="{{i.name}}">{{i.name}}</option>
+                                {% endfor %}
+                               
+                               
+                            </select> </div>
+                        <div class="col-md-6">
+                        
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+
+                        </div>
+                    </div>
+
+                
+               
+             
+              
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+  
+</div>
+
+
+  <!-- Datatables Content -->
+  <div class="block full">
+    <div class="block-title">
+        <h2><strong>Group's Permissions</strong> List</h2>
+    </div>
+   
+    <div class="table-responsive">
+        <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th>Name</th>
+                   
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for cc in perms %}
+                <tr>
+                    <td>{{cc.name}}</td>
+                   
+                    <td class="text-center">
+                        <div class="btn-group">
+                            
+                        
+                            <a href="{%url 'groups_perms_del' gname=name name=cc.name %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Delete</i></a>
+                           
+                        </div>
+                    </td>
+                </tr>
+             
+               
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- END Datatables Content -->
+
+
+{% endblock %}
+
+
+
+
+{% block footerblock %}
+
+   <!-- Load and execute javascript code used only in this page -->
+   <script src="{%static 'back/js/pages/tablesDatatables.js' %}"></script>
+   <script>$(function(){ TablesDatatables.init(); });</script>
+        {% endblock %}
