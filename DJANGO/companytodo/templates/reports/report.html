@@ -1,12 +1,14 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Reports</title>
 </head>
 <body>
-{{ r_form.as_p }}
+{{ r_form | crispy}}
 <hr>
-{{ p_form.as_p }}
+{{ p_form | crispy }}
 </body>
 </html>
