@@ -1,47 +1,50 @@
 {% extends 'layout.html' %}
-{% load static %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}
-    Reports
-{% endblock %}
+    Report
+{% endblock title %}
 {% block icerik %}
-    <!-- Modal   -->
-    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+
+    <!-- Modal -->
+    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Report Problems</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Report problems</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
                         {{ p_form|crispy }}
                         <input type="hidden" name="report_id" id="report_id">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="submitbtn1" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-
-
     <div class="container bg-white shadow-lg rounded py-2">
         <div class="row">
             <div class="col-2">
-                <form action="" method="post">
+                <form action="" method="POST">
+                    {% csrf_token %}
                     {{ r_form|crispy }}
-                    <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3"><i
+                    <button type="submit" name="submitbtn2" class="btn btn-primary w-100 shadow-sm mt-3"><i
                             class="far fa-paper-plane pr-3"></i>Send
                     </button>
                 </form>
             </div>
             <div class="col-10">
-                <div style="overflow-y: scroll;" class="w-100 h-100 bg-light rounded border">
+                <div style="overflow-y:scroll; height:85vh" class="w-100 bg-light rounded border">
                     <table class="table">
                         <thead class="thead-light">
                         <tr class="text-center">
@@ -52,59 +55,60 @@
                             <th scope="col">Plan</th>
                             <th scope="col">Execution</th>
                             <th scope="col">Line</th>
+                            <th scope="col"></th>
                             <th scope="col">Problems</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for object in object_list %}
+                        {% for obj in object_list %}
                             <tr class="text-center">
-                                <td>{{ object.get_day }}</td>
-                                <td>{{ object.start_hour }}</td>
-                                <td>{{ object.end_hour }}</td>
-                                <td>{{ object.product }}</td>
-                                <td>{{ object.plan }}</td>
-                                <td>{{ object.execution }}</td>
-                                <td>{{ object.production_line }}</td>
+                                <td>{{ obj.get_day }}</td>
+                                <td>{{ obj.start_hour }}</td>
+                                <td>{{ obj.end_hour }}</td>
+                                <td>{{ obj.product }}</td>
+                                <td>{{ obj.plan }}</td>
+                                <td>{{ obj.execution }}</td>
+                                <td>{{ obj.production_line }}</td>
+                                <td>
+                                    {% if obj.problemreported_set.all %}
+                                        <div class="badge badge-danger">P</div>
+                                    {% endif %}
+                                </td>
+
+                                <td class="fit">
+                                    <button class="btn btn-warning open-modal" data-toggle="modal"
+                                            data-target="#problemModal" data-url={{ obj.id }}><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                </td>
                                 <td class="fit">
                                     <a href="">
-                                        <button class="btn btn-warning open-modal" data-toggle="modal"
-                                                data-target="#problemModal"
-                                                data-url="{{ object.id }}"><i class="fas fa-exclamation-triangle"></i>
-                                        </button>
+                                        <button class="btn btn-info"><i class="far fa-edit"></i></button>
                                     </a>
                                 </td>
                                 <td class="fit">
                                     <a href="">
-                                        <button class="btn btn-info"><i class="far fa-edit"></i>
-                                        </button>
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </a>
-
-                                </td>
-                                <td class="fit">
-                                    <a href="">
-                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </a>
-
                                 </td>
                             </tr>
                         {% endfor %}
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+
+{% endblock icerik %}
 {% block ozel_js %}
     <script>
-        $(".open-modal").on('click', function () {
-            const r_id = $(this).attr('data-url');
-            $("#report_id").val(r_id);
-            console.log(r_id);
+        $(".open-modal").on("click", function () {
+            const r_id = $(this).attr("data-url")
+            $("#report_id").val(r_id)
+            console.log(r_id)
         });
     </script>
+
 {% endblock ozel_js %}
