@@ -21,9 +21,13 @@ class Report(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('-created',)
+
     def __str__(self):
         return "{}-{}-{}".format(self.start_hour, self.end_hour, self.production_line)
-
+    def get_day(self):
+        return self.day.strftime('%Y/%m/%d')
 
 class ProblemReported(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

@@ -5,12 +5,39 @@
     Reports
 {% endblock %}
 {% block icerik %}
+    <!-- Modal   -->
+    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Report Problems</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        {{ p_form|crispy }}
+                        <input type="hidden" name="report_id" id="report_id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="container bg-white shadow-lg rounded py-2">
         <div class="row">
             <div class="col-2">
                 <form action="" method="post">
                     {{ r_form|crispy }}
-                    <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Send</button>
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3"><i
+                            class="far fa-paper-plane pr-3"></i>Send
+                    </button>
                 </form>
             </div>
             <div class="col-10">
@@ -31,7 +58,40 @@
                         </tr>
                         </thead>
                         <tbody>
-                        
+                        {% for object in object_list %}
+                            <tr class="text-center">
+                                <td>{{ object.get_day }}</td>
+                                <td>{{ object.start_hour }}</td>
+                                <td>{{ object.end_hour }}</td>
+                                <td>{{ object.product }}</td>
+                                <td>{{ object.plan }}</td>
+                                <td>{{ object.execution }}</td>
+                                <td>{{ object.production_line }}</td>
+                                <td class="fit">
+                                    <a href="">
+                                        <button class="btn btn-warning open-modal" data-toggle="modal"
+                                                data-target="#problemModal"
+                                                data-url="{{ object.id }}"><i class="fas fa-exclamation-triangle"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td class="fit">
+                                    <a href="">
+                                        <button class="btn btn-info"><i class="far fa-edit"></i>
+                                        </button>
+                                    </a>
+
+                                </td>
+                                <td class="fit">
+                                    <a href="">
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+
                         </tbody>
                     </table>
                 </div>
@@ -39,3 +99,12 @@
         </div>
     </div>
 {% endblock %}
+{% block ozel_js %}
+    <script>
+        $(".open-modal").on('click', function () {
+            const r_id = $(this).attr('data-url');
+            $("#report_id").val(r_id);
+            console.log(r_id);
+        });
+    </script>
+{% endblock ozel_js %}

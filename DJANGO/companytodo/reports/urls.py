@@ -4,5 +4,5 @@ from reports import views
 app_name = 'reports'
 
 urlpatterns = [
-    path('', views.report_view, name='report_view'),
+    path('<str:production_line>/', views.report_view, name='report_view'),
 ]
