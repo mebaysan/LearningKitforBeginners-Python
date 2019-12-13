@@ -1,0 +1,73 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>News List<br><small>you can add, edit and delete your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>News</li>
+        <li><a href="{% url 'panel:news_list' %}">News List</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>News</strong> List</h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center"><i class="gi gi-picture"></i></th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Writer</th>
+                    <th>Category</th>
+                    <th>Views</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for news in news_list %}
+                    <tr>
+                        <td class="text-center">{{ news.id }}</td>
+                        <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar7.jpg' %}"
+                                                     alt="avatar"
+                                                     class="img-circle"></td>
+                        <td>{{ news.name }}</td>
+
+                        <td><a href="javascript:void(0)">{{ news.date }}</a></td>
+                        <td>{{ news.writer }}</td>
+                        <td>test</td>
+                        <td>NaN</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete"
+                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock ozel_js %}
