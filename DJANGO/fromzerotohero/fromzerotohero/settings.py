@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'news.apps.NewsConfig',
-    'django.contrib.humanize', # humanize tag'leri kullanabilmek için geçerli
+    'panel.apps.PanelConfig',
 
 ]
 

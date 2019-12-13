@@ -11,11 +11,3 @@ def news_detail(request, pk):
         'site': site
     }
     return render(request, 'front/news_detail.html', context=context)
-
-
-def news_list(request):
-    news = News.objects.all()
-    context = {
-        'news': news
-    }
-    return render(request, 'back/news_list.html')

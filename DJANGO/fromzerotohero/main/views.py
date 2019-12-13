@@ -21,5 +21,3 @@ def about(request):
     return render(request, 'front/about.html', context=context)
 
 
-def panel(request):
-    return render(request, 'back/home.html')
