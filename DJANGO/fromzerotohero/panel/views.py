@@ -13,3 +13,7 @@ def news_list(request):
         'news_list': news_list,
     }
     return render(request, 'back/news_list.html', context=context)
+
+
+def news_add(request):
+    return render(request, 'back/news_add.html')

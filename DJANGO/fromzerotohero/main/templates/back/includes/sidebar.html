@@ -1,29 +1,29 @@
 {% load static %}
-                    <ul class="sidebar-nav">
-                        <li>
-                            <a href="{% url 'panel:home' %}" class=" active"><i
-                                    class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
-                        </li>
-                        <li class="sidebar-header">
+<ul class="sidebar-nav">
+    <li>
+        <a href="{% url 'panel:home' %}" class=" active"><i
+                class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
+    </li>
+    <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
                                                                              title="Quick Settings"><i
                                     class="gi gi-settings"></i></a></span>
-                            <span class="sidebar-header-title">Site Settings</span>
-                        </li>
-                        <li>
-                            <a href="#" class="sidebar-nav-menu"><i
-                                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                                    class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
-                                    class="sidebar-nav-mini-hide">News</span></a>
-                            <ul>
-                                <li>
-                                    <a href="#">Add News</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'panel:news_list' %}">News List</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- END Sidebar Navigation -->
+        <span class="sidebar-header-title">Site Settings</span>
+    </li>
+    <li>
+        <a href="#" class="sidebar-nav-menu"><i
+                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
+                class="sidebar-nav-mini-hide">News</span></a>
+        <ul>
+            <li>
+                <a href="{% url 'panel:news_add' %}">Add News</a>
+            </li>
+            <li>
+                <a href="{% url 'panel:news_list' %}">News List</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!-- END Sidebar Navigation -->

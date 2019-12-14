@@ -1,0 +1,73 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Add News<br><small>you can add your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>News</li>
+        <li><a href="{% url 'panel:news_add' %}">Add News</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Title -->
+                    <div class="block-title">
+                        <h2><strong>Add</strong> News</h2>
+                    </div>
+                    <!-- END Form Elements Title -->
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="page_forms_general.html" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered" onsubmit="return false;">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="News Title">
+                            </div>
+                            <div class="col-md-6">
+                                <select id="example-chosen" name="example-chosen" class="select-chosen"
+                                        data-placeholder="Choose a Category.." style="width: 250px;">
+                                    <option value=""></option>
+                                    <option value="Cat1">Cat 1</option>
+                                    <option value="Cat2">Cat 2</option>
+                                    <option value="Cat3">Cat 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea type="text" class="form-control" placeholder="Short Txt" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea type="text" class="form-control" placeholder="Body Txt" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                    Submit
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
