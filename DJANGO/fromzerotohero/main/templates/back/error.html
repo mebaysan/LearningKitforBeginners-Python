@@ -1,0 +1,12 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Error<br><small>{{ error }} <a href="{{ link }}"><i class="fas fa-backward"></i> Back to the page</a></small>
+            </h1>
+        </div>
+    </div>
+{% endblock body %}

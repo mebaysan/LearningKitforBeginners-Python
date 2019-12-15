@@ -10,6 +10,10 @@ class News(models.Model):
     date = models.CharField(max_length=12)
     pic = models.TextField()
     writer = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=255, default='-')
+    category_id = models.IntegerField(default=0)
+    show = models.IntegerField(default=0)
+
     class Meta:
         verbose_name = 'News'
         verbose_name_plural = 'News'

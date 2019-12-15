@@ -11,7 +11,7 @@
     </div>
     <ul class="breadcrumb breadcrumb-top">
         <li>News</li>
-        <li><a href="{% url 'panel:news_list' %}">News List</a></li>
+        <li><a href="{% url 'panel:news_list' %}">List</a></li>
     </ul>
     <!-- END Datatables Header -->
 
@@ -45,8 +45,9 @@
 
                         <td><a href="javascript:void(0)">{{ news.date }}</a></td>
                         <td>{{ news.writer }}</td>
-                        <td>test</td>
-                        <td>NaN</td>
+                        <td>{{ news.category_name }}</td>
+
+                        <td>{{ news.show }}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
