@@ -55,6 +55,7 @@ def news_add(request):
                     return render(request, 'back/error.html', context=context)
             else:
                 error = "Your File Not Supported!"
+                fs.delete(file_name) # eğer desteklenmeyen bir dosya tipi gelirse bunu media/ altından silecek
                 link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
                 context = {
                     'error': error,
@@ -70,3 +71,20 @@ def news_add(request):
             }
             return render(request, 'back/error.html', context=context)
     return render(request, 'back/news_add.html')
+
+
+def news_delete(request, pk):
+    try:
+        news = News.objects.get(pk=pk)
+        fs = FileSystemStorage()
+        fs.delete(news.pic_name)
+        news.delete()
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+    return redirect('panel:news_list')
