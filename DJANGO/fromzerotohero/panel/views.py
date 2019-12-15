@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from news.models import News
+from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
@@ -29,8 +30,43 @@ def news_add(request):
                 'link': link
             }
             return render(request, 'back/error.html', context=context)
-        news = News(name=news_title, short_txt=news_short_txt, body_txt=news_body_txt, date='2019', pic='-', writer='-',
-                    category_name=news_category, category_id=0, show=0)
-        news.save()
-        return redirect('panel:news_list')
+
+        try:
+            news_file = request.FILES['news_file']
+            fs = FileSystemStorage()
+            file_name = fs.save(news_file.name, news_file)  # dosyanın adı
+            file_url = fs.url(file_name)  # dosyanın uzantısı
+            if str(news_file.content_type).startswith('image'):  # eğer gelen dosyanın tipi 'image' ile başlıyorsa
+                if news_file.size < 5000000:
+                    news = News(name=news_title, short_txt=news_short_txt, body_txt=news_body_txt, date='2019',
+                                pic_name=file_name,
+                                pic_url=file_url,
+                                writer='-',
+                                category_name=news_category, category_id=0, show=0)
+                    news.save()
+                    return redirect('panel:news_list')
+                else:
+                    error = "Your File Is Bigger Than 5MB!"
+                    link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+                    context = {
+                        'error': error,
+                        'link': link
+                    }
+                    return render(request, 'back/error.html', context=context)
+            else:
+                error = "Your File Not Supported!"
+                link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+                context = {
+                    'error': error,
+                    'link': link
+                }
+                return render(request, 'back/error.html', context=context)
+        except:
+            error = "Please Input Your Image!"
+            link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
     return render(request, 'back/news_add.html')

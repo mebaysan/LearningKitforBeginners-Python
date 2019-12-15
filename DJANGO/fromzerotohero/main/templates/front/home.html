@@ -227,7 +227,7 @@
                         <!-- Item latest -->
                         <div class="m-b-45">
                             <a href="{% url 'news:news_detail' pk=new.pk %}" class="wrap-pic-w hov1 trans-03">
-                                <img src="{% static 'front/images/latest-01.jpg' %}" alt="IMG">
+                                <img src="{{ new.pic_url }}" alt="IMG">
                             </a>
 
                             <div class="p-t-16">

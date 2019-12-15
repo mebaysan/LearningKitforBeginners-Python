@@ -38,9 +38,10 @@
                 {% for news in news_list %}
                     <tr>
                         <td class="text-center">{{ news.id }}</td>
-                        <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar7.jpg' %}"
+                        <td class="text-center"><img src="{{ news.pic_url }}"
                                                      alt="avatar"
-                                                     class="img-circle"></td>
+                                                     class="img-circle"
+                                                     style="display: inline-block; width: 50px; height: 50px;"></td>
                         <td>{{ news.name }}</td>
 
                         <td><a href="javascript:void(0)">{{ news.date }}</a></td>
