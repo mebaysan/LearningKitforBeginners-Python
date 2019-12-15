@@ -38,7 +38,7 @@ def news_add(request):
             file_url = fs.url(file_name)  # dosyanın uzantısı
             if str(news_file.content_type).startswith('image'):  # eğer gelen dosyanın tipi 'image' ile başlıyorsa
                 if news_file.size < 5000000:
-                    news = News(name=news_title, short_txt=news_short_txt, body_txt=news_body_txt, date='2019',
+                    news = News(name=news_title, short_txt=news_short_txt, body_txt=news_body_txt,
                                 pic_name=file_name,
                                 pic_url=file_url,
                                 writer='-',
