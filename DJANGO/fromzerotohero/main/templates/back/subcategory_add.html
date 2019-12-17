@@ -5,13 +5,13 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Add News<br><small>you can add your data!</small>
+                <i class="fa fa-table"></i>Add SubCategory<br><small>you can add your data!</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
-        <li>News</li>
-        <li><a href="{% url 'panel:news_add' %}">Add</a></li>
+        <li>SubCategory</li>
+        <li><a href="{% url 'panel:subcategory_add' %}">Add</a></li>
     </ul>
     <!-- END Datatables Header -->
 
@@ -23,54 +23,36 @@
                 <div class="block">
                     <!-- Basic Form Elements Title -->
                     <div class="block-title">
-                        <h2><strong>Add</strong> News</h2>
+                        <h2><strong>Add</strong> Category</h2>
                     </div>
                     <!-- END Form Elements Title -->
 
                     <!-- Basic Form Elements Content -->
-                    <form action="{% url 'panel:news_add' %}" method="post" enctype="multipart/form-data"
+                    <form action="{% url 'panel:subcategory_add' %}" method="post" enctype="multipart/form-data"
                           class="form-horizontal form-bordered">
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="text" id="news_title" name="news_title" class="form-control"
-                                       placeholder="News Title">
+                                <input type="text" id="subcategory_name" name="subcategory_name" class="form-control"
+                                       placeholder="SubCategory Name">
                             </div>
                             <div class="col-md-6">
-                                <select id="news_category" name="news_category" class="select-chosen"
+                                <select id="category" name="category" class="select-chosen"
                                         data-placeholder="Choose a Category.." style="width: 250px;">
                                     <option value="0"></option>
-                                    {% for subcategory in subcategories %}
-                                        <option value="{{ subcategory.pk }}">{{ subcategory.category_name }} | {{ subcategory.name }}</option>
 
+                                    {% for category in categories %}
+                                        <option value="{{ category.pk }}">{{ category.name }}</option>
                                     {% endfor %}
 
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-12">
-                                <textarea type="text" id="news_short_txt" name="news_short_txt" class="form-control"
-                                          placeholder="Short Txt" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <textarea type="text" id="news_body_txt" name="news_body_txt" class="form-control"
-                                          placeholder="Body Txt" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-md-6">
-                                <input type="file" id="news_file" name="news_file">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
                                     Submit
                                 </button>
-
                             </div>
                         </div>
                     </form>
