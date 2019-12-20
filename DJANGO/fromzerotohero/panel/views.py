@@ -98,6 +98,88 @@ def news_delete(request, pk):
     return redirect('panel:news_list')
 
 
+def news_edit(request, pk):
+    news = News.objects.filter(pk=pk) # filter olunca bize array döndürür
+    if len(news) == 0: # eğer array'in eleman sayısı 0'a eşitse böyle bir haber yok demektir
+        error = "News Not Found!"
+        link = '/panel/news/list'
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+    news = News.objects.get(pk=pk)
+    subcategories = SubCategory.objects.all()
+    context = {
+        'pk': pk,
+        'news': news,
+        'subcategories': subcategories,
+    }
+    if request.method == "POST":
+        news_title = request.POST.get('news_title')
+        news_category_id = request.POST.get(
+            'news_category')  # html formunda selectbox içindeki option value'yi döndürür bize
+        news_short_txt = request.POST.get('news_short_txt')
+        news_body_txt = request.POST.get('news_body_txt')
+        news_category = SubCategory.objects.get(pk=news_category_id).name
+        if news_title == "" or news_category_id == "0" or news_short_txt == "" or news_body_txt == "":
+            error = "All fields required!"
+            link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+
+        try:
+            news_file = request.FILES['news_file']
+            fs = FileSystemStorage()
+            file_name = fs.save(news_file.name, news_file)
+            file_url = fs.url(file_name)  # dosyanın uzantısı
+            if str(news_file.content_type).startswith('image'):
+                if news_file.size < 5000000:
+                    news = News.objects.get(pk=pk)
+                    fs.delete(news.pic_name)  # güncelleme işleminden önce eski resmi siler
+                    news.name = news_title
+                    news.short_txt = news_short_txt
+                    news.body_txt = news_body_txt
+                    news.pic_name = file_name
+                    news.pic_url = file_url
+                    news.writer = "-"
+                    news.category_name = news_category
+                    news.category_id = news_category_id
+                    news.save()
+                    return redirect('panel:news_list')
+                else:
+                    error = "Your File Is Bigger Than 5MB!"
+                    link = request.META.get('HTTP_REFERER')
+                    context = {
+                        'error': error,
+                        'link': link
+                    }
+                    return render(request, 'back/error.html', context=context)
+            else:
+                error = "Your File Not Supported!"
+                fs.delete(file_name)
+                link = request.META.get('HTTP_REFERER')
+                context = {
+                    'error': error,
+                    'link': link
+                }
+                return render(request, 'back/error.html', context=context)
+        except:
+            news = News.objects.get(pk=pk)
+            news.name = news_title
+            news.short_txt = news_short_txt
+            news.body_txt = news_body_txt
+            news.writer = "-"
+            news.category_name = news_category
+            news.category_id = news_category_id
+            news.save()
+            return redirect('panel:news_list')
+    return render(request, 'back/news_edit.html', context=context)
+
+
 def category_list(request):
     categories = Category.objects.all()
     context = {

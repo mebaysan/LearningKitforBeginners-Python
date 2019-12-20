@@ -51,7 +51,7 @@
                         <td>{{ news.show }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
+                                <a href="{% url 'panel:news_edit' pk=news.pk %}" data-toggle="tooltip" title="Edit"
                                    class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                                 <a href="{% url 'panel:news_delete' pk=news.pk %}" data-toggle="tooltip" title="Delete"
                                    class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
