@@ -1,4 +1,4 @@
-$("button").click((e) => {
+$("#news_submit").click((e) => {
     e.preventDefault(); // elementin kendi default özelliğini block eder!.
     let category_val = $("#news_category").val();
     if (category_val == '0') {
