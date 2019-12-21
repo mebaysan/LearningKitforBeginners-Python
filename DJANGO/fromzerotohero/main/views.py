@@ -5,10 +5,10 @@ from news.models import News
 
 def home(request):
     site = Main.objects.first()
-    news = News.objects.all()
+    news = News.objects.all().order_by('-date')  # büyükten küçüğe sıralar
     context = {
         'site': site,
-        'news': news
+        'news': news,
     }
     return render(request, 'front/home.html', context=context)
 
@@ -19,5 +19,3 @@ def about(request):
         'site': site
     }
     return render(request, 'front/about.html', context=context)
-
-
