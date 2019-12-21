@@ -42,6 +42,10 @@
 
     <!-- Modernizr (browser feature detection library) -->
     <script src="{% static 'back/js/vendor/modernizr.min.js' %}"></script>
+    <!-- Toast Js Baslangıc -->
+    <link rel="stylesheet" href="{% static 'ToastJs/Toast.min.css' %}">
+    <script src="{% static 'ToastJs/Toast.min.js' %}"></script>
+    <!-- Toast Js Bitis -->
     {% block ozel_css %}
 
     {% endblock ozel_css %}
@@ -109,7 +113,8 @@
                 <div class="sidebar-content">
                     <!-- Brand -->
                     <a href="{% url 'panel:home' %}" class="sidebar-brand">
-                        <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>BAYSAN</strong>SOFT</span>
+                        <i class="gi gi-flash"></i><span
+                            class="sidebar-nav-mini-hide"><strong>BAYSAN</strong>SOFT</span>
                     </a>
                     <!-- END Brand -->
 
