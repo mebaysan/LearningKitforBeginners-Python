@@ -30,6 +30,7 @@ def news_add(request):
         news_short_txt = request.POST.get('news_short_txt')
         news_body_txt = request.POST.get('news_body_txt')
         news_category = SubCategory.objects.get(pk=news_category_id).name
+        ocategory_id = SubCategory.objects.get(pk=news_category_id).category_id
         if news_title == "" or news_category_id == "0" or news_short_txt == "" or news_body_txt == "":
             error = "All fields required!"
             link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
@@ -50,8 +51,13 @@ def news_add(request):
                                 pic_name=file_name,
                                 pic_url=file_url,
                                 writer='-',
-                                category_name=news_category, category_id=0, show=0)
+                                category_name=news_category, category_id=0, show=0, ocategory_id=ocategory_id)
                     news.save()
+                    count = len(
+                        News.objects.filter(ocategory_id=ocategory_id))  # bu kategorideki haber sayısını buluyoruz
+                    category = Category.objects.get(pk=ocategory_id)  # kategoriyi seçiyoruz
+                    category.count = count  # kategorinin sayısını yeni sayı ile eşitliyoruz
+                    category.save()
                     return redirect('panel:news_list')
                 else:
                     error = "Your File Is Bigger Than 5MB!"
@@ -86,7 +92,12 @@ def news_delete(request, pk):
         news = News.objects.get(pk=pk)
         fs = FileSystemStorage()
         fs.delete(news.pic_name)
+        ocat_id = News.objects.get(pk=pk).ocategory_id
         news.delete()
+        count = len(News.objects.filter(ocategory_id=ocat_id))  # bu kategorideki haber sayısını buluyoruz
+        category = Category.objects.get(pk=ocat_id)  # kategoriyi seçiyoruz
+        category.count = count  # kategorinin sayısını yeni sayı ile eşitliyoruz
+        category.save()
     except:
         error = "Something Wrong!"
         link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
@@ -99,8 +110,8 @@ def news_delete(request, pk):
 
 
 def news_edit(request, pk):
-    news = News.objects.filter(pk=pk) # filter olunca bize array döndürür
-    if len(news) == 0: # eğer array'in eleman sayısı 0'a eşitse böyle bir haber yok demektir
+    news = News.objects.filter(pk=pk)  # filter olunca bize array döndürür
+    if len(news) == 0:  # eğer array'in eleman sayısı 0'a eşitse böyle bir haber yok demektir
         error = "News Not Found!"
         link = '/panel/news/list'
         context = {

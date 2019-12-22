@@ -2318,13 +2318,15 @@
                     </div>
 
                     <ul class="m-t--12">
-                        {% for category in footer_categories %}
+                        {% for category in get_categories %}
                             <!-- categories/context_processor.py'den gelen categories -->
-                            <li class="how-bor1 p-rl-5 p-tb-10">
-                                <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                    {{ category.name }} ({{ category.count }})
-                                </a>
-                            </li>
+                            {% if category.count != 0 %} <!-- categorinin büyüklüğü 0'dan farklı ise -->
+                                <li class="how-bor1 p-rl-5 p-tb-10">
+                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                        {{ category.name }} ({{ category.count }})
+                                    </a>
+                                </li>
+                            {% endif %}
 
                         {% endfor %}
 
