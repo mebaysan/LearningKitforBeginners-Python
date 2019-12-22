@@ -17,7 +17,7 @@
                 </a>
 
                 <span class="breadcrumb-item f1-s-3 cl9">
-					{{ news.name }}
+					{{ new.name }}
 				</span>
             </div>
 
@@ -42,24 +42,24 @@
                             </a>
 
                             <h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-                                {{ news.name }}
+                                {{ new.name }}
                             </h3>
 
                             <div class="flex-wr-s-s p-b-40">
 								<span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										by {{ news.writer }}
+										by {{ new.writer }}
 									</a>
 
 									<span class="m-rl-3">-</span>
 
 									<span>
-										{{ news.date }}
+										{{ new.date }}
 									</span>
 								</span>
 
                                 <span class="f1-s-3 cl8 m-r-15">
-									{{ news.show }}
+									{{ new.show }}
 								</span>
 
                                 <a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
@@ -68,11 +68,11 @@
                             </div>
 
                             <div class="wrap-pic-max-w p-b-30">
-                                <img src="{{ news.pic_url }}" alt="IMG">
+                                <img src="{{ new.pic_url }}" alt="IMG">
                             </div>
 
                             <p class="f1-s-11 cl6 p-b-25">
-                                {{ news.body_txt |safe}}
+                                {{ new.body_txt |safe}}
                             </p>
                         </div>
 

@@ -60,7 +60,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'category.context_processor.get_categories',
+                'category.context_processor.get_categories',  # yazdığımız context_processors'leri dahil ettik
+                'subcategory.context_processors.get_subcategories',
+                'news.context_processors.get_last_news',
             ],
         },
     },
