@@ -3,12 +3,13 @@ from news.models import News
 from category.models import Category
 from subcategory.models import SubCategory
 from django.core.files.storage import FileSystemStorage
+from main.models import Main
 
 
 # Create your views here.
 def home(request):
     # login kontrol başlangıç
-    if not request.user.is_authenticated: # eğer mevcut kullanıcı authenticate değilse
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
         return redirect('main:my_login')
     # login kontrol bitiş
     return render(request, 'back/home.html')
@@ -339,3 +340,15 @@ def subcategory_add(request):
         subcategory.save()
         return redirect('panel:subcategory_list')
     return render(request, 'back/subcategory_add.html', context=context)
+
+
+def site_settings(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
+    site = Main.objects.first()
+    context = {
+        'site': site,
+    }
+    return render(request, 'back/settings.html', context=context)

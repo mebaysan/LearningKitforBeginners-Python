@@ -13,6 +13,8 @@ class Main(models.Model):
     link = models.CharField(max_length=255)
     link_name = models.CharField(max_length=255)
     set_name = models.CharField(max_length=255)
+    pic_url = models.TextField(default='-')
+    pic_name = models.TextField(default='-')
 
     def __str__(self):
         return self.set_name + " ({})".format(self.id)

@@ -135,7 +135,7 @@
                                 <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom"
                                    title="Messages"><i class="gi gi-envelope"></i></a>
                                 <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom"
+                                <a href="{% url 'panel:site_settings' %}" class="enable-tooltip" data-placement="bottom"
                                    title="Settings"
                                    onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
                                 <a href="{% url 'main:my_logout' %}" data-toggle="tooltip" data-placement="bottom" title="Logout"><i

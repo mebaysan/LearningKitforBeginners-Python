@@ -15,4 +15,5 @@ urlpatterns = [
     path('subcategory/delete/<int:pk>', views.subcategory_delete, name='subcategory_delete'),
     path('subcategory/list/', views.subcategory_list, name='subcategory_list'),
     path('subcategory/add/', views.subcategory_add, name='subcategory_add'),
+    path('sitesettings/', views.site_settings, name='site_settings'),
 ]

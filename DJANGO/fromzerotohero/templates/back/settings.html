@@ -1,0 +1,107 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block ozel_css %}
+    <script src="{% static 'node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
+{% endblock ozel_css %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Site Settings<br><small>you can edit your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Site Settings</li>
+        <li><a href="{% url 'panel:site_settings' %}">Settings</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Title -->
+                    <div class="block-title">
+                        <h2><strong>Site</strong> Settings</h2>
+                    </div>
+                    <!-- END Form Elements Title -->
+
+                    <!-- Basic Form Elements Content -->
+                    <form id="site_settings_form" action="{% url 'panel:site_settings' %}" method="post"
+                          enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.name }}" id="site_title" name="site_title" class="form-control"
+                                       placeholder="Site Title">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.phone }}" id="site_phone" name="site_phone" class="form-control"
+                                       placeholder="Site Phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.facebook_address }}" id="site_facebook" name="site_facebook" class="form-control"
+                                       placeholder="Site Facebook">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.twitter_address }}" id="site_twitter" name="site_twitter" class="form-control"
+                                       placeholder="Site Twitter">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.youtube_address }}" id="site_youtube" name="site_youtube" class="form-control"
+                                       placeholder="Site Youtube">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ site.link }}" id="site_link" name="site_link" class="form-control"
+                                       placeholder="Site Link">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea type="text" id="site_about" name="site_about" class="form-control"
+                                          placeholder="About" rows="5">{{ site.about }}</textarea>
+                            </div>
+                        </div>
+                        <script>
+                            ClassicEditor
+                                .create(document.querySelector('#site_about'))
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        </script>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="file" id="site_pic" name="site_pic">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="news_submit" type="submit" class="btn btn-sm btn-primary"><i
+                                        class="fa fa-angle-right"></i>
+                                    Submit
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <script src="{% static 'back/js/news/news_add.js' %}"></script>
+{% endblock ozel_js %}
