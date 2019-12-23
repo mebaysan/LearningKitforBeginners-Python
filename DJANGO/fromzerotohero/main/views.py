@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Main
 from news.models import News
+from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
@@ -19,3 +20,21 @@ def about(request):
         'site': site
     }
     return render(request, 'front/about.html', context=context)
+
+
+def my_login(request):
+    #todo: Giriş yapınca hoşgeldin {{username}} diye bir toast göster
+    if request.method == "POST":
+        username = request.POST.get('login_username')
+        password = request.POST.get('login_password')
+        if username != "" and password != "":
+            user = authenticate(username=username, password=password) # user'i doğruladık
+            if user != None: # eğer user nesnesi varsa
+                login(request, user) # login yaptık
+                return redirect('panel:home')
+    return render(request, 'front/login.html')
+
+
+def my_logout(request):
+    logout(request)
+    return redirect('main:my_login')

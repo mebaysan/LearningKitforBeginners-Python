@@ -7,10 +7,18 @@ from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 def home(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated: # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     return render(request, 'back/home.html')
 
 
 def news_list(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     news_list = News.objects.all()
     context = {
         'news_list': news_list,
@@ -19,6 +27,10 @@ def news_list(request):
 
 
 def news_add(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     subcategories = SubCategory.objects.all()
     context = {
         'subcategories': subcategories
@@ -88,6 +100,10 @@ def news_add(request):
 
 
 def news_delete(request, pk):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     try:
         news = News.objects.get(pk=pk)
         fs = FileSystemStorage()
@@ -110,6 +126,10 @@ def news_delete(request, pk):
 
 
 def news_edit(request, pk):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     news = News.objects.filter(pk=pk)  # filter olunca bize array döndürür
     if len(news) == 0:  # eğer array'in eleman sayısı 0'a eşitse böyle bir haber yok demektir
         error = "News Not Found!"
@@ -192,6 +212,10 @@ def news_edit(request, pk):
 
 
 def category_list(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     categories = Category.objects.all()
     context = {
         'categories': categories
@@ -200,6 +224,10 @@ def category_list(request):
 
 
 def category_delete(request, pk):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     try:
         cat = Category.objects.get(pk=pk)
         cat.delete()
@@ -215,6 +243,10 @@ def category_delete(request, pk):
 
 
 def category_add(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     if request.method == "POST":
         cat_name = request.POST.get('category_name')
         if cat_name == "":
@@ -241,6 +273,10 @@ def category_add(request):
 
 
 def subcategory_list(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     subcategories = SubCategory.objects.all()
     context = {
         'subcategories': subcategories
@@ -249,6 +285,10 @@ def subcategory_list(request):
 
 
 def subcategory_delete(request, pk):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     try:
         subcat = SubCategory.objects.get(pk=pk)
         subcat.delete()
@@ -264,6 +304,10 @@ def subcategory_delete(request, pk):
 
 
 def subcategory_add(request):
+    # login kontrol başlangıç
+    if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
+        return redirect('main:my_login')
+    # login kontrol bitiş
     categories = Category.objects.all()
     context = {
         'categories': categories
