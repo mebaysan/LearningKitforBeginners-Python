@@ -3,12 +3,12 @@
 <html lang="en">
 <head>
 
-    <title>{{ site.name }} | {% block title %} {% endblock title %}</title>
+    <title>{{ site_settings.name }} | {% block title %} {% endblock title %}</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{% static 'front/images/icons/favicon.png' %}"/>
+    <link rel="icon" type="image/png" href="{{ site_settings.pic_url }}"/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'front/vendor/bootstrap/css/bootstrap.min.css' %}">
     <!--===============================================================================================-->
@@ -77,7 +77,7 @@
                             Sign up
                         </a>
 
-                        <a href="#" class="left-topbar-item">
+                        <a href="{% url 'main:my_login' %}" class="left-topbar-item">
                             Log in
                         </a>
 
@@ -85,14 +85,14 @@
                     </div>
 
                     <div class="right-topbar p-l-18">
-                        <a href="{{ site.facebook_address }}">
+                        <a href="{{ site_settings.facebook_address }}">
                             <span class="fab fa-facebook-f"></span>
                         </a>
 
-                        <a href="{{ site.twitter_address }}">
+                        <a href="{{ site_settings.twitter_address }}">
                             <span class="fab fa-twitter"></span>
                         </a>
-                        <a href="{{ site.youtube_address }}">
+                        <a href="{{ site_settings.youtube_address }}">
                             <span class="fab fa-youtube"></span>
                         </a>
                     </div>
@@ -105,7 +105,9 @@
         <div class="wrap-logo no-banner container">
             <!-- Logo desktop -->
             <div class="logo">
-                <a href="{% url 'main:home' %}"><img src="{% static 'front/images/icons/logo-01.png' %}" alt="LOGO"></a>
+                <a href="http://baysansoft.com/" target="_blank"><img
+                        style="display: inline-block; width: 500px; height: 120px;"
+                        src="{{ site_settings.pic_url }}" alt="LOGO"></a>
             </div>
         </div>
 
@@ -260,28 +262,29 @@
                 <div class="col-lg-4 p-b-20">
                     <div class="size-h-3 flex-s-c">
                         <a href="{% url 'main:home' %}">
-                            <img class="max-s-full" src="{% static 'front/images/icons/logo-02.png' %}" alt="LOGO">
+                            <img class="max-s-full" style="display: inline-block; width: 300px;height: 100px;"
+                                 src="{{ site_settings.pic_url }}" alt="LOGO">
                         </a>
                     </div>
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            {{ site.about }}
+                            {{ site_settings.about | safe }}
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
-                            Any questions? Call us on (+1) 96 716 6879
+                            Any questions? Call us on {{ site_settings.phone }}
                         </p>
 
                         <div class="p-t-15">
-                            <a href="{{ site.facebook_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site_settings.facebook_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-facebook-f"></span>
                             </a>
 
-                            <a href="{{ site.twitter_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site_settings.twitter_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-twitter"></span>
                             </a>
-                            <a href="{{ site.youtube_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a href="{{ site_settings.youtube_address }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-youtube"></span>
                             </a>
                         </div>
@@ -383,10 +386,10 @@
 				<span class="f1-s-1 cl0 txt-center">
 					Copyright © 2019
 
-					<a href="{{ site.link }}" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					<a href="{{ site_settings.link }}" target="_blank" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This wep application is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a href="{{ site.link }}"
-                                                                                  target="_blank">{{ site.link_name }}</a>
+                                class="fa fa-heart" aria-hidden="true"></i> by <a href="http://baysansoft.com/"
+                                                                                  target="_blank">BaysanSoft</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</span>
         </div>

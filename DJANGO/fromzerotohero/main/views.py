@@ -5,32 +5,26 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def home(request):
-    site = Main.objects.first()
     news = News.objects.all().order_by('-date')  # büyükten küçüğe sıralar
     context = {
-        'site': site,
         'news': news,
     }
     return render(request, 'front/home.html', context=context)
 
 
 def about(request):
-    site = Main.objects.first()
-    context = {
-        'site': site
-    }
-    return render(request, 'front/about.html', context=context)
+    return render(request, 'front/about.html')
 
 
 def my_login(request):
-    #todo: Giriş yapınca hoşgeldin {{username}} diye bir toast göster
+    # toDo: Giriş yapınca hoşgeldin {{username}} diye bir toast göster
     if request.method == "POST":
         username = request.POST.get('login_username')
         password = request.POST.get('login_password')
         if username != "" and password != "":
-            user = authenticate(username=username, password=password) # user'i doğruladık
-            if user != None: # eğer user nesnesi varsa
-                login(request, user) # login yaptık
+            user = authenticate(username=username, password=password)  # user'i doğruladık
+            if user != None:  # eğer user nesnesi varsa
+                login(request, user)  # login yaptık
                 return redirect('panel:home')
     return render(request, 'front/login.html')
 

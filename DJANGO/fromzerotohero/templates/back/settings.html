@@ -4,6 +4,14 @@
     <script src="{% static 'node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
 {% endblock ozel_css %}
 {% block body %}
+    {% if success == 'True' %}
+        <script>
+            new Toast({
+                message: 'Success!',
+                type: 'success'
+            });
+        </script>
+    {% endif %}
     <!-- Datatables Header -->
     <div class="content-header">
         <div class="header-section">
@@ -37,31 +45,37 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.name }}" id="site_title" name="site_title" class="form-control"
+                                <input type="text" value="{{ site.name }}" id="site_title" name="site_title"
+                                       class="form-control"
                                        placeholder="Site Title">
                             </div>
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.phone }}" id="site_phone" name="site_phone" class="form-control"
+                                <input type="text" value="{{ site.phone }}" id="site_phone" name="site_phone"
+                                       class="form-control"
                                        placeholder="Site Phone">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.facebook_address }}" id="site_facebook" name="site_facebook" class="form-control"
+                                <input type="text" value="{{ site.facebook_address }}" id="site_facebook"
+                                       name="site_facebook" class="form-control"
                                        placeholder="Site Facebook">
                             </div>
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.twitter_address }}" id="site_twitter" name="site_twitter" class="form-control"
+                                <input type="text" value="{{ site.twitter_address }}" id="site_twitter"
+                                       name="site_twitter" class="form-control"
                                        placeholder="Site Twitter">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.youtube_address }}" id="site_youtube" name="site_youtube" class="form-control"
+                                <input type="text" value="{{ site.youtube_address }}" id="site_youtube"
+                                       name="site_youtube" class="form-control"
                                        placeholder="Site Youtube">
                             </div>
                             <div class="col-md-6">
-                                <input type="text" value="{{ site.link }}" id="site_link" name="site_link" class="form-control"
+                                <input type="text" value="{{ site.link }}" id="site_link" name="site_link"
+                                       class="form-control"
                                        placeholder="Site Link">
                             </div>
                         </div>
@@ -84,12 +98,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-12">
-                                <button id="news_submit" type="submit" class="btn btn-sm btn-primary"><i
+                            <div class="col-md-6">
+                                <button id="site_submit" type="submit" class="btn btn-sm btn-primary"><i
                                         class="fa fa-angle-right"></i>
                                     Submit
                                 </button>
-
+                            </div>
+                            <div class="col-md-6">
+                                <img style="display: inline-block;width: 350px;height: 300px;" src="{{ site.pic_url }}"
+                                     alt="{{ site.pic_name }}">
                             </div>
                         </div>
                     </form>
@@ -103,5 +120,5 @@
     <!-- END Datatables Content -->
 {% endblock body %}
 {% block ozel_js %}
-    <script src="{% static 'back/js/news/news_add.js' %}"></script>
+    <script src="{% static 'back/js/settings/site_settings.js' %}"></script>
 {% endblock ozel_js %}

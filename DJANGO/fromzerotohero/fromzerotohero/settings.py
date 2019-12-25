@@ -63,6 +63,7 @@ TEMPLATES = [
                 'category.context_processor.get_categories',  # yazdığımız context_processors'leri dahil ettik
                 'subcategory.context_processors.get_subcategories',
                 'news.context_processors.get_last_news',
+                'main.context_processors.get_site_settings',
             ],
         },
     },

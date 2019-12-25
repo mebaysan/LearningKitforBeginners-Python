@@ -347,8 +347,58 @@ def site_settings(request):
     if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
         return redirect('main:my_login')
     # login kontrol bitiş
+    if request.method == "POST":
+        site_title = request.POST.get("site_title")
+        site_phone = request.POST.get("site_phone")
+        site_facebook = request.POST.get("site_facebook")
+        site_twitter = request.POST.get("site_twitter")
+        site_youtube = request.POST.get("site_youtube")
+        site_link = request.POST.get("site_link")
+        site_about = request.POST.get("site_about")
+        if site_facebook == "": site_facebook = "#"
+        if site_twitter == "": site_twitter = "#"
+        if site_youtube == "": site_youtube = "#"
+        if site_link == "": site_link = "#"
+        if site_title == "" or site_phone == "" or site_about == "":
+            error = "All fields required!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+        try:
+            site_pic = request.FILES['site_pic']
+            fs = FileSystemStorage()
+            site_pic_name = fs.save(site_pic.name, site_pic)
+            site_pic_url = fs.url(site_pic_name)
+            site = Main.objects.first()
+            site.name = site_title
+            site.about = site_about
+            site.facebook_address = site_facebook
+            site.twitter_address = site_twitter
+            site.youtube_address = site_youtube
+            site.phone = site_phone
+            site.link = site_link
+            site.link_name = site_link
+            site.pic_url = site_pic_url
+            site.pic_name = site_pic_name
+            site.save()  # instance'i save ediyoruz
+        except:
+            site = Main.objects.first()
+            site.name = site_title
+            site.about = site_about
+            site.facebook_address = site_facebook
+            site.twitter_address = site_twitter
+            site.youtube_address = site_youtube
+            site.phone = site_phone
+            site.link = site_link
+            site.link_name = site_link
+            site.save()
+            # toDo: post başarılı olursa context'ten 'success' = True yolla ve toast göster
     site = Main.objects.first()
     context = {
         'site': site,
+        'success': False,
     }
     return render(request, 'back/settings.html', context=context)
