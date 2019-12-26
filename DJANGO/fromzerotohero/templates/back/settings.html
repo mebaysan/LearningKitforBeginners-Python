@@ -4,14 +4,6 @@
     <script src="{% static 'node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
 {% endblock ozel_css %}
 {% block body %}
-    {% if success == 'True' %}
-        <script>
-            new Toast({
-                message: 'Success!',
-                type: 'success'
-            });
-        </script>
-    {% endif %}
     <!-- Datatables Header -->
     <div class="content-header">
         <div class="header-section">
@@ -97,6 +89,7 @@
                                 <input type="file" id="site_pic" name="site_pic">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-6">
                                 <button id="site_submit" type="submit" class="btn btn-sm btn-primary"><i
@@ -109,6 +102,8 @@
                                      alt="{{ site.pic_name }}">
                             </div>
                         </div>
+
+                        <input type="hidden" id="ajax_url_link" value="{% url 'panel:site_settings' %}">
                     </form>
                     <!-- END Basic Form Elements Content -->
                 </div>
@@ -120,5 +115,6 @@
     <!-- END Datatables Content -->
 {% endblock body %}
 {% block ozel_js %}
+    <script src="{% static 'back/js/prepare_ajax.js' %}"></script>
     <script src="{% static 'back/js/settings/site_settings.js' %}"></script>
 {% endblock ozel_js %}

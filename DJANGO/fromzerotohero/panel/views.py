@@ -4,7 +4,7 @@ from category.models import Category
 from subcategory.models import SubCategory
 from django.core.files.storage import FileSystemStorage
 from main.models import Main
-
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -347,14 +347,14 @@ def site_settings(request):
     if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
         return redirect('main:my_login')
     # login kontrol bitiş
-    if request.method == "POST":
-        site_title = request.POST.get("site_title")
-        site_phone = request.POST.get("site_phone")
+    if request.method == "POST" and request.is_ajax():
+        site_title = request.POST.get("title") #ajax kısmında nasıl yolluyorsak o isim ile yakalamalıyız. site_settings altında bilgiler['title']'a bakınız
+        site_phone = request.POST.get("phone")
         site_facebook = request.POST.get("site_facebook")
         site_twitter = request.POST.get("site_twitter")
         site_youtube = request.POST.get("site_youtube")
         site_link = request.POST.get("site_link")
-        site_about = request.POST.get("site_about")
+        site_about = request.POST.get("about")
         if site_facebook == "": site_facebook = "#"
         if site_twitter == "": site_twitter = "#"
         if site_youtube == "": site_youtube = "#"
@@ -384,6 +384,11 @@ def site_settings(request):
             site.pic_url = site_pic_url
             site.pic_name = site_pic_name
             site.save()  # instance'i save ediyoruz
+            data = {
+                'success': True
+            }
+            return JsonResponse(data)
+        #toDO: Ajax ile resim yüklemeyi yap
         except:
             site = Main.objects.first()
             site.name = site_title
@@ -395,10 +400,12 @@ def site_settings(request):
             site.link = site_link
             site.link_name = site_link
             site.save()
-            # toDo: post başarılı olursa context'ten 'success' = True yolla ve toast göster
+            data = {
+                'success': True
+            }
+            return JsonResponse(data)
     site = Main.objects.first()
     context = {
         'site': site,
-        'success': False,
     }
     return render(request, 'back/settings.html', context=context)
