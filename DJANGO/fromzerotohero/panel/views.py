@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 from main.models import Main
 from django.http import JsonResponse
 
+
 # Create your views here.
 def home(request):
     # login kontrol başlangıç
@@ -348,18 +349,19 @@ def site_settings(request):
         return redirect('main:my_login')
     # login kontrol bitiş
     if request.method == "POST" and request.is_ajax():
-        site_title = request.POST.get("title") #ajax kısmında nasıl yolluyorsak o isim ile yakalamalıyız. site_settings altında bilgiler['title']'a bakınız
-        site_phone = request.POST.get("phone")
+        site_title = request.POST.get(
+            "site_title")  # ajax kısmında nasıl yolluyorsak o isim ile yakalamalıyız. site_settings.js altında 15.satıra bakınız
+        site_phone = request.POST.get("site_phone")
         site_facebook = request.POST.get("site_facebook")
         site_twitter = request.POST.get("site_twitter")
         site_youtube = request.POST.get("site_youtube")
         site_link = request.POST.get("site_link")
-        site_about = request.POST.get("about")
-        if site_facebook == "": site_facebook = "#"
-        if site_twitter == "": site_twitter = "#"
-        if site_youtube == "": site_youtube = "#"
-        if site_link == "": site_link = "#"
-        if site_title == "" or site_phone == "" or site_about == "":
+        site_about = request.POST.get("site_about")
+        if not site_facebook: site_facebook = "#"
+        if not site_twitter: site_twitter = "#"
+        if not site_youtube: site_youtube = "#"
+        if not site_link: site_link = "#"
+        if not site_title or not site_phone or not site_about:
             error = "All fields required!"
             link = request.META.get('HTTP_REFERER')
             context = {
@@ -367,12 +369,12 @@ def site_settings(request):
                 'link': link
             }
             return render(request, 'back/error.html', context=context)
+        site = Main.objects.first()
         try:
-            site_pic = request.FILES['site_pic']
+            site_pic = request.FILES['site_pic'] # resmi yakaladık
             fs = FileSystemStorage()
             site_pic_name = fs.save(site_pic.name, site_pic)
             site_pic_url = fs.url(site_pic_name)
-            site = Main.objects.first()
             site.name = site_title
             site.about = site_about
             site.facebook_address = site_facebook
@@ -388,9 +390,7 @@ def site_settings(request):
                 'success': True
             }
             return JsonResponse(data)
-        #toDO: Ajax ile resim yüklemeyi yap
         except:
-            site = Main.objects.first()
             site.name = site_title
             site.about = site_about
             site.facebook_address = site_facebook

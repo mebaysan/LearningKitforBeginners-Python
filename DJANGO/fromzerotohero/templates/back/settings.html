@@ -89,7 +89,7 @@
                                 <input type="file" id="site_pic" name="site_pic">
                             </div>
                         </div>
-
+                        <input type="hidden" id="ajax_url" value="{% url 'panel:site_settings' %}">
                         <div class="form-group">
                             <div class="col-md-6">
                                 <button id="site_submit" type="submit" class="btn btn-sm btn-primary"><i
@@ -102,8 +102,6 @@
                                      alt="{{ site.pic_name }}">
                             </div>
                         </div>
-
-                        <input type="hidden" id="ajax_url_link" value="{% url 'panel:site_settings' %}">
                     </form>
                     <!-- END Basic Form Elements Content -->
                 </div>

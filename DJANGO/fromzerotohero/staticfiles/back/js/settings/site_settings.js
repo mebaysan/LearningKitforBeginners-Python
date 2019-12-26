@@ -1,6 +1,7 @@
-$("#site_settings_form").on("submit", (e) => {
+$("#site_settings_form").submit((e) => {
     e.preventDefault(); // elementin kendi default özelliğini block eder!.
-    let url = $("#ajax_url_link").val();
+    let url = $("#ajax_url").val();
+    let form_data = new FormData(); // FormData instance oluşturduk
     let phone = $("#site_phone").val();
     let title = $("#site_title").val();
     let about = $("#site_about").val();
@@ -8,28 +9,27 @@ $("#site_settings_form").on("submit", (e) => {
     let site_twitter = $("#site_twitter").val();
     let site_youtube = $("#site_youtube").val();
     let site_link = $("#site_link").val();
-    let site_pic = $("#site_pic").val();
-    if (phone == '' || title == '' || about == '') {
+    let site_pic = $("#site_pic")[0].files[0]; // resmi yakaladık
+    form_data.append('site_phone', phone); // bu şekilde yollayınca view kısmında request.POST.get('site_phone') olarak yakalayacağız
+    form_data.append('site_title', title);
+    form_data.append('site_about', about);
+    form_data.append('site_facebook', site_facebook);
+    form_data.append('site_twitter', site_twitter);
+    form_data.append('site_youtube', site_youtube);
+    form_data.append('site_link', site_link);
+    form_data.append('site_pic', site_pic);
+    if (!phone || !title || !about) { // kontrolleri yaptık
         new Toast({
             message: 'Phone & Title & About Fields Are Required!',
             type: 'danger'
         });
     } else {
-        let bilgiler = {
-            'phone': phone,
-            'title': title,
-            'about': about,
-            'site_facebook': site_facebook,
-            'site_twitter': site_twitter,
-            'site_youtube': site_youtube,
-            'site_link': site_link,
-            'site_pic': site_pic
-        };
         $.ajax({
             url: url,
-            type: 'post',
-            dataType: 'json',
-            data: bilgiler,
+            type: "post",
+            data: form_data,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 if (data.success) {
                     new Toast({
