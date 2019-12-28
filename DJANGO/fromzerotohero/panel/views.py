@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from news.models import News
 from category.models import Category
 from subcategory.models import SubCategory
 from django.core.files.storage import FileSystemStorage
-from main.models import Main
+from main.models import Main, ContactForm
 from django.http import JsonResponse
+from django.core.serializers import serialize
 
 
 # Create your views here.
@@ -419,4 +420,56 @@ def site_settings(request):
 def message_box(request):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
-    return render(request, 'back/message_box.html')
+    if request.method == "POST" and request.is_ajax():
+        if request.POST.get('process') and request.POST.get('process') == "is_it_read":
+            pk = request.POST.get('message_pk')
+            message = ContactForm.objects.get(pk=pk)
+            message.is_it_read = True
+            message.save()
+            data = {
+                'success': True,
+            }
+            return JsonResponse(data)
+        # elif request.POST.get('process') and request.POST.get('process') == 'get_page_data':
+        #     messages = serialize('json', ContactForm.objects.all())
+        #     data = {
+        #         'messages': messages,
+        #         'success': True,
+        #     }
+        #     return JsonResponse(data)
+    messages = ContactForm.objects.all()
+    context = {
+        'messages': messages,
+    }
+    return render(request, 'back/message_box.html', context=context)
+
+
+def message_box_delete(request, pk):
+    try:
+        message = get_object_or_404(ContactForm, pk=pk)
+        message.delete()
+        return redirect('panel:message_box')
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+
+
+def message_box_update(request, pk):
+    try:
+        message = get_object_or_404(ContactForm, pk=pk)
+        message.is_it_read = True
+        message.save()
+        return redirect('panel:message_box')
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)

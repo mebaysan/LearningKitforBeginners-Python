@@ -1,5 +1,79 @@
 {% extends 'back/layout.html' %}
 {% load static %}
 {% block body %}
-    <h2>Message Box</h2>
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Message Box<br><small>you can list your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Messages</li>
+        <li><a href="{% url 'panel:message_box' %}">Box</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Message</strong> Box</h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Message</th>
+                    <th>Is it Read</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for message in messages %}
+                    <tr>
+                        <td>{{ message.name }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.date }}</td>
+                        <td>{{ message.message | truncatewords:5 }}</td>
+                        <td>
+                            {% if message.is_it_read == True %}
+                                <span class="label label-success">Success</span>
+
+                            {% else %}
+                                <span class="label label-warning">Waiting</span>
+
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'panel:message_box_update' pk=message.pk %}" data-toggle="tooltip"
+                                   data-id="{{ message.pk }}" id="show_message_btn" title="Read"
+                                   class="btn btn-xs btn-default"><i class="fa fa-search"></i></a>
+                                <a href="{% url 'panel:message_box_delete' pk=message.pk %}" data-toggle="tooltip"
+                                   title="Delete"
+                                   class="btn btn-xs btn-danger" id="{{ message.pk }}"><i
+                                        class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
 {% endblock body %}
+{% block ozel_js %}
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+    <script src="{% static 'back/js/prepare_ajax.js' %}"></script>
+    <script src="{% static 'back/js/settings/message_box.js' %}"></script>
+{% endblock ozel_js %}
