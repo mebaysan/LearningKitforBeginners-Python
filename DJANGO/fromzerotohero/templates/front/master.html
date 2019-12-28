@@ -72,14 +72,20 @@
                         <a href="#" class="left-topbar-item">
                             Contact
                         </a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'panel:home' %}" class="left-topbar-item">
+                                Panel
+                            </a>
 
-                        <a href="#" class="left-topbar-item">
-                            Sign up
-                        </a>
+                        {% else %}
+                            <a href="#" class="left-topbar-item">
+                                Sign up
+                            </a>
 
-                        <a href="{% url 'main:my_login' %}" class="left-topbar-item">
-                            Log in
-                        </a>
+                            <a href="{% url 'main:my_login' %}" class="left-topbar-item">
+                                Log in
+                            </a>
+                        {% endif %}
 
                         <a href="#" class="left-topbar-item"></a>
                     </div>
@@ -299,59 +305,27 @@
                     </div>
 
                     <ul>
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{% static 'front/images/popular-post-01.jpg' %}" alt="IMG">
-                            </a>
+                        {% for popular_post in get_popular_posts_home %}
+                            <li class="flex-wr-sb-s p-b-20">
+                                <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
+                                    <img src="{{ popular_post.pic_url }}" alt="{{popular_post.pic_name}}">
+                                </a>
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Donec metus orci, malesuada et lectus vitae
-                                    </a>
-                                </h6>
+                                <div class="size-w-5">
+                                    <h6 class="p-b-5">
+                                        <a href="{% url 'news:news_detail' pk=popular_post.pk %}" class="f1-s-5 cl11 hov-cl10 trans-03">
+                                            {{ popular_post.name }}
+                                        </a>
+                                    </h6>
 
-                                <span class="f1-s-3 cl6">
-										Feb 17
+                                    <span class="f1-s-3 cl6">
+										{{ popular_post.date | date }}
 									</span>
-                            </div>
-                        </li>
+                                </div>
+                            </li>
 
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{% static 'front/images/popular-post-02.jpg' %}" alt="IMG">
-                            </a>
+                        {% endfor %}
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-										Feb 16
-									</span>
-                            </div>
-                        </li>
-
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="{% static 'front/images/popular-post-03.jpg' %}" alt="IMG">
-                            </a>
-
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Suspendisse dictum enim quis imperdiet auctor
-                                    </a>
-                                </h6>
-
-                                <span class="f1-s-3 cl6">
-										Feb 15
-									</span>
-                            </div>
-                        </li>
                     </ul>
                 </div>
 

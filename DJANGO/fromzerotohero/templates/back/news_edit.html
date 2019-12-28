@@ -82,6 +82,9 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <input type="file" id="news_file" name="news_file">
+                                <br><br>
+                                  <textarea type="text" id="news_tag" name="news_tag" rows="5" class="form-control"
+                                       placeholder="Tags">{{ news.tag }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <img src="{{ news.pic_url }}" alt="{{ news.pic_name }}"

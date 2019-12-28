@@ -17,7 +17,6 @@ def about(request):
 
 
 def my_login(request):
-    # toDo: Giriş yapınca hoşgeldin {{username}} diye bir toast göster
     if request.method == "POST":
         username = request.POST.get('login_username')
         password = request.POST.get('login_password')

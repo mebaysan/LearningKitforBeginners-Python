@@ -58,7 +58,7 @@
                                           placeholder="Short Txt" rows="5"></textarea>
                             </div>
                         </div>
-                     <script>
+                        <script>
                             ClassicEditor
                                 .create(document.querySelector('#news_short_txt'))
                                 .catch(error => {
@@ -82,10 +82,15 @@
                             <div class="col-md-6">
                                 <input type="file" id="news_file" name="news_file">
                             </div>
+                            <div class="col-md-6">
+                                <textarea type="text" id="news_tag" name="news_tag" rows="5" class="form-control"
+                                          placeholder="Tags"></textarea>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button id="news_submit" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                <button id="news_submit" type="submit" class="btn btn-sm btn-primary"><i
+                                        class="fa fa-angle-right"></i>
                                     Submit
                                 </button>
 

@@ -43,6 +43,7 @@ def news_add(request):
             'news_category')  # html formunda selectbox içindeki option value'yi döndürür bize
         news_short_txt = request.POST.get('news_short_txt')
         news_body_txt = request.POST.get('news_body_txt')
+        news_tag = request.POST.get('news_tag')
         news_category = SubCategory.objects.get(pk=news_category_id).name
         ocategory_id = SubCategory.objects.get(pk=news_category_id).category_id
         if news_title == "" or news_category_id == "0" or news_short_txt == "" or news_body_txt == "":
@@ -65,7 +66,8 @@ def news_add(request):
                                 pic_name=file_name,
                                 pic_url=file_url,
                                 writer='-',
-                                category_name=news_category, category_id=0, show=0, ocategory_id=ocategory_id)
+                                category_name=news_category, category_id=0, show=0, ocategory_id=ocategory_id,
+                                tag=news_tag)
                     news.save()
                     count = len(
                         News.objects.filter(ocategory_id=ocategory_id))  # bu kategorideki haber sayısını buluyoruz
@@ -154,6 +156,7 @@ def news_edit(request, pk):
             'news_category')  # html formunda selectbox içindeki option value'yi döndürür bize
         news_short_txt = request.POST.get('news_short_txt')
         news_body_txt = request.POST.get('news_body_txt')
+        news_tags = request.POST.get('news_tag')
         news_category = SubCategory.objects.get(pk=news_category_id).name
         if news_title == "" or news_category_id == "0" or news_short_txt == "" or news_body_txt == "":
             error = "All fields required!"
@@ -181,6 +184,7 @@ def news_edit(request, pk):
                     news.writer = "-"
                     news.category_name = news_category
                     news.category_id = news_category_id
+                    news.tag = news_tags
                     news.save()
                     return redirect('panel:news_list')
                 else:
@@ -208,6 +212,7 @@ def news_edit(request, pk):
             news.writer = "-"
             news.category_name = news_category
             news.category_id = news_category_id
+            news.tag = news_tags
             news.save()
             return redirect('panel:news_list')
     return render(request, 'back/news_edit.html', context=context)
@@ -371,7 +376,7 @@ def site_settings(request):
             return render(request, 'back/error.html', context=context)
         site = Main.objects.first()
         try:
-            site_pic = request.FILES['site_pic'] # resmi yakaladık
+            site_pic = request.FILES['site_pic']  # resmi yakaladık
             fs = FileSystemStorage()
             site_pic_name = fs.save(site_pic.name, site_pic)
             site_pic_url = fs.url(site_pic_name)

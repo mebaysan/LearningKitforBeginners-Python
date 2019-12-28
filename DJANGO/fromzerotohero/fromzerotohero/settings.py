@@ -64,6 +64,7 @@ TEMPLATES = [
                 'subcategory.context_processors.get_subcategories',
                 'news.context_processors.get_last_news',
                 'main.context_processors.get_site_settings',
+                'news.context_processors.get_popular_posts',
             ],
         },
     },

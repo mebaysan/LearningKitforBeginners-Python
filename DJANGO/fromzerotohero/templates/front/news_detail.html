@@ -38,7 +38,7 @@
                         <!-- Blog Detail -->
                         <div class="p-b-70">
                             <a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-                                Technology
+                                {{ new.category_name }}
                             </a>
 
                             <h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
@@ -59,7 +59,7 @@
 								</span>
 
                                 <span class="f1-s-3 cl8 m-r-15">
-									{{ new.show }}
+									{{ new.show }} views
 								</span>
 
                                 <a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
@@ -72,7 +72,7 @@
                             </div>
 
                             <p class="f1-s-11 cl6 p-b-25">
-                                {{ new.body_txt |safe}}
+                                {{ new.body_txt |safe }}
                             </p>
                         </div>
 
@@ -119,35 +119,17 @@
                             </div>
 
                             <ul class="p-t-35">
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        Fashion
-                                    </a>
-                                </li>
-
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        Beauty
-                                    </a>
-                                </li>
-
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        Street Style
-                                    </a>
-                                </li>
-
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        Life Style
-                                    </a>
-                                </li>
-
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        DIY & Crafts
-                                    </a>
-                                </li>
+                                {% for category in get_categories %}
+                                    <!-- category app altındaki context_processor'den geliyor -->
+                                    {% if category.count != 0 %}
+                                        <li class="how-bor3 p-rl-4">
+                                            <a href="#"
+                                               class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                                {{ category.name }} ({{ category.count }})
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </div>
 
@@ -267,21 +249,24 @@
                             </div>
 
                             <ul class="p-t-35">
-                                <li class="flex-wr-sb-s p-b-30">
-                                    <a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                        <img src="images/popular-post-04.jpg" alt="IMG">
-                                    </a>
+                                {% for popular_post in get_popular_posts_detail %}
+                                    <li class="flex-wr-sb-s p-b-30">
+                                        <a href="{% url 'news:news_detail' pk=popular_post.pk %}"
+                                           class="size-w-10 wrap-pic-w hov1 trans-03">
+                                            <img src="{{ popular_post.pic_url }}" alt="{{ popular_post.pic_name }}">
+                                        </a>
 
-                                    <div class="size-w-11">
-                                        <h6 class="p-b-4">
-                                            <a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                Donec metus orci, malesuada et lectus vitae
-                                            </a>
-                                        </h6>
+                                        <div class="size-w-11">
+                                            <h6 class="p-b-4">
+                                                <a href="{% url 'news:news_detail' pk=popular_post.pk %}"
+                                                   class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    {{ popular_post.name }}
+                                                </a>
+                                            </h6>
 
-                                        <span class="cl8 txt-center p-b-24">
+                                            <span class="cl8 txt-center p-b-24">
 											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Music
+												{{ popular_post.category_name }}
 											</a>
 
 											<span class="f1-s-3 m-rl-3">
@@ -289,67 +274,14 @@
 											</span>
 
 											<span class="f1-s-3">
-												Feb 18
+												{{ popular_post.date | date }}
 											</span>
 										</span>
-                                    </div>
-                                </li>
+                                        </div>
+                                    </li>
 
-                                <li class="flex-wr-sb-s p-b-30">
-                                    <a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                        <img src="images/popular-post-05.jpg" alt="IMG">
-                                    </a>
+                                {% endfor %}
 
-                                    <div class="size-w-11">
-                                        <h6 class="p-b-4">
-                                            <a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                Donec metus orci, malesuada et lectus vitae
-                                            </a>
-                                        </h6>
-
-                                        <span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Game
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 16
-											</span>
-										</span>
-                                    </div>
-                                </li>
-
-                                <li class="flex-wr-sb-s p-b-30">
-                                    <a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                        <img src="images/popular-post-06.jpg" alt="IMG">
-                                    </a>
-
-                                    <div class="size-w-11">
-                                        <h6 class="p-b-4">
-                                            <a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                Donec metus orci, malesuada et lectus vitae
-                                            </a>
-                                        </h6>
-
-                                        <span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Celebrity
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 12
-											</span>
-										</span>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
 
@@ -362,45 +294,14 @@
                             </div>
 
                             <div class="flex-wr-s-s m-rl--5">
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Fashion
-                                </a>
+                                {% for tag in tags %}
+                                    <a href="#"
+                                       class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        {{ tag }}
+                                    </a>
+                                {% endfor %}
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Lifestyle
-                                </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Denim
-                                </a>
-
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Streetstyle
-                                </a>
-
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Crafts
-                                </a>
-
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Magazine
-                                </a>
-
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    News
-                                </a>
-
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Blogs
-                                </a>
                             </div>
                         </div>
                     </div>
