@@ -414,3 +414,9 @@ def site_settings(request):
         'site': site,
     }
     return render(request, 'back/settings.html', context=context)
+
+
+def message_box(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    return render(request, 'back/message_box.html')

@@ -1,10 +1,10 @@
 {% extends 'front/master.html' %}
 {% load static %}
 {% block title %}
-    About
-{% endblock title %}
-
+    Contact
+{% endblock %}
 {% block mainblock %}
+
     <!-- Breadcrumb -->
     <div class="container">
         <div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
@@ -14,7 +14,7 @@
                 </a>
 
                 <span class="breadcrumb-item f1-s-3 cl9">
-					About Us
+					Contact Us
 				</span>
             </div>
 
@@ -28,27 +28,40 @@
     </div>
 
     <!-- Page heading -->
-    <div class="container p-t-4 p-b-35">
+    <div class="container p-t-4 p-b-40">
         <h2 class="f1-l-1 cl2">
-            About Us
+            Contact Us
         </h2>
     </div>
 
     <!-- Content -->
-    <section class="bg0 p-b-110">
+    <section class="bg0 p-b-60">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-8 p-b-30">
+                <div class="col-md-7 col-lg-8 p-b-80">
                     <div class="p-r-10 p-r-0-sr991">
-                        <p class="f1-s-11 cl6 p-b-25">
-                            {{ site_settings.about|safe }}
-                        </p>
+                        <form method="post" action="{% url 'main:contact' %}" id="contact_form">
+                            {% csrf_token %}
+                            <input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
+                                   name="name" id="name" placeholder="Name*">
+
+                            <input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
+                                   name="email" id="email" placeholder="Email*">
+
+                            <textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20"
+                                      name="msg" id="msg" placeholder="Your Message"></textarea>
+
+                            <button id="form_button"
+                                    class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20">
+                                Send
+                            </button>
+                        </form>
                     </div>
                 </div>
 
                 <!-- Sidebar -->
-                <div class="col-md-5 col-lg-4 p-b-30">
-                    <div class="p-l-10 p-rl-0-sr991 p-t-5">
+                <div class="col-md-5 col-lg-4 p-b-80">
+                    <div class="p-l-10 p-rl-0-sr991">
                         <!-- Popular Posts -->
                         <div>
                             <div class="how2 how2-cl4 flex-s-c">
@@ -60,7 +73,8 @@
                             <ul class="p-t-35">
                                 {% for pop_post in get_popular_posts_home %}
                                     <li class="flex-wr-sb-s p-b-30">
-                                        <a href="{% url 'news:news_detail' pk=pop_post.pk %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                        <a href="{% url 'news:news_detail' pk=pop_post.pk %}"
+                                           class="size-w-10 wrap-pic-w hov1 trans-03">
                                             <img src="{{ pop_post.pic_url }}" alt="{{ pop_post.pic_name }}">
                                         </a>
 
@@ -73,8 +87,7 @@
                                             </h6>
 
                                             <span class="cl8 txt-center p-b-24">
-											<a href="#"
-                                               class="f1-s-6 cl8 hov-cl10 trans-03">
+											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
 												{{ pop_post.category_name }}
 											</a>
 
@@ -83,13 +96,13 @@
 											</span>
 
 											<span class="f1-s-3">
-												{{ pop_post.date|date }}
+												{{ pop_post.date | date }}
 											</span>
 										</span>
                                         </div>
                                     </li>
-
                                 {% endfor %}
+
 
                             </ul>
                         </div>
@@ -98,4 +111,9 @@
             </div>
         </div>
     </section>
-{% endblock mainblock %}
+
+{% endblock %}
+{% block ozel_js %}
+    <script src="{% static 'back/js/prepare_ajax.js' %}"></script>
+    <script src="{% static 'front/js/contact.js' %}"></script>
+{% endblock %}

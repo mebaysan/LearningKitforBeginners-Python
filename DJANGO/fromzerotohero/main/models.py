@@ -1,8 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
 class Main(models.Model):
     name = models.CharField(max_length=255)
     about = models.TextField()
@@ -18,3 +16,13 @@ class Main(models.Model):
 
     def __str__(self):
         return self.set_name + " ({})".format(self.id)
+
+
+class ContactForm(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    message = models.TextField()
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=False)
+
+    def __str__(self):
+        return self.name

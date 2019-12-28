@@ -130,10 +130,12 @@
                             </div>
                             <div class="sidebar-user-name">Admin</div>
                             <div class="sidebar-user-links">
+                                <a href="{% url 'main:home' %}" data-toggle="tooltip" data-placement="bottom"
+                                   title="Site Home Page"><i class="gi gi-home"></i></a>
+                                <a href="{% url 'panel:message_box' %}" data-toggle="tooltip" data-placement="bottom"
+                                   title="Message Box"><i class="gi gi-message_plus"></i></a>
                                 <a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom"
                                    title="Profile"><i class="gi gi-user"></i></a>
-                                <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom"
-                                   title="Messages"><i class="gi gi-envelope"></i></a>
                                 <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
                                 <a href="{% url 'panel:site_settings' %}" class="enable-tooltip" data-placement="bottom"
                                    title="Settings"

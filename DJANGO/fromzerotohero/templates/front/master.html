@@ -28,6 +28,10 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'front/css/main.css' %}">
     <!--===============================================================================================-->
+    <!-- Toast Js Baslangıc -->
+    <link rel="stylesheet" href="{% static 'ToastJs/Toast.min.css' %}">
+    <script src="{% static 'ToastJs/Toast.min.js' %}"></script>
+    <!-- Toast Js Bitis -->
 </head>
 <body class="animsition">
 
@@ -69,10 +73,11 @@
                             About
                         </a>
 
-                        <a href="#" class="left-topbar-item">
+                        <a href="{% url 'main:contact' %}" class="left-topbar-item">
                             Contact
                         </a>
                         {% if request.user.is_authenticated %}
+                            {#                        {% if request.user.is_authenticated and request.user.is_superuser %}#}
                             <a href="{% url 'panel:home' %}" class="left-topbar-item">
                                 Panel
                             </a>
@@ -275,9 +280,9 @@
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            {{ site_settings.about | safe }}
+                            {{ site_settings.about | safe | truncatewords:30 }}
                         </p>
-
+                        <br>
                         <p class="f1-s-1 cl11 p-b-16">
                             Any questions? Call us on {{ site_settings.phone }}
                         </p>
@@ -307,13 +312,15 @@
                     <ul>
                         {% for popular_post in get_popular_posts_home %}
                             <li class="flex-wr-sb-s p-b-20">
-                                <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                    <img src="{{ popular_post.pic_url }}" alt="{{popular_post.pic_name}}">
+                                <a href="{% url 'news:news_detail' pk=popular_post.pk %}"
+                                   class="size-w-4 wrap-pic-w hov1 trans-03">
+                                    <img src="{{ popular_post.pic_url }}" alt="{{ popular_post.pic_name }}">
                                 </a>
 
                                 <div class="size-w-5">
                                     <h6 class="p-b-5">
-                                        <a href="{% url 'news:news_detail' pk=popular_post.pk %}" class="f1-s-5 cl11 hov-cl10 trans-03">
+                                        <a href="{% url 'news:news_detail' pk=popular_post.pk %}"
+                                           class="f1-s-5 cl11 hov-cl10 trans-03">
                                             {{ popular_post.name }}
                                         </a>
                                     </h6>
@@ -399,6 +406,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
 <script src="{% static 'front/js/main.js' %}"></script>
+{% block ozel_js %}
+
+{% endblock %}
 
 </body>
 </html>
