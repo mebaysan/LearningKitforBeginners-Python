@@ -7,6 +7,7 @@ from main.models import Main, ContactForm
 from django.http import JsonResponse
 from django.core import serializers
 import json
+from trending.models import Trending
 
 
 # Create your views here.
@@ -463,3 +464,78 @@ def message_box(request):
         'messages': messages,
     }
     return render(request, 'back/message_box.html', context=context)
+
+
+def trends(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    trends = Trending.objects.all()
+    context = {
+        'trends': trends,
+    }
+    return render(request, 'back/trends.html', context=context)
+
+
+def trends_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    try:
+        trend = get_object_or_404(Trending, pk=pk)
+        trend.delete()
+        return redirect('panel:trends_list')
+    except:
+        error = "All fields required!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+
+
+def trends_update(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    trend = get_object_or_404(Trending, pk=pk)
+    context = {
+        'trend': trend,
+    }
+    if request.method == "POST":
+        try:
+            text = request.POST.get('trend_text')
+            publish = request.POST.get('trend_is_published')
+            trend.txt = text
+            trend.is_publish = publish
+            trend.save()
+            return redirect('panel:trends_list')
+        except:
+            error = "Something Wrong!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+
+    return render(request, 'back/trends_update.html', context=context)
+
+
+def trend_add(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    if request.method == "POST":
+        text = request.POST.get('trend_text')
+        publish = request.POST.get('trend_is_published')
+        try:
+            trend = Trending(txt=text, is_publish=publish)
+            trend.save()
+        except:
+            error = "Something Wrong!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+        return redirect('panel:trends_list')
+    return render(request, 'back/trends_add.html')

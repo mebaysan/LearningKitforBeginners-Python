@@ -1,0 +1,70 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Trends List<br><small>you can list your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Trends</li>
+        <li><a href="{% url 'panel:trends_list' %}">List</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Message</strong> Box</h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>Txt</th>
+                    <th>Is Publish</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for trend in trends %}
+                    <tr>
+                        <td>{{ trend.txt }}</td>
+                        <td>
+                            {% if trend.is_publish == True %}
+                                <span class="label label-success">Success</span>
+
+                            {% else %}
+                                <span class="label label-warning">Waiting</span>
+
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'panel:trends_update' pk=trend.pk %}" data-toggle="tooltip"
+                                   id="show_message_btn" title="Read"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'panel:trends_delete' pk=trend.pk %}" data-toggle="tooltip"
+                                   title="Delete"
+                                   class="btn btn-xs btn-danger" id="delete_message_btn"><i
+                                        class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock ozel_js %}

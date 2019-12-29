@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'panel.apps.PanelConfig',
     'category.apps.CategoryConfig',
     'subcategory.apps.SubcategoryConfig',
+    'trending.apps.TrendingConfig',
 
 ]
 
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'news.context_processors.get_last_news',
                 'main.context_processors.get_site_settings',
                 'news.context_processors.get_popular_posts',
+                'trending.context_processors.get_trendings',
             ],
         },
     },

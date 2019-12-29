@@ -1,0 +1,75 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block ozel_css %}
+    <script src="{% static 'node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
+{% endblock ozel_css %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Edit Trend<br><small>you can edit your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Trends</li>
+        <li><a href="{% url 'panel:trends_update' pk=trend.pk %}">Edit</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Title -->
+                    <div class="block-title">
+                        <h2><strong>Edit</strong> Trend</h2>
+                    </div>
+                    <!-- END Form Elements Title -->
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'panel:trends_update' pk=trend.pk %}" method="post"
+                          enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" value="{{ trend.txt }}" id="trend_text" name="trend_text"
+                                       class="form-control"
+                                       placeholder="Trend Text">
+                            </div>
+                            <div class="col-md-6">
+                                <select id="trend_is_published" name="trend_is_published" class="select-chosen"
+                                        data-placeholder="Choose a Category.." style="width: 250px;">
+                                    {% if trend.is_publish == True %}
+                                        <option value="{{ trend.is_publish }}">Publish</option>
+                                        <option value="False">Draft
+                                        </option>
+                                    {% else %}
+                                        <option value="{{ trend.is_publish }}">Draft</option>
+                                        <option value="True">Publish
+                                        </option>
+                                    {% endif %}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}

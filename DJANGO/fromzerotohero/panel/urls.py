@@ -17,4 +17,8 @@ urlpatterns = [
     path('subcategory/add/', views.subcategory_add, name='subcategory_add'),
     path('sitesettings/', views.site_settings, name='site_settings'),
     path('message_box/', views.message_box, name='message_box'),
+    path('trends/list', views.trends, name='trends_list'),
+    path('trends/delete/<int:pk>', views.trends_delete, name='trends_delete'),
+    path('trends/update/<int:pk>', views.trends_update, name='trends_update'),
+    path('trends/add/', views.trend_add, name='trends_add'),
 ]
