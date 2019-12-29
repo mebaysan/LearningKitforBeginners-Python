@@ -25,6 +25,10 @@ $('#example-datatable tbody').on('click', '#show_message_btn', function (e) {
                     type: 'success'
                 });
                 get_page_data();
+                setTimeout(
+                    function () {
+                        location.reload();
+                    }, 8000);
             } else {
                 new Toast({
                     message: "Something Wrong!",
@@ -56,11 +60,16 @@ $('#example-datatable tbody').on('click', '#delete_message_btn', function (e) {
                     type: 'success'
                 });
                 get_page_data();
+                setTimeout(
+                    function () {
+                        location.reload();
+                    }, 8000);
             } else {
                 new Toast({
                     message: "Something Wrong!",
                     type: 'danger'
                 });
+
             }
         }
     });
@@ -79,10 +88,7 @@ let get_page_data = () => {
         processData: false,
         success: function (data) {
             if (data.success === true) {
-                // Python kısmında obje olarak yollayamadığımızdan JavaScript kısmında Json objesine çevirdik
-                //toDO: Tablo içeriğini ajax ile getir
-                let data_set = JSON.parse(data.messages);
-                console.log(JSON.parse(data.messages));
+                console.log(data.messages);
             } else {
                 new Toast({
                     message: "Something Wrong!",

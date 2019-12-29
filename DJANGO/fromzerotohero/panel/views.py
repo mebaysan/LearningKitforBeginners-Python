@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from django.core import serializers
 import json
 
+
 # Create your views here.
 def home(request):
     # login kontrol başlangıç
@@ -439,12 +440,11 @@ def message_box(request):
                 }
             return JsonResponse(data)
         elif request.POST.get('process') and request.POST.get('process') == 'get_page_data':
-            messages = serializers.serialize('json', ContactForm.objects.all())
             data = {
-                'messages': messages,
                 'success': True,
+                'messages': list(ContactForm.objects.all().values())
             }
-            return JsonResponse(data)
+            return JsonResponse(data, safe=False)
         elif request.POST.get('process') and request.POST.get('process') == 'delete_message':
             pk = request.POST.get('message_pk')
             try:
