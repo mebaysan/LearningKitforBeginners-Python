@@ -49,6 +49,10 @@
         <link rel="stylesheet" href="{% static 'ToastJs/Toast.min.css' %}">
         <script src="{% static 'ToastJs/Toast.min.js' %}"></script>
         <!-- Toast Js Bitis -->
+        <!--SweetAlert2 Baslangıc -->
+        <link rel="stylesheet" href="{% static 'node_modules/sweetalert2/dist/sweetalert2.min.css' %}">
+        <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+        <!--SweetAlert2 Bitis -->
         {% block ozel_css %}
 
         {% endblock ozel_css %}
@@ -243,6 +247,8 @@
     <!-- For more info please have a look at https://developers.google.com/maps/documentation/javascript/get-api-key#key -->
     <script src="https://maps.googleapis.com/maps/api/js?key="></script>
     <script src="{% static 'back/js/helpers/gmaps.min.js' %}"></script>
+
+
     {% block ozel_js %}
 
     {% endblock ozel_js %}

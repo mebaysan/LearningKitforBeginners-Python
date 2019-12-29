@@ -17,6 +17,4 @@ urlpatterns = [
     path('subcategory/add/', views.subcategory_add, name='subcategory_add'),
     path('sitesettings/', views.site_settings, name='site_settings'),
     path('message_box/', views.message_box, name='message_box'),
-    path('message_box_delete/<int:pk>', views.message_box_delete, name='message_box_delete'),
-    path('message_box_update/<int:pk>', views.message_box_update, name='message_box_update'),
 ]

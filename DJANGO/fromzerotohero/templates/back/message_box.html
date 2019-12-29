@@ -50,12 +50,13 @@
                         </td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'panel:message_box_update' pk=message.pk %}" data-toggle="tooltip"
+                                <a href="{% url 'panel:message_box' %}" data-toggle="tooltip"
                                    data-id="{{ message.pk }}" id="show_message_btn" title="Read"
                                    class="btn btn-xs btn-default"><i class="fa fa-search"></i></a>
-                                <a href="{% url 'panel:message_box_delete' pk=message.pk %}" data-toggle="tooltip"
+                                <a href="{% url 'panel:message_box' %}" data-toggle="tooltip"
                                    title="Delete"
-                                   class="btn btn-xs btn-danger" id="{{ message.pk }}"><i
+                                   data-id="{{ message.pk }}"
+                                   class="btn btn-xs btn-danger" id="delete_message_btn"><i
                                         class="fa fa-times"></i></a>
                             </div>
                         </td>
