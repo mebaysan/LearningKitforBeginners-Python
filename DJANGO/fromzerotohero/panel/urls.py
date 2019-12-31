@@ -21,4 +21,5 @@ urlpatterns = [
     path('trends/delete/<int:pk>', views.trends_delete, name='trends_delete'),
     path('trends/update/<int:pk>', views.trends_update, name='trends_update'),
     path('trends/add/', views.trend_add, name='trends_add'),
+    path('users/change_password/', views.change_pass, name='change_password'),
 ]

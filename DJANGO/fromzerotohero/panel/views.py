@@ -5,9 +5,9 @@ from subcategory.models import SubCategory
 from django.core.files.storage import FileSystemStorage
 from main.models import Main, ContactForm
 from django.http import JsonResponse
-from django.core import serializers
-import json
 from trending.models import Trending
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -539,3 +539,34 @@ def trend_add(request):
             return render(request, 'back/error.html', context=context)
         return redirect('panel:trends_list')
     return render(request, 'back/trends_add.html')
+
+
+def change_pass(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    if request.method == "POST":
+        old_pass = request.POST.get('old_pass')
+        new_pass = request.POST.get('new_pass')
+        user = authenticate(username=request.user.username, password=old_pass)  # user'i auth ediyoruz
+        if user != None:  # eğer auth olmazsa demek ki şifresi yanlıştır, olursa şifresi doğrudur
+            if len(new_pass) < 3:
+                error = "Your new pass < 3 character"
+                link = request.META.get('HTTP_REFERER')
+                context = {
+                    'error': error,
+                    'link': link
+                }
+                return render(request, 'back/error.html', context=context)
+            user = User.objects.get(pk=request.user.pk)
+            user.set_password(new_pass)
+            user.save()
+            return redirect('main:my_logout')
+        else:
+            error = "Your Password Is Not Correct!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+    return render(request, 'back/change_pass.html')

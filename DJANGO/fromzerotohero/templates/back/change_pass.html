@@ -1,0 +1,69 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block ozel_css %}
+    <script src="{% static 'node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
+{% endblock ozel_css %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Change Password<br><small>you can change your password!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Users</li>
+        <li><a href="{% url 'panel:change_password' %}">Change Password</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Title -->
+                    <div class="block-title">
+                        <h2><strong>Change</strong> Password</h2>
+                    </div>
+                    <!-- END Form Elements Title -->
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'panel:change_password' %}" method="post"
+                          enctype="multipart/form-data"
+                          id="change_pass_form"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="password" id="old_pass" name="old_pass"
+                                       class="form-control"
+                                       placeholder="Old Password">
+                            </div>
+                            <div class="col-md-6">
+                               <input type="password" id="new_pass" name="new_pass"
+                                       class="form-control"
+                                       placeholder="New Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="btn_submit" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <script src="{% static 'back/js/users/change_pass.js' %}"></script>
+{% endblock %}

@@ -59,3 +59,5 @@ def contact(request):
         'news': news,
     }
     return render(request, 'front/contact.html', context=context)
+
+
