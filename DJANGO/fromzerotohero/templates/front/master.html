@@ -50,7 +50,7 @@
                         <span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown"
                               data-out="fadeOutDown">
                                 {% for trend in get_trendings %}
-                                <span class="dis-inline-block slide100-txt-item animated visible-false">
+                                    <span class="dis-inline-block slide100-txt-item animated visible-false">
 									{{ trend.txt }}
 								</span>
                                 {% endfor %}
@@ -79,12 +79,9 @@
                             </a>
 
                         {% else %}
-                            <a href="#" class="left-topbar-item">
-                                Sign up
-                            </a>
-
                             <a href="{% url 'main:my_login' %}" class="left-topbar-item">
-                                Log in
+                                Log in / Sign up
+
                             </a>
                         {% endif %}
 

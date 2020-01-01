@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Our Apps
     'main.apps.MainConfig',
     'news.apps.NewsConfig',
     'panel.apps.PanelConfig',

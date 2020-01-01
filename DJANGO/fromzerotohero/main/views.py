@@ -3,6 +3,7 @@ from main.models import Main, ContactForm
 from news.models import News
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -61,3 +62,33 @@ def contact(request):
     return render(request, 'front/contact.html', context=context)
 
 
+def my_register(request):
+    if request.method == "POST":
+        username = request.POST.get("new_username")
+        name = request.POST.get("new_name")
+        email = request.POST.get("new_email")
+        password = request.POST.get("new_password")
+        password_verify = request.POST.get("new_password_verify")
+        if password != password_verify or len(password) < 3:
+            error = "Your password not verified or password < 3 character!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'front/msgbox.html', context=context)
+        if len(User.objects.filter(username=username)) == 0 and len(User.objects.filter(email=email)) == 0:
+            # user = User(username=username, email=email, password=password)
+            # user.save()
+            user = User.objects.create_user(username=username, first_name=username, email=email,
+                                            password=password)  # iki türlü de user oluşturabiliriz
+            return redirect('main:my_login')
+        else:
+            error = "Your Email or Username has been used!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'front/msgbox.html', context=context)
+    return render(request, 'front/login.html')

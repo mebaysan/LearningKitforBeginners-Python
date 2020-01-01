@@ -7,7 +7,7 @@
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
-                                                                             title="Quick Settings"><i
+                                                                             title="Site Settings"><i
                                     class="gi gi-settings"></i></a></span>
         <span class="sidebar-header-title">Site Settings</span>
     </li>
@@ -39,7 +39,26 @@
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
-                                                                             title="Quick Settings"><i
+                                                                             title="Users"><i
+                                    class="fa fa-users"></i></a></span>
+        <span class="sidebar-header-title">Users</span>
+    </li>
+    <li>
+        <a href="" class="sidebar-nav-menu"><i
+                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                class="fa fa-users sidebar-nav-icon"></i><span
+                class="sidebar-nav-mini-hide">Managers</span></a>
+        <ul>
+            <li>
+                <a href="{% url 'panel:manager_list' %}">Manager List</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="sidebar-header">
+                            <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
+                                                                             data-toggle="tooltip"
+                                                                             title="News Settings"><i
                                     class="gi gi-show_big_thumbnails"></i></a></span>
         <span class="sidebar-header-title">News Settings</span>
     </li>

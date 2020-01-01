@@ -132,7 +132,7 @@
                                     <img src="{% static 'back/img/placeholders/avatars/avatar2.jpg' %}" alt="avatar">
                                 </a>
                             </div>
-                            <div class="sidebar-user-name">Admin</div>
+                            <div class="sidebar-user-name">{{ request.user.username }}</div>
                             <div class="sidebar-user-links">
                                 <a href="{% url 'main:home' %}" data-toggle="tooltip" data-placement="bottom"
                                    title="Site Home Page"><i class="gi gi-home"></i></a>

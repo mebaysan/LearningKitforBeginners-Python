@@ -570,3 +570,26 @@ def change_pass(request):
             }
             return render(request, 'back/error.html', context=context)
     return render(request, 'back/change_pass.html')
+
+
+def manager_list(request):
+    managers = User.objects.all().filter(is_superuser=False)
+    context = {
+        'managers': managers,
+    }
+    return render(request, 'back/manager_list.html', context=context)
+
+
+def manager_del(request, pk):
+    try:
+        manager = User.objects.get(pk=pk)
+        manager.delete()
+        return redirect('panel:manager_list')
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
