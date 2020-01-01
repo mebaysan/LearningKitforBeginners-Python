@@ -7,7 +7,8 @@ from main.models import Main, ContactForm
 from django.http import JsonResponse
 from trending.models import Trending
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
+from users.models import Manager
 
 
 # Create your views here.
@@ -573,7 +574,7 @@ def change_pass(request):
 
 
 def manager_list(request):
-    managers = User.objects.all().filter(is_superuser=False)
+    managers = Manager.objects.all()
     context = {
         'managers': managers,
     }
@@ -582,7 +583,9 @@ def manager_list(request):
 
 def manager_del(request, pk):
     try:
-        manager = User.objects.get(pk=pk)
+        manager = Manager.objects.get(pk=pk)
+        user = manager.user
+        user.delete()
         manager.delete()
         return redirect('panel:manager_list')
     except:
@@ -593,3 +596,11 @@ def manager_del(request, pk):
             'link': link
         }
         return render(request, 'back/error.html', context=context)
+
+
+def manager_group_list(request):
+    groups = Group.objects.all()
+    context = {
+        'groups': groups,
+    }
+    return render(request, 'back/manager_group_list.html', context=context)

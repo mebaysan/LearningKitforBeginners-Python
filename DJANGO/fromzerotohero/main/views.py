@@ -4,6 +4,7 @@ from news.models import News
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from users.models import Manager
 
 
 def home(request):
@@ -82,6 +83,8 @@ def my_register(request):
             # user.save()
             user = User.objects.create_user(username=username, first_name=username, email=email,
                                             password=password)  # iki türlü de user oluşturabiliriz
+            manager = Manager(name=name, user=user, email=email)
+            manager.save()
             return redirect('main:my_login')
         else:
             error = "Your Email or Username has been used!"

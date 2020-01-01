@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'category.apps.CategoryConfig',
     'subcategory.apps.SubcategoryConfig',
     'trending.apps.TrendingConfig',
-
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
