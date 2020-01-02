@@ -576,6 +576,7 @@ def change_pass(request):
 def manager_list(request):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
+
     managers = Manager.objects.all()
     context = {
         'managers': managers,
@@ -586,6 +587,14 @@ def manager_list(request):
 def manager_del(request, pk):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
+    if len(request.user.groups.filter(name='Master User')) < 1:
+        error = "Access Denied!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
     try:
         manager = Manager.objects.get(pk=pk)
         user = manager.user
@@ -605,6 +614,7 @@ def manager_del(request, pk):
 def manager_group_list(request):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
+   # groups = Group.objects.all().exclude(name='Master User')  # exclude bu filtreye uyan objeyi listeden çıkartır
     groups = Group.objects.all()
     context = {
         'groups': groups,
@@ -639,7 +649,7 @@ def manager_group_add(request):
     return render(request, 'back/manager_group_add.html')
 
 
-def manager_group_del(request,pk):
+def manager_group_del(request, pk):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
     try:
@@ -654,3 +664,35 @@ def manager_group_del(request,pk):
         }
         return render(request, 'back/error.html', context=context)
     return redirect('panel:manager_group_list')
+
+
+def users_groups(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    user = Manager.objects.get(pk=pk).user
+    groups = Group.objects.all()
+    context = {
+        'user': user,
+        'groups': groups,
+    }
+    return render(request, 'back/users_groups.html', context=context)
+
+
+def users_groups_delete(request, uid, gid):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    user = User.objects.get(pk=uid)
+    group = Group.objects.get(pk=gid)
+    user.groups.remove(group)
+    return redirect('panel:users_groups', pk=user.manager.pk)
+
+
+def users_groups_add(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    user = User.objects.get(pk=pk)
+    new_group_pk = request.POST.get('group_name')
+    new_group = Group.objects.get(pk=new_group_pk)
+    user.groups.add(new_group)
+    user.save()
+    return redirect('panel:users_groups', pk=user.manager.pk)

@@ -25,6 +25,7 @@
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Members</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -32,6 +33,7 @@
                 {% for group in groups %}
                     <tr>
                         <td>{{ group.name }}</td>
+                        <td>{{ group.user_set.count }}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'panel:manager_group_delete' pk=group.pk %}" data-toggle="tooltip" title="Delete"

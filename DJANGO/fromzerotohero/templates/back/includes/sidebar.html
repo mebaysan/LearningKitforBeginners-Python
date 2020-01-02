@@ -1,9 +1,11 @@
 {% load static %}
+{% load my_auth %}
 <ul class="sidebar-nav">
     <li>
         <a href="{% url 'panel:home' %}" class=" active"><i
                 class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
     </li>
+{% if request.user|has_group:'Master User' %}
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
@@ -17,9 +19,10 @@
                 class="gi gi-settings sidebar-nav-icon"></i><span
                 class="sidebar-nav-mini-hide">Site Settings</span></a>
         <ul>
-            <li>
-                <a href="{% url 'panel:site_settings' %}">Settings</a>
-            </li>
+
+                <li>
+                    <a href="{% url 'panel:site_settings' %}">Settings</a>
+                </li>
         </ul>
     </li>
     <li>
@@ -36,27 +39,28 @@
             </li>
         </ul>
     </li>
-    <li class="sidebar-header">
+
+        <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
                                                                              title="Permissions"><i
                                     class="gi gi-lock"></i></a></span>
-        <span class="sidebar-header-title">Permissions</span>
-    </li>
-     <li>
-        <a href="" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-group sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">Groups</span></a>
-        <ul>
-            <li>
-                <a href="{% url 'panel:manager_group_list' %}">Group List</a>
-            </li>
-            <li>
-                <a href="{% url 'panel:manager_group_add' %}">Add Group</a>
-            </li>
-        </ul>
-    </li>
+            <span class="sidebar-header-title">Permissions</span>
+        </li>
+        <li>
+            <a href="" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-group sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Groups</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'panel:manager_group_list' %}">Group List</a>
+                </li>
+                <li>
+                    <a href="{% url 'panel:manager_group_add' %}">Add Group</a>
+                </li>
+            </ul>
+        </li>
 
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
@@ -76,7 +80,7 @@
             </li>
         </ul>
     </li>
-
+{% endif %}
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
@@ -84,6 +88,7 @@
                                     class="gi gi-show_big_thumbnails"></i></a></span>
         <span class="sidebar-header-title">News Settings</span>
     </li>
+{% if request.user|has_group:'Master User' %}
     <li>
         <a href="#" class="sidebar-nav-menu"><i
                 class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
@@ -112,6 +117,7 @@
             </li>
         </ul>
     </li>
+{% endif %}
     <li>
         <a href="#" class="sidebar-nav-menu"><i
                 class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i

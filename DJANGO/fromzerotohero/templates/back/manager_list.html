@@ -1,5 +1,6 @@
 {% extends 'back/layout.html' %}
 {% load static %}
+{% load my_auth %}
 {% block body %}
     <!-- Datatables Header -->
     <div class="content-header">
@@ -27,7 +28,10 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Username</th>
+                    <th>Last Log In</th>
+                    {% if request.user|has_group:'Master User' %}
                     <th class="text-center">Actions</th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
@@ -36,12 +40,17 @@
                         <td>{% if manager.name %} {{ manager.name }} {% else %} - {% endif %}</td>
                         <td>{{ manager.email }}</td>
                         <td>{{ manager.user.username }}</td>
+                        <td>{{ manager.user.last_login }}</td>
+                    {% if request.user|has_group:'Master User' %}
                         <td class="text-center">
                             <div class="btn-group">
+                                <a href="{% url 'panel:users_groups' pk=manager.pk %}" data-toggle="tooltip" title="Groups"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Groups</a>
                                 <a href="{% url 'panel:manager_delete' pk=manager.pk %}" data-toggle="tooltip" title="Delete"
-                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Delete</a>
                             </div>
                         </td>
+                    {% endif %}
                     </tr>
                 {% endfor %}
 

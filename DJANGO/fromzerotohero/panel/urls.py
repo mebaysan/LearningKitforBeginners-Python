@@ -27,4 +27,7 @@ urlpatterns = [
     path('users/managers/group/list/', views.manager_group_list, name='manager_group_list'),
     path('users/managers/group/add/', views.manager_group_add, name='manager_group_add'),
     path('users/managers/group/delete/<int:pk>/', views.manager_group_del, name='manager_group_delete'),
+    path('users/groups/<int:pk>/', views.users_groups, name='users_groups'),
+    path('users/groups/add/<int:pk>/', views.users_groups_add, name='users_groups_add'),
+    path('users/groups/delete/<int:uid>/<int:gid>/', views.users_groups_delete, name='users_groups_delete'),
 ]
