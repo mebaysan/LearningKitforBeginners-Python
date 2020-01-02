@@ -1,0 +1,53 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Add Group<br><small>you can add your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Group</li>
+        <li><a href="{% url 'panel:manager_group_add' %}">Add</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="table-responsive">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Basic Form Elements Block -->
+                <div class="block">
+                    <!-- Basic Form Elements Title -->
+                    <div class="block-title">
+                        <h2><strong>Add</strong> Group</h2>
+                    </div>
+                    <!-- END Form Elements Title -->
+
+                    <!-- Basic Form Elements Content -->
+                    <form action="{% url 'panel:manager_group_add' %}" method="post" enctype="multipart/form-data"
+                          class="form-horizontal form-bordered">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="text" id="group_name" name="group_name" class="form-control"
+                                       placeholder="Group Name">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END Basic Form Elements Content -->
+                </div>
+                <!-- END Basic Form Elements Block -->
+            </div>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}

@@ -574,6 +574,8 @@ def change_pass(request):
 
 
 def manager_list(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
     managers = Manager.objects.all()
     context = {
         'managers': managers,
@@ -582,6 +584,8 @@ def manager_list(request):
 
 
 def manager_del(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
     try:
         manager = Manager.objects.get(pk=pk)
         user = manager.user
@@ -599,8 +603,54 @@ def manager_del(request, pk):
 
 
 def manager_group_list(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
     groups = Group.objects.all()
     context = {
         'groups': groups,
     }
     return render(request, 'back/manager_group_list.html', context=context)
+
+
+def manager_group_add(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    if request.method == "POST":
+        group_name = request.POST.get('group_name')
+        if not group_name:
+            error = "Please Enter The Group Name!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+        elif Group.objects.filter(name=group_name).exists():
+            error = "Group name has been used!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+        group = Group(name=group_name)
+        group.save()
+        return redirect('panel:manager_group_list')
+    return render(request, 'back/manager_group_add.html')
+
+
+def manager_group_del(request,pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    try:
+        group = Group.objects.get(pk=pk)
+        group.delete()
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+    return redirect('panel:manager_group_list')

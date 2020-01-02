@@ -24,5 +24,7 @@ urlpatterns = [
     path('users/change_password/', views.change_pass, name='change_password'),
     path('users/managers/list/', views.manager_list, name='manager_list'),
     path('users/managers/delete/<int:pk>/', views.manager_del, name='manager_delete'),
-    path('users/managers/group/', views.manager_group_list, name='manager_group_list'),
+    path('users/managers/group/list/', views.manager_group_list, name='manager_group_list'),
+    path('users/managers/group/add/', views.manager_group_add, name='manager_group_add'),
+    path('users/managers/group/delete/<int:pk>/', views.manager_group_del, name='manager_group_delete'),
 ]
