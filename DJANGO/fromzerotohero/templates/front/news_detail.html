@@ -1,5 +1,6 @@
 {% extends 'front/master.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
     News Detail
 {% endblock title %}
@@ -54,7 +55,7 @@
 									<span class="m-rl-3">-</span>
 
 									<span>
-										{{ new.date }}
+										{{ new.date | naturalday }}
 									</span>
 								</span>
 
