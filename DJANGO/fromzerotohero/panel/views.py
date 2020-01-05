@@ -70,7 +70,7 @@ def news_add(request):
                     news = News(name=news_title, short_txt=news_short_txt, body_txt=news_body_txt,
                                 pic_name=file_name,
                                 pic_url=file_url,
-                                writer='-',
+                                writer=request.user.username,
                                 category_name=news_category, category_id=0, show=0, ocategory_id=ocategory_id,
                                 tag=news_tag)
                     news.save()
@@ -113,8 +113,16 @@ def news_delete(request, pk):
     if not request.user.is_authenticated:  # eğer mevcut kullanıcı authenticate değilse
         return redirect('main:my_login')
     # login kontrol bitiş
+    news = News.objects.get(pk=pk)
+    if request.user.username != news.writer:
+        error = "Access Denied!"
+        link = request.META.get('HTTP_REFERER')  # bir önceki url'i alır
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
     try:
-        news = News.objects.get(pk=pk)
         fs = FileSystemStorage()
         fs.delete(news.pic_name)
         ocat_id = News.objects.get(pk=pk).ocategory_id
@@ -186,7 +194,7 @@ def news_edit(request, pk):
                     news.body_txt = news_body_txt
                     news.pic_name = file_name
                     news.pic_url = file_url
-                    news.writer = "-"
+                   # news.writer = request.user.username
                     news.category_name = news_category
                     news.category_id = news_category_id
                     news.tag = news_tags
@@ -214,7 +222,7 @@ def news_edit(request, pk):
             news.name = news_title
             news.short_txt = news_short_txt
             news.body_txt = news_body_txt
-            news.writer = "-"
+           # news.writer = request.user.username
             news.category_name = news_category
             news.category_id = news_category_id
             news.tag = news_tags
