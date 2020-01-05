@@ -1,0 +1,130 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+
+
+{% block body %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Group Permissions ({{ group.name }})<br><small>you can add, edit and delete
+                your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Groups</li>
+        <li><a href="{% url 'panel:group_permissions' pk=group.pk %}">Permissions</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Basic Form Elements Block -->
+            <div class="block">
+                <!-- Basic Form Elements Title -->
+                <div class="block-title">
+
+                    <h2><strong>Add Permission</strong> To Group</h2>
+                </div>
+                <!-- END Form Elements Title -->
+
+                <!-- Basic Form Elements Content -->
+                <form action="{% url 'panel:group_permissions_add' gid=group.pk %}" method="post"
+                      enctype="multipart/form-data"
+                      class="form-horizontal form-bordered">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <select id="perm_pk" name="perm_pk" class="select-chosen"
+                                    data-placeholder="Choose a Group..."
+                                    style="width: 250px;">
+
+                                {% for perm in all_perms %}
+                                    <option value="{{ perm.pk }}">{{ perm.name }}</option>
+                                {% endfor %}
+
+
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                Submit
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                </form>
+                <!-- END Basic Form Elements Content -->
+            </div>
+            <!-- END Basic Form Elements Block -->
+        </div>
+
+    </div>
+
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Permissions</strong> List</h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Code</th>
+
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for perm in perms %}
+                    <tr>
+                        <td>{{ perm.name }}</td>
+                        <td>{{ perm.codename }}</td>
+
+                        <td class="text-center">
+                            <div class="btn-group">
+
+
+                                <a href="{% url 'panel:group_permissions_delete' gid=group.pk pid=perm.id %}"
+                                   data-toggle="tooltip"
+                                   title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Delete</i></a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+
+{% endblock %}
+
+
+
+
+{% block ozel_js %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock %}

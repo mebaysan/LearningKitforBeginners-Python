@@ -26,6 +26,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Members</th>
+                    <th>Permissions Count</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -34,10 +35,13 @@
                     <tr>
                         <td>{{ group.name }}</td>
                         <td>{{ group.user_set.count }}</td>
+                        <td>{{ group.permissions.count }}</td>
                         <td class="text-center">
                             <div class="btn-group">
+                                <a href="{% url 'panel:group_permissions' pk=group.pk %}" data-toggle="tooltip" title="Delete"
+                                   class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Permissions</a>
                                 <a href="{% url 'panel:manager_group_delete' pk=group.pk %}" data-toggle="tooltip" title="Delete"
-                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Delete</a>
                             </div>
                         </td>
                     </tr>

@@ -1,0 +1,121 @@
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Permission List<br><small>you can add, edit and delete your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Permissions</li>
+        <li><a href="{% url 'panel:permission_list' %}">List</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Basic Form Elements Block -->
+            <div class="block">
+                <!-- Basic Form Elements Title -->
+                <div class="block-title">
+
+                    <h2><strong>Add</strong> Permission</h2>
+                </div>
+                <!-- END Form Elements Title -->
+
+                <!-- Basic Form Elements Content -->
+                <form action="{% url 'panel:permission_list' %}" method="post" enctype="multipart/form-data"
+                      class="form-horizontal form-bordered">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="text" id="perm_name" name="perm_name" class="form-control"
+                                   placeholder="Permission Name"
+                                   required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="perm_code_name" name="perm_code_name" class="form-control"
+                                   placeholder="Permission Code Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <select id="ctypepk" name="ctypepk" class="select-chosen"
+                                    data-placeholder="Choose a Group..."
+                                    style="width: 250px;">
+
+                                {% for ctype in content_types %}
+                                    <option value="{{ ctype.pk }}">{{ ctype.name }}</option>
+                                {% endfor %}
+
+
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                Submit
+                            </button>
+
+                        </div>
+                    </div>
+
+                </form>
+                <!-- END Basic Form Elements Content -->
+            </div>
+            <!-- END Basic Form Elements Block -->
+        </div>
+
+    </div>
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Permission</strong> List</h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Content Type</th>
+                    <th>User Count</th>
+                    <th>Group Count</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for permission in permissions %}
+                    <tr>
+                        <td class="text-center">{{ permission.name }}</td>
+                        <td class="text-center">{{ permission.codename }}</td>
+                        <td class="text-center">{{ permission.content_type }}</td>
+                        <td class="text-center">{{ permission.user_set.count }}</td>
+                        <td class="text-center">{{ permission.group_set.count }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'panel:permission_delete' pk=permission.pk %}" data-toggle="tooltip"
+                                   title="Delete"
+                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i> Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock ozel_js %}

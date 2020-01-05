@@ -9,6 +9,7 @@ from trending.models import Trending
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, Group, Permission
 from users.models import Manager
+from django.contrib.contenttypes.models import ContentType
 
 
 # Create your views here.
@@ -614,7 +615,7 @@ def manager_del(request, pk):
 def manager_group_list(request):
     if not request.user.is_authenticated:
         return redirect('main:my_login')
-   # groups = Group.objects.all().exclude(name='Master User')  # exclude bu filtreye uyan objeyi listeden çıkartır
+    # groups = Group.objects.all().exclude(name='Master User')  # exclude bu filtreye uyan objeyi listeden çıkartır
     groups = Group.objects.all()
     context = {
         'groups': groups,
@@ -696,3 +697,131 @@ def users_groups_add(request, pk):
     user.groups.add(new_group)
     user.save()
     return redirect('panel:users_groups', pk=user.manager.pk)
+
+
+def permission_list(request):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    if request.method == "POST":
+        permission_name = request.POST.get('perm_name')
+        permission_code_name = request.POST.get('perm_code_name')
+        ctypepk = request.POST.get('ctypepk')
+        if len(Permission.objects.filter(name=permission_name)) == 0:
+            content_type = ContentType.objects.get(pk=ctypepk)
+            permission = Permission.objects.create(codename=permission_code_name, name=permission_name,
+                                                   content_type=content_type)
+            permission.save()
+        else:
+            error = "This Permission Name is has been used!"
+            link = request.META.get('HTTP_REFERER')
+            context = {
+                'error': error,
+                'link': link
+            }
+            return render(request, 'back/error.html', context=context)
+    permissions = Permission.objects.all()
+    content_types = ContentType.objects.all()
+    context = {
+        'permissions': permissions,
+        'content_types': content_types,
+    }
+    return render(request, 'back/permission_list.html', context=context)
+
+
+def permission_delete(request, pk):
+    try:
+        perm = Permission.objects.get(pk=pk)
+        perm.delete()
+        return redirect('panel:permission_list')
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+
+
+def users_perms(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    user = Manager.objects.get(pk=pk).user
+    perms = Permission.objects.filter(user=user)
+    all_perms = Permission.objects.all()
+    context = {
+        'user': user,
+        'perms': perms,
+        'all_perms': all_perms,
+    }
+    return render(request, 'back/users_permissions.html', context=context)
+
+
+def users_perms_delete(request, uid, pid):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    user = User.objects.get(pk=uid)
+    perm = Permission.objects.get(pk=pid)
+    user.user_permissions.remove(perm)
+    return redirect('panel:users_permissions', pk=user.manager.pk)
+
+
+def users_perms_add(request, uid):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    try:
+        user = User.objects.get(pk=uid)
+        pid = request.POST.get('perm_pk')
+        perm = Permission.objects.get(pk=pid)
+        user.user_permissions.add(perm)
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+    return redirect('panel:users_permissions', pk=user.manager.pk)
+
+
+def group_perms(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    group = Group.objects.get(pk=pk)
+    perms = Permission.objects.filter(group=group)
+    all_perms = Permission.objects.all()
+    context = {
+        'group': group,
+        'perms': perms,
+        'all_perms': all_perms,
+    }
+    return render(request, 'back/group_perms.html', context=context)
+
+
+def group_perms_delete(request, gid, pid):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    group = Group.objects.get(pk=gid)
+    perm = Permission.objects.get(pk=pid)
+    group.permissions.remove(perm)
+    return redirect('panel:group_permissions', pk=group.pk)
+
+
+def group_perms_add(request, gid):
+    if not request.user.is_authenticated:
+        return redirect('main:my_login')
+    try:
+        group = Group.objects.get(pk=gid)
+        pid = request.POST.get('perm_pk')
+        perm = Permission.objects.get(pk=pid)
+        group.permissions.add(perm)
+    except:
+        error = "Something Wrong!"
+        link = request.META.get('HTTP_REFERER')
+        context = {
+            'error': error,
+            'link': link
+        }
+        return render(request, 'back/error.html', context=context)
+    return redirect('panel:group_permissions', pk=group.pk)
