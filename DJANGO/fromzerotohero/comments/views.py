@@ -6,9 +6,13 @@ from django.views.decorators.http import require_http_methods
 
 
 @login_required(
-    login_url='/login/')  # bu şekilde login olmasını sağlıyoruz, eğer auth değilse login sayfasına redirect oluyor
+    login_url='/login/')  # bu şekilde login olmasını sağlıyoruz, eğer auth değilse login sayfasına (login_url='...') redirect oluyor
 def get_all_comments(request):
-    return render(request, 'back/comment_list.html')
+    comments = Comment.objects.all()
+    context = {
+        'comments': comments,
+    }
+    return render(request, 'back/comment_list.html', context=context)
 
 
 @require_http_methods(['POST'])
@@ -23,8 +27,23 @@ def add_comment(request, npk):
     return redirect('news:news_detail', pk=npk)
 
 
-@require_http_methods(['POST'])
 def delete_comment(request, cpk):
     comment = Comment.objects.get(pk=cpk)
     comment.delete()
+    return redirect('comments:comment_list')
+
+
+@login_required(login_url='/login/')
+def publish_comment(request, cpk):
+    comment = Comment.objects.get(pk=cpk)
+    comment.is_published = True
+    comment.save()
+    return redirect('comments:comment_list')
+
+
+@login_required(login_url='/login/')
+def draft_comment(request, cpk):
+    comment = Comment.objects.get(pk=cpk)
+    comment.is_published = False
+    comment.save()
     return redirect('comments:comment_list')

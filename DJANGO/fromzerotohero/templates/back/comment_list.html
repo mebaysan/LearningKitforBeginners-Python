@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h2>Comment list</h2>
-</body>
-</html>
+{% extends 'back/layout.html' %}
+{% load static %}
+{% block body %}
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Comment List<br><small>you can view your data!</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Comments</li>
+        <li><a href="{% url 'comments:comment_list' %}">List</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Comment</strong> List</h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                <tr>
+                    <th>News</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Is Publish</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td><a href="{% url 'panel:news_edit' pk=comment.news.pk %}">{{ comment.news.name }}</a></td>
+                        <td>{{ comment.name }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>{{ comment.txt }}</td>
+                        <td class="text-center">
+                            {% if comment.is_published == True %}
+                                <span class="label label-success">Publish</span>
+
+                            {% else %}
+                                <span class="label label-warning">Draft</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                {% if comment.is_published == False %}
+                                    <a href="{% url 'comments:publish_comment' cpk=comment.pk %}" data-toggle="tooltip"
+                                       title="Publish"
+                                       class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Publish</a>
+                                {% else %}
+                                    <a href="{% url 'comments:draft_comment' cpk=comment.pk %}" data-toggle="tooltip"
+                                       title="Draft"
+                                       class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Draft</a>
+                                {% endif %}
+                                <a href="{% url 'comments:delete_comment' cpk=comment.pk %}" data-toggle="tooltip"
+                                   title="Delete"
+                                   class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+{% endblock body %}
+{% block ozel_js %}
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {
+        TablesDatatables.init();
+    });</script>
+{% endblock ozel_js %}

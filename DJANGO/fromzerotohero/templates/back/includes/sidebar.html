@@ -5,40 +5,40 @@
         <a href="{% url 'panel:home' %}" class=" active"><i
                 class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
     </li>
-{% if request.user|has_group:'Master User' %}
-    <li class="sidebar-header">
+    {% if request.user|has_group:'Master User' %}
+        <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
                                                                              title="Site Settings"><i
                                     class="gi gi-settings"></i></a></span>
-        <span class="sidebar-header-title">Site Settings</span>
-    </li>
-    <li>
-        <a href="#" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-settings sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">Site Settings</span></a>
-        <ul>
+            <span class="sidebar-header-title">Site Settings</span>
+        </li>
+        <li>
+            <a href="#" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-settings sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Site Settings</span></a>
+            <ul>
 
                 <li>
                     <a href="{% url 'panel:site_settings' %}">Settings</a>
                 </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-settings sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">Trends</span></a>
-        <ul>
-            <li>
-                <a href="{% url 'panel:trends_list' %}">Trends List</a>
-            </li>
-            <li>
-                <a href="{% url 'panel:trends_add' %}">Add Trend</a>
-            </li>
-        </ul>
-    </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-settings sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Trends</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'panel:trends_list' %}">Trends List</a>
+                </li>
+                <li>
+                    <a href="{% url 'panel:trends_add' %}">Add Trend</a>
+                </li>
+            </ul>
+        </li>
 
         <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
@@ -61,7 +61,7 @@
                 </li>
             </ul>
         </li>
-    <li>
+        <li>
             <a href="" class="sidebar-nav-menu"><i
                     class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
                     class="gi gi-lock sidebar-nav-icon"></i><span
@@ -73,25 +73,43 @@
             </ul>
         </li>
 
-    <li class="sidebar-header">
+        <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
                                                                              title="Users"><i
                                     class="fa fa-users"></i></a></span>
-        <span class="sidebar-header-title">Users</span>
-    </li>
-    <li>
-        <a href="" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-user sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">Managers</span></a>
-        <ul>
-            <li>
-                <a href="{% url 'panel:manager_list' %}">Manager List</a>
-            </li>
-        </ul>
-    </li>
-{% endif %}
+            <span class="sidebar-header-title">Users</span>
+        </li>
+        <li>
+            <a href="" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-user sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Managers</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'panel:manager_list' %}">Manager List</a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-header">
+                            <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
+                                                                             data-toggle="tooltip"
+                                                                             title="Permissions"><i
+                                    class="gi gi-pen"></i></a></span>
+            <span class="sidebar-header-title">Comments</span>
+        </li>
+        <li>
+            <a href="" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-pencil sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Comments</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'comments:comment_list' %}">Comment List</a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
     <li class="sidebar-header">
                             <span class="sidebar-header-options clearfix"><a href="javascript:void(0)"
                                                                              data-toggle="tooltip"
@@ -99,36 +117,37 @@
                                     class="gi gi-show_big_thumbnails"></i></a></span>
         <span class="sidebar-header-title">News Settings</span>
     </li>
-{% if request.user|has_group:'Master User' %}
-    <li>
-        <a href="#" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">Categories</span></a>
-        <ul>
-            <li>
-                <a href="{% url 'panel:category_add' %}">Add Category</a>
-            </li>
-            <li>
-                <a href="{% url 'panel:category_list' %}">Categories List</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#" class="sidebar-nav-menu"><i
-                class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
-                class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
-                class="sidebar-nav-mini-hide">SubCategories</span></a>
-        <ul>
-            <li>
-                <a href="{% url 'panel:subcategory_add' %}">Add SubCategory</a>
-            </li>
-            <li>
-                <a href="{% url 'panel:subcategory_list' %}">SubCategories List</a>
-            </li>
-        </ul>
-    </li>
-{% endif %}
+    {% if request.user|has_group:'Master User' %}
+        <li>
+            <a href="#" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">Categories</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'panel:category_add' %}">Add Category</a>
+                </li>
+                <li>
+                    <a href="{% url 'panel:category_list' %}">Categories List</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="sidebar-nav-menu"><i
+                    class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i
+                    class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span
+                    class="sidebar-nav-mini-hide">SubCategories</span></a>
+            <ul>
+                <li>
+                    <a href="{% url 'panel:subcategory_add' %}">Add SubCategory</a>
+                </li>
+                <li>
+                    <a href="{% url 'panel:subcategory_list' %}">SubCategories List</a>
+                </li>
+            </ul>
+        </li>
+
+    {% endif %}
     <li>
         <a href="#" class="sidebar-nav-menu"><i
                 class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i

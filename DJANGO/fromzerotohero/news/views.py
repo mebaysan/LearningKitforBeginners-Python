@@ -8,9 +8,11 @@ def news_detail(request, pk):
     new.show += 1
     new.save()
     tags = new.tag.split(',')
+    comments = new.comment_set.filter(is_published=True)
     context = {
         'news': news,
         'new': new,
         'tags': tags,
+        'comments': comments,
     }
     return render(request, 'front/news_detail.html', context=context)
