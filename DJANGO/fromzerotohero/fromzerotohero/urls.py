@@ -26,6 +26,7 @@ urlpatterns = [
                   path('', include('subcategory.urls')),
                   path('', include('trending.urls')),
                   path('', include('users.urls')),
+                  path('panel/comments/', include('comments.urls')),
                   path('panel/', include('panel.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                                                                                            document_root=settings.MEDIA_ROOT)

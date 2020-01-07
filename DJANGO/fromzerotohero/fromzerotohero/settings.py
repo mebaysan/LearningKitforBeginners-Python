@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'subcategory.apps.SubcategoryConfig',
     'trending.apps.TrendingConfig',
     'users.apps.UsersConfig',
+    'comments.apps.CommentsConfig',
     'django.contrib.humanize',
 ]
 
