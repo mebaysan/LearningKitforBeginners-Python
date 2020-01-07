@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from users.models import Manager
+from ipware import get_client_ip
+from ip2geotools.databases.noncommercial import DbIpCity
 
 
 def home(request):
@@ -81,9 +83,22 @@ def my_register(request):
         if len(User.objects.filter(username=username)) == 0 and len(User.objects.filter(email=email)) == 0:
             # user = User(username=username, email=email, password=password)
             # user.save()
+            (ip, is_routable) = get_client_ip(request)
+            if ip is None:
+                ip = '0.0.0.0'
+            # else:
+            #     if is_routable:
+            #         ipv = 'Public'
+            #     else:
+            #         ipv = 'Private'
+            try:
+                response = DbIpCity.get(ip, api_key='free')
+                country = response.country + " | " + response.city
+            except:
+                country = "Unkown"
             user = User.objects.create_user(username=username, first_name=username, email=email,
                                             password=password)  # iki türlü de user oluşturabiliriz
-            manager = Manager(name=name, user=user, email=email)
+            manager = Manager(name=name, user=user, email=email, ip=ip, country=country)
             manager.save()
             return redirect('main:my_login')
         else:

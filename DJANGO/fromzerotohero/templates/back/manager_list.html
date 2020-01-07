@@ -29,6 +29,7 @@
                     <th>Email</th>
                     <th>Username</th>
                     <th>Last Log In</th>
+                    <th>Ip</th>
                     {% if request.user|has_group:'Master User' %}
                     <th class="text-center">Actions</th>
                     {% endif %}
@@ -41,6 +42,7 @@
                         <td>{{ manager.email }}</td>
                         <td>{{ manager.user.username }}</td>
                         <td>{{ manager.user.last_login }}</td>
+                        <td>{{manager.ip }}</td>
                     {% if request.user|has_group:'Master User' %}
                         <td class="text-center">
                             <div class="btn-group">
