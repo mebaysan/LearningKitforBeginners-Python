@@ -1,6 +1,7 @@
 {% extends 'front/master.html' %}
 {% load static %}
 {% load humanize %}
+{% load qr_code %}
 {% block title %}
     News Detail
 {% endblock title %}
@@ -103,6 +104,7 @@
                             <hr>
 
                         {% endif %}
+                        {% qr_from_text url%}
                         <br><br>
                         <!-- Leave a comment -->
                         <div>

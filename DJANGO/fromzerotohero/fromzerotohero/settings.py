@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'comments.apps.CommentsConfig',
     'django.contrib.humanize',
     'django_crontab',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
