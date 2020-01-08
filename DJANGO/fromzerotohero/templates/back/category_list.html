@@ -18,6 +18,37 @@
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
+            <h2><strong>Export</strong> Data</h2>
+        </div>
+
+        <div class="table-responsive">
+            <a href="{% url 'category:export_csv' %}" data-toggle="tooltip" title="export csv file"
+               class="btn btn-xs btn-primary"> CSV</a>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Import</strong> Data</h2>
+        </div>
+
+        <form action="{% url 'category:import_csv' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="table-responsive">
+                <input type="file" name="csv_file" id="csv_file"/>
+                <br/>
+                <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <!-- END Datatables Content -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
             <h2><strong>Categories</strong> List</h2>
         </div>
         <div class="table-responsive">
