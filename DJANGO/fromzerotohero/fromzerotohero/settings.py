@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'comments.apps.CommentsConfig',
     'django.contrib.humanize',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,11 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CRONJOBS = [
+    # python manage.py crontab add
+    # python manage.py crontab show
+    # python manage.py crontab remove
+    ('*/5 * * * *', 'main.cron.my_cron')
+    # her 5 saniyede 1 çalışacak crontab
+]
