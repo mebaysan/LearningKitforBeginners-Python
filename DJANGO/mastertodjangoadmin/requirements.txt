@@ -1,6 +1,6 @@
 defusedxml==0.6.0
 diff-match-patch==20181111
-Django==2.2.7
+Django==2.2.8
 django-admin-honeypot==1.1.0
 django-admin-list-filter-dropdown==1.0.3
 django-admin-rangefilter==0.5.1
