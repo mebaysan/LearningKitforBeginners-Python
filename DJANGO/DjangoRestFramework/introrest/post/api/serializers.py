@@ -19,6 +19,8 @@ class PostSerializer(
             'image',
             'slug',
             'created',
+            'user',
+            'modified_by',
         ]
 
 

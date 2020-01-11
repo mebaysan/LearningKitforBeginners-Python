@@ -25,10 +25,18 @@ class PostUpdateAPIView(UpdateAPIView):  # güncellemek için class based
     serializer_class = PostSerializer
     lookup_field = 'slug'
 
+    def perform_update(self, serializer):
+        serializer.save(modified_by=self.request.user)
+
 
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(
+            user=self.request.user)  # serializer'ı save ederken bazı işlemleri yapabiliyoruz. form.save(commit=False) gibi
+
     """
     Postman ile örnek bir post request (http://127.0.0.1:8000/post/api/create/)
     {
