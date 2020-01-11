@@ -13,7 +13,7 @@ class Post(models.Model):
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField()
     slug = models.SlugField(unique=True, max_length=150, editable=False)
-    image = models.ImageField(upload_to='post/')
+    image = models.ImageField(upload_to='post/', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Yazı'

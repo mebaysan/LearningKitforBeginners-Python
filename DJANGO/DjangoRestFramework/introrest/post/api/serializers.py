@@ -35,3 +35,19 @@ else:
 
 
 """
+###################################################
+
+"""
+                                Shell ile manuel güncelleme
+            Güncelleme
+from post.api.serializers import PostSerializer
+from post.models import Post
+obj = Post.objects.get(pk=1) # objeyi yakaladık
+data = {'title':'değişen başlık','content':'değişen içerik'} 
+islem = PostSerializer(obj,data=data)# yakaladığımız objeyi bu data ile değiştir diyoruz
+islem.is_valid() # eğer true ise
+islem.save() # islemi yapıyoruz
+
+
+
+"""

@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
 from post.models import Post
 from post.api.serializers import PostSerializer
 
@@ -14,13 +14,27 @@ class PostDetailAPIView(RetrieveAPIView):  # tek bir değer döndürür (detay �
     lookup_field = 'slug'  # slug'a göre detay sayfasına gideceğimiz için böyle bir şey yaptık. routing gibi düşünebiliriz.
 
 
-class PostDeleteAPIView(DestroyAPIView): # silmek için class based
+class PostDeleteAPIView(DestroyAPIView):  # silmek için class based
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
 
 
-class PostUpdateAPIView(UpdateAPIView): # güncellemek için class based
+class PostUpdateAPIView(UpdateAPIView):  # güncellemek için class based
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
+
+
+class PostCreateAPIView(CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    """
+    Postman ile örnek bir post request (http://127.0.0.1:8000/post/api/create/)
+    {
+    "title": "create api ile eklenen",
+    "content": "create api ile eklenen post'un içeriği",
+    "image": null
+    }
+    
+    """
