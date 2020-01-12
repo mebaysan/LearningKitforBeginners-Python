@@ -1,6 +1,8 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
 from post.models import Post
 from post.api.serializers import PostSerializer
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from post.api.permissions import IsOwner
 
 
 class PostListAPIView(ListAPIView):  # ListAPIView class'ı listelemeye yarar
@@ -18,12 +20,14 @@ class PostDeleteAPIView(DestroyAPIView):  # silmek için class based
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
+    permission_classes = [IsOwner]
 
 
 class PostUpdateAPIView(UpdateAPIView):  # güncellemek için class based
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
+    permission_classes = [IsOwner]
 
     def perform_update(self, serializer):
         serializer.save(modified_by=self.request.user)
@@ -32,6 +36,7 @@ class PostUpdateAPIView(UpdateAPIView):  # güncellemek için class based
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(
