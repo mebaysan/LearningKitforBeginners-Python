@@ -55,6 +55,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'fromzerotohero.urls'
 
+#AUTH_USER_MODEL = 'users.CustomUser' #hangi model ile auth işlemlerini yapabileceğimizi belirledik. app_adi.model_adi
+LOGIN_URL = '/login/' # login required gibi işlemlerde nereye redirect yapacağını belirledik
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True # browser aç-kapa yapılınca tekrar login required olur!
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,6 +79,8 @@ TEMPLATES = [
         },
     },
 ]
+#_("deneme")
+
 
 WSGI_APPLICATION = 'fromzerotohero.wsgi.application'
 

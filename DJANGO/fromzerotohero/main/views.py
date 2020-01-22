@@ -4,7 +4,7 @@ from news.models import News
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from users.models import Manager
+from users.models import Manager,CustomUser
 from ipware import get_client_ip
 from ip2geotools.databases.noncommercial import DbIpCity
 
