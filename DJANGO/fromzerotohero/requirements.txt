@@ -7,6 +7,7 @@ certifi==2019.9.11
 cffi==1.13.2
 chardet==3.0.4
 Click==7.0
+colorama==0.4.3
 cryptography==2.8
 cssselect==1.1.0
 decorator==4.4.1
@@ -18,6 +19,7 @@ django-crontab==0.7.1
 django-filter==2.2.0
 django-ipware==2.1.0
 django-js-asset==1.2.2
+django-qr-code==1.1.0
 djangorestframework==3.10.3
 docutils==0.15.2
 future==0.18.2
@@ -50,6 +52,8 @@ pylint==2.4.4
 pyparsing==2.4.6
 pyquery==1.4.1
 pytz==2019.3
+pywin32-ctypes==0.2.0
+qrcode==6.1
 ratelim==0.1.6
 readme-renderer==24.0
 requests==2.22.0
