@@ -1,0 +1,49 @@
+dashboardımızdan web sekmesine tıklıyoruz ve yeni bir app oluşturuyoruz custom seçeneğini seçiyoruz
+ardından bash console açıyoruz
+
+
+/home/kullanici_adiniz/.virtualenvs -> bu dizin altında virtualenvlerimiz bulunur
+
+mkvirtualenv --python=/usr/bin/python3.8 venv  -> /home/kullanici_adiniz/.virtualenvs altına venv adında bir virtualenv kurar
+
+git repomuzu /home altına klonluyoruz
+
+pip install -r requirements.txt -> gerekli modülleri virtualenv'imize yüklüyoruz
+
+
+cd proje_dosyasi -> proje dizinine gittik
+
+python manage.py makemigrations & migrate -> gerekli migrateleri yaptık ve veritabanını oluşturduk
+
+bash console sağ üst köşedeki dropdownı açıp web bölümüne gidiyoruz
+
+
+Virtualenv bölümünde virtualenvimizi tanıtıyoruz
+
+
+Code bölümünde git repoumuzun yolunu veriyoruz
+
+
+WSGI configuration file açıyoruz (Code bölümünde)
+	HELLO_WORLD'u sil
+	DJANGO bölümüne in ve
+		import os
+            	import sys
+		path = '/home/o1baysan/mysite'  -> git repo yolunu veriyoruz
+		if path not in sys.path:
+    			sys.path.append(path)
+		os.chdir(path)  -> üstüne sen elle yaz, hata alırsın
+		os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'  -> ana uygulamanın yani settings dosyanın olduğu appi veriyoruz
+		from django.core.wsgi import get_wsgi_application
+		application = get_wsgi_application()
+	bunların commentlerini kaldır ve save et çık
+
+sitene web bölümünden bir reload at
+
+allowed host  bölümünde pythonanywhere sitenin urlini belirtmeyi unutma
+
+static dosyalarının yolunu belirt ve keyfine bak :)
+	/static/   collectstatic yapınca toplanılan dizinin yolu
+	/media/    yapınca dosyaları nerden çekecekse orayı da tanıt
+	
+
