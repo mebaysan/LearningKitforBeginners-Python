@@ -36,7 +36,7 @@ class PostUpdateAPIView(UpdateAPIView):  # güncellemek için class based
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated] # Create yapabilmek için gerekli olan izinleri yazdık
 
     def perform_create(self, serializer):
         serializer.save(
