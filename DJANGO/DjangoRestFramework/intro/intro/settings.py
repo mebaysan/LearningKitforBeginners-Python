@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'post.apps.PostConfig',
     'comment.apps.CommentConfig',
+    'favourite.apps.FavouriteConfig',
 ]
 
 MIDDLEWARE = [
