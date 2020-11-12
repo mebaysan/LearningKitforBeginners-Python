@@ -1,3 +1,0 @@
-virtualenv'imizde iken -> 
-set FLASK_APP=app.py ,
-(bu şekilde flask uygulamamızı belirtebiliriz ve ardından flask run diyerek çalıştırabiliriz)
