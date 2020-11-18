@@ -1,13 +1,22 @@
 from flask import Flask, request
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
+from flask_jwt import JWT, jwt_required
+from security import authenticate, identity
+
 
 app = Flask(__name__)
+app.secret_key = '$baba$naber#-_-'
 api = Api(app)  # ana flask uygulamamızın üzerine bir api oluşturuyoruz
+
+# /auth endpointi oluşturur ve username ile password bekler. Gönderdiğimiz değerleri authenticate fonksiyonuna yollar oradan bir user dönerse JWT oluşur ve identity fonksiyonuna gönderir
+jwt = JWT(app, authenticate, identity)
 
 items = []
 
 
 class Item(Resource):  # Api için modellerimizi oluştururken Resource sınıfından inherit alırız
+    # jwt yok ise bu endpoint çalışmayacak. Bunun için header'da Authorization key'inin karşısına "JWT [TOKEN]" value'sini eklememiz gerekmektedir
+    @jwt_required()
     def get(self, name):  # Resource metodları birer dict dönmelilerdir
         # ilk parametre hangi fonksiyon çalışacak, hangi liste üzerinde (filter), bulduğu ilk elemanı döner eğer bulamazsa None döner (next)
         item = next(filter(lambda x: x['name'] == name, items), None)
@@ -25,6 +34,29 @@ class Item(Resource):  # Api için modellerimizi oluştururken Resource sınıf�
         item = {'name': name, 'price': price}
         items.append(item)
         return item, 201
+
+    def delete(self, name):
+        global items  # en üstte tanımladığımız GLOBAL items değişkenini burada kullanacağız
+        items = list(filter(lambda x: x['name'] != name, items)),
+        return {'message': f'Item ({name}) deleted'}
+
+    def put(self, name):
+        parser = reqparse.RequestParser()  # parser objesi oluşturuyoruz
+        parser.add_argument('price',  # request body'den yakalamak istediğimiz parametreyi parser'a ekliyoruz
+                            required=True,  # bu parametre eksik olabilir mi
+                            type=float,  # gelen değer hangi tipe convert olacak
+                            help='Price field is cannot be left blank!')  # help -> parametre eksik olursa ne mesaj döneceği
+        # parser içerisinde request'ten yakaladığımız key-value'ları değişkene atıyoruz
+        data = parser.parse_args() # hatalar bu fonksiyon çağrıldığında tetiklenir
+        # request_json = request.get_json()
+        item = next(filter(lambda x: x['name'] == name, items), None)
+        if item is None:
+            item = {'name': name, 'price': data['price']}
+            items.append(item)
+        else:
+            # bir sözlüğü başka bir sözlük ile güncelliyoruz (key'leri aynı olmalı)
+            item.update(data)
+        return item
 
 
 class ItemList(Resource):  # sadece tüm itemları dönmek için bir Resource oluşturuyoruz
