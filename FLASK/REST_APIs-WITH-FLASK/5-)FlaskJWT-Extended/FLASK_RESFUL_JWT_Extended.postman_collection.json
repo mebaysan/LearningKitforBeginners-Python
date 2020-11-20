@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "7ef340bc-5ece-4b3d-9963-d2d4370a7e22",
-		"name": "FLASK_RESFUL_LIB_WTIH_SQLALCHEMY",
+		"name": "FLASK_RESFUL_JWT_Extended",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -116,7 +116,13 @@
 			"name": "/items",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDU4ODU0OTQsIm5iZiI6MTYwNTg4NTQ5NCwianRpIjoiZmIzMmEyOGMtYzY3YS00MjhjLThiODAtMDU4MzY4NWJlMmIxIiwiZXhwIjoxNjA1ODg2Mzk0LCJpZGVudGl0eSI6MSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.Pj32s99u2z-2OwvBXuiAnMDkEZZ2RWfpDZAbwmbiOFo",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://127.0.0.1:5000/items",
 					"protocol": "http",
@@ -253,7 +259,7 @@
 			"response": []
 		},
 		{
-			"name": "/auth",
+			"name": "/login",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -268,7 +274,7 @@
 					"raw": "{\n    \"username\":\"baysan\",\n    \"password\":\"asd\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/auth",
+					"raw": "http://127.0.0.1:5000/login",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -278,7 +284,7 @@
 					],
 					"port": "5000",
 					"path": [
-						"auth"
+						"login"
 					]
 				}
 			},
@@ -300,7 +306,7 @@
 					"raw": "{\n    \"username\":\"baysan\",\n    \"password\":\"asd\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/auth",
+					"raw": "http://127.0.0.1:5000/register",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -310,7 +316,76 @@
 					],
 					"port": "5000",
 					"path": [
-						"auth"
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/<id>",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"baysan\",\n    \"password\":\"asd\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/<id>",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"baysan\",\n    \"password\":\"asd\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"1"
 					]
 				}
 			},
