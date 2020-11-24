@@ -9,6 +9,6 @@
   "author": "Brad Traversy",
   "license": "MIT",
   "dependencies": {
-    "node-sass": "^4.9.3"
+    "node-sass": "^4.13.1"
   }
 }
