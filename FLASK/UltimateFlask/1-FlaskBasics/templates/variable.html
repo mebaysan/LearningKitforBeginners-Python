@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+<!-- base.html'den inherit -->
+
+{% block content %}
+
+<h1>Naber {{name}}</h1>
+<h1>Username {{sozluk['username']}}</h1>
+<h1>IP {{sozluk['IP']}}</h1>
+
+{% if not sozluk['password'] %}
+<h1>Password gelmedi</h1>
+{% endif %}
+
+<ul>
+  {% for name in sozluk['names'] %}
+  <li>{{name}}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

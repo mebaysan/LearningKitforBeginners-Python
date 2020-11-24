@@ -4,7 +4,8 @@ from flask import (
     request, # gelen isteği parçalayibilirz
     redirect, # string url'e yönlendirirz
     url_for, # kendi url'lerimize yönlendirebiliriz
-    session # oturum işlemlerini yönetiriz
+    session, # oturum işlemlerini yönetiriz
+    render_template
 )
 
 
@@ -12,6 +13,7 @@ app = Flask(__name__)
 
 app.config['DEBUG'] = True # uygulamamıza ait configurasyonları set edebiliriz. debug True iken hata mesajlarını vs alabiliriz
 app.config['SECRET_KEY'] = 'asd123ssd' # cookie'ler için gereklidir
+
 
 @app.route('/')
 def index():
@@ -58,12 +60,7 @@ def form():
     if request.method == 'POST':
         name = request.form.get('name') # form'dan girilen verileri yakalayabiliriz
         return f"Formdan gelen [name] = {name}"
-    return """
-    <form action="/form" method="POST">
-    <input type="text" name="name">
-    <input type="submit" value="Gönder">
-    </form>
-    """
+    return render_template('form.html')
 
 @app.route('/json',methods=['POST'])
 def get_json():
@@ -101,6 +98,12 @@ def login():
 def logout():
     session.pop('user') # session'daki user'i sil
     return redirect(url_for('is_auth'))
+
+@app.route('/variable')
+def variable():
+    name = 'Baysan' # ister tek değişken göndeririz
+    sozluk = {'username':'mebaysan','IP':'127.0.0.1','names':['Enes','Yusuf','Yavuz']} # ister sözlük olarak göndeririz
+    return render_template('variable.html',name=name,sozluk=sozluk)
 
 if __name__ == '__main__':
     app.run()
