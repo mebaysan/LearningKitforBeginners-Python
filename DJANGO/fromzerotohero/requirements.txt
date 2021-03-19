@@ -20,7 +20,7 @@ django-filter==2.2.0
 django-ipware==2.1.0
 django-js-asset==1.2.2
 django-qr-code==1.1.0
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 docutils==0.15.2
 future==0.18.2
 geocoder==1.38.1
