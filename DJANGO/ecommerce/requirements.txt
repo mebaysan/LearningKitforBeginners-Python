@@ -19,5 +19,5 @@ requests==2.22.0
 soupsieve==1.9.5
 sqlparse==0.3.0
 Unidecode==1.1.1
-urllib3==1.25.7
+urllib3==1.25.8
 virtualenv==16.7.5
