@@ -68,7 +68,7 @@ twine==3.1.1
 typed-ast==1.4.0
 typing==3.7.4.1
 Unidecode==1.1.1
-urllib3==1.25.7
+urllib3==1.26.5
 virtualenv==16.7.5
 webencodings==0.5.1
 wrapt==1.11.2
