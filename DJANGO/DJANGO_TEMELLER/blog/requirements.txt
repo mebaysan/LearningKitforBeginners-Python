@@ -34,7 +34,7 @@ pytz==2019.2
 pyxdg==0.25
 quodlibet==4.2.1
 reportbug===7.5.3-deb10u1
-reportlab==3.5.13
+reportlab==3.5.55
 requests==2.21.0
 SecretStorage==2.3.1
 six==1.12.0
