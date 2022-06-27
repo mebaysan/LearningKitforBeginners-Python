@@ -60,7 +60,7 @@ python-editor==1.0.4
 pytz==2019.1
 pyxdg==0.25
 reportbug==7.5.2
-reportlab==3.5.13
+reportlab==3.5.55
 requests==2.21.0
 requests-oauthlib==1.2.0
 scapy==2.4.2
